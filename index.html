@@ -3,572 +3,996 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hussain Alshikhy — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Hussain Alshikhy — Full-Stack Web Developer &amp; UI/UX Designer</title>
+  <meta name="description"
+    content="The portfolio of Hussain Alshikhy, front-end engineer and UI/UX designer in Benghazi, Libya — presented as a pixel-art book you pull off a shelf. Web developer at Grids Company." />
+  <meta name="theme-color" content="#182430" />
+  <meta name="color-scheme" content="dark" />
+
+  <meta property="og:title" content="Hussain Alshikhy — Full-Stack Web Developer &amp; UI/UX Designer" />
+  <meta property="og:description"
+    content="A pixel-art portfolio you read like a book. Front-end, UI/UX and cloud work from Benghazi, Libya." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:image" content="assets/px/book_cover_front.png" />
+
+  <link rel="icon" href="assets/px/book_spine.png" />
+
+  <!-- Fonts are served from this repo, not from Google. 40 KB total, no
+       third-party connection, and the type still renders on a bad line. -->
+  <link rel="preload" href="assets/fonts/silkscreen-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/pixelify-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css?v=29" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hussain Alshikhy",
+    "jobTitle": "Full-Stack Web Developer & UI/UX Designer",
+    "email": "mailto:hussain14saleem1@gmail.com",
+    "telephone": "+218916765318",
+    "address": { "@type": "PostalAddress", "addressLocality": "Benghazi", "addressCountry": "LY" },
+    "alumniOf": "Libyan International Medical University",
+    "worksFor": { "@type": "Organization", "name": "Grids Company" }
+  }
+  </script>
 </head>
 
-<body>
-  <div class="hero-grid-lines"></div>
-  <div class="cursor-glow" id="glow"></div>
+<!--
+  ===========================================================================
+  Art pipeline:  python tools/build_room.py
+                 python tools/build_sprites.py
+                 python tools/build_avatar.py   (assets/images/photo.png -> the portrait)
+  ===========================================================================
+-->
 
-  <nav>
-    <a href="#hero" class="nav-logo">HA.dev</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<body class="booting" data-scene="boot">
 
-  <section id="hero">
-    <div style="position:relative;z-index:2;">
-      <p class="hero-eyebrow">// Software Engineer · UI/UX · AI Enthusiast</p>
-      <h1 class="hero-name">Hussain<br /><span>Alshikhy</span></h1>
-      <p class="hero-tagline">Third-year Software Engineering student building smart, responsive, and impactful digital
-        experiences.</p>
-      <p class="hero-location">
-        📍 <span>Benghazi, Libya</span>
-        &nbsp;·&nbsp;
-        (+218) 916 765 318
-        &nbsp;·&nbsp;
-        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-URL" target="_blank" class="linkedin-btn" title="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+  <!-- ======================= BOOT ======================= -->
+  <div id="boot" class="boot">
+    <div class="boot__inner">
+      <div class="boot__logo" aria-hidden="true">
+        <span class="boot__book"></span>
+      </div>
+      <p class="boot__title">HUSSAIN ALSHIKHY</p>
+      <p class="boot__sub">PORTFOLIO &middot; V2</p>
+      <div class="boot__bar"><i id="bootFill"></i></div>
+      <p class="boot__hint" id="bootHint">LOADING&hellip;</p>
+    </div>
+  </div>
+
+  <!-- ======================= STAGE (pixel scenes) ======================= -->
+  <div id="stage" class="stage">
+    <div id="world" class="world">
+      <img class="world__room" src="assets/px/room.png" alt="" width="480" height="560" draggable="false" />
+
+      <!-- the halos that mark which books matter. One each rather than one wide
+           one: the two slots are 124px apart now, and a single ellipse spanning
+           both would light forty books that do nothing. -->
+      <div id="glow" class="glow" aria-hidden="true"></div>
+      <div id="glowBlue" class="glow glow--blue" aria-hidden="true"></div>
+
+      <!-- the portfolio, spine out, sitting in the shelf -->
+      <button id="spine" class="spine" type="button"
+        aria-label="Take the portfolio book off the shelf">
+        <img src="assets/px/book_spine.png" alt="" width="22" height="106" draggable="false" />
+      </button>
+
+      <!-- the certificates, further along the same shelf -->
+      <button id="spineBlue" class="spine spine--blue" type="button"
+        aria-label="Take the certificates book off the shelf">
+        <img src="assets/px/book_spine_blue.png" alt="" width="22" height="106" draggable="false" />
+      </button>
+
+      <!-- The desk lamp's light. A sprite, not a CSS gradient: it has to keep
+           the same hard pixel bands as everything else, and it has to be able
+           to go out. Placed from the numbers build_room.py prints. -->
+      <div id="lamp" class="lamp" aria-hidden="true">
+        <img class="lamp__cone" src="assets/px/lamp_cone.png" alt=""
+          width="88" height="48" draggable="false" />
+        <div class="lamp__dust" id="lampDust"></div>
+      </div>
+
+      <!-- The cord that switches it. Not a stretching line: a rope of nine
+           points run through a Verlet solver, so it swings, overshoots and
+           settles. The <svg> is the rope; the <button> is the bead you grab,
+           moved to the end of the rope every frame. -->
+      <div id="cord" class="cord" aria-hidden="true">
+        <svg class="cord__svg" viewBox="0 0 72 56" width="72" height="56">
+          <polyline id="cordLine" class="cord__rope" points="" />
+          <polyline id="cordLit" class="cord__rope cord__rope--lit" points="" />
+        </svg>
+      </div>
+      <button id="cordGrab" class="cordgrab" type="button" aria-pressed="true"
+        aria-label="Pull the cord to switch the lamp on or off">
+        <i class="cordgrab__bead" aria-hidden="true"></i>
+      </button>
+
+      <!-- Static pointing hand. Only ever shown on touch/no-hover devices,
+           where there is no cursor to turn into one. -->
+      <div id="hand" class="hand" aria-hidden="true"></div>
+
+      <!-- the same book, face on, once it lands on the desk -->
+      <button id="deskBook" class="deskbook" type="button" hidden
+        aria-label="Open the portfolio book">
+        <span class="deskbook__pages" aria-hidden="true"></span>
+        <span class="deskbook__cover">
+          <img id="deskCover" src="assets/px/book_cover_front.png" alt="" width="96" height="128" draggable="false" />
+          <span class="deskbook__inner"></span>
+        </span>
+      </button>
+
+      <!-- The computer on the desk. Its box matches the drawn case exactly;
+           the numbers come from PC in tools/build_room.py. -->
+      <button id="pc" class="pc" type="button"
+        aria-label="Use the computer to see the projects">
+        <span class="pc__halo" aria-hidden="true"></span>
+      </button>
+
+      <div id="dust" class="dust" aria-hidden="true"></div>
+    </div>
+
+    <!-- Up and down the room. Two floors: the bookcase and the desk. -->
+    <nav id="floors" class="floors" aria-label="Move around the room">
+      <button id="goUp" class="floorbtn floorbtn--up" type="button">
+        <i class="floorbtn__tri" aria-hidden="true"></i>
+        <span class="floorbtn__label">BOOKCASE</span>
+      </button>
+      <button id="goDown" class="floorbtn floorbtn--down" type="button">
+        <i class="floorbtn__tri" aria-hidden="true"></i>
+        <span class="floorbtn__label">DESK</span>
+      </button>
+    </nav>
+
+    <p id="prompt" class="prompt"><span>CLICK THE GREEN BOOK</span></p>
+
+    <div class="stage__vignette" aria-hidden="true"></div>
+    <div class="stage__scan" aria-hidden="true"></div>
+  </div>
+
+  <!-- The pointer itself, on devices that have one. Lives outside #stage so the
+       camera transform never moves or scales it. -->
+  <div id="cursor" class="cursor" aria-hidden="true"></div>
+
+  <!-- ======================= READER ======================= -->
+  <main id="reader" class="reader" hidden>
+
+    <div class="reader__desk" aria-hidden="true"></div>
+
+    <div class="book" id="book">
+      <div class="book__board">
+
+        <!-- The head and tail of the page block. Not straight bars: on a
+             real open book these edges dive into the gutter, because the
+             leaves bend down into the binding. The stack is clipped at the
+             paper line, so it fills the band evenly right across. -->
+        <div class="edges edges--top" aria-hidden="true">
+          <svg viewBox="0 0 1000 22" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="edgeFadeT" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d0b48a" />
+                <stop offset="55%" stop-color="#e4cca4" />
+                <stop offset="100%" stop-color="#eed8b0" />
+              </linearGradient>
+              <clipPath id="edgeTopClip"><rect x="0" y="0" width="1000" height="22" /></clipPath>
+              <path id="edgeTop" d="M0 2 C 240 2, 400 9, 500 11 C 600 9, 760 2, 1000 2" />
+            </defs>
+            <path class="edges__fill" fill="url(#edgeFadeT)" d="M0 2 C 240 2, 400 9, 500 11 C 600 9, 760 2, 1000 2 L 1000 22 L 0 22 Z" />
+            <g clip-path="url(#edgeTopClip)">
+            <use href="#edgeTop" y="-0.8" class="rim" />
+            <use href="#edgeTop" y="1.6" class="lit" />
+            <use href="#edgeTop" y="3.2" class="dark" />
+            <use href="#edgeTop" y="4.8" class="mid" />
+            <use href="#edgeTop" y="6.4" class="dark" />
+            <use href="#edgeTop" y="8.0" class="mid" />
+            <use href="#edgeTop" y="9.6" class="dark" />
+            <use href="#edgeTop" y="11.2" class="mid" />
+            <use href="#edgeTop" y="12.8" class="dark" />
+            <use href="#edgeTop" y="14.4" class="mid" />
+            <use href="#edgeTop" y="16.0" class="dark" />
+            <use href="#edgeTop" y="17.6" class="mid" />
+            <use href="#edgeTop" y="19.2" class="dark" />
+            <use href="#edgeTop" y="20.8" class="mid" />
+            </g>
           </svg>
-          LinkedIn
-        </a>
-      </p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-outline">Get In Touch</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-line"></div>Scroll to explore
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="section-header reveal"><span class="section-num">01</span>
-      <h2 class="section-title">About</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-bio reveal">
-        <p>I'm a <strong>third-year Software Engineering student</strong> at Libyan International Medical University,
-          passionate about building intelligent, beautiful, and functional software.</p>
-        <p>My focus spans <strong>web development, UI/UX design, and Artificial Intelligence</strong>. I enjoy crafting
-          responsive interfaces, training ML models, and solving real-world problems through code.</p>
-        <p>I'm motivated to learn, grow, and contribute to <strong>impactful tech projects</strong> — from hackathons to
-          open-source collaboration with communities like Google Developers.</p>
-      </div>
-      <div class="about-stats reveal" style="transition-delay:0.15s">
-        <div class="stat-card"><span class="stat-num">3rd</span><span class="stat-label">Year of Studies</span></div>
-        <div class="stat-card"><span class="stat-num">5</span><span class="stat-label">Certifications</span></div>
-        <div class="stat-card"><span class="stat-num">10</span><span class="stat-label">Projects Built</span></div>
-        <div class="stat-card"><span class="stat-num">2026</span><span class="stat-label">Google Dev Team</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="section-header reveal"><span class="section-num">02</span>
-      <h2 class="section-title">Skills</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-group reveal">
-        <div class="skill-group-title">Frontend</div>
-        <div class="skill-tags"><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span
-            class="skill-tag">JavaScript</span><span class="skill-tag">Responsive Design</span></div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.08s">
-        <div class="skill-group-title">Programming</div>
-        <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">C#</span><span
-            class="skill-tag">SQL</span></div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.16s">
-        <div class="skill-group-title">AI & Machine Learning</div>
-        <div class="skill-tags"><span class="skill-tag">Deep Learning</span><span class="skill-tag">Neural
-            Networks</span><span class="skill-tag">NLP Basics</span><span class="skill-tag">Computer Vision</span></div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.24s">
-        <div class="skill-group-title">UI/UX & Design</div>
-        <div class="skill-tags"><span class="skill-tag">Figma</span><span class="skill-tag">Google Stitch</span><span
-            class="skill-tag">UX Thinking</span></div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.32s">
-        <div class="skill-group-title">Tools & Dev</div>
-        <div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">VS Code</span><span
-            class="skill-tag">Supabase</span><span class="skill-tag">SQL DB Design</span></div>
-      </div>
-      <div class="skill-group reveal" style="transition-delay:0.4s">
-        <div class="skill-group-title">Soft Skills</div>
-        <div class="skill-tags"><span class="soft-tag">Teamwork</span><span class="soft-tag">Leadership</span><span
-            class="soft-tag">Problem Solving</span><span class="soft-tag">Project Org.</span></div>
-      </div>
-    </div>
-    <div style="margin-top:4rem;">
-      <div class="section-header reveal"><span class="section-num" style="opacity:0.5">02b</span>
-        <h2 class="section-title" style="font-size:1.6rem;">Interests</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="interests-grid">
-        <div class="interest-card reveal"><span class="interest-icon">🤖</span><span class="interest-name">Artificial
-            Intelligence</span></div>
-        <div class="interest-card reveal" style="transition-delay:0.08s"><span class="interest-icon">🎨</span><span
-            class="interest-name">Web & UI/UX Design</span></div>
-        <div class="interest-card reveal" style="transition-delay:0.14s"><span class="interest-icon">📊</span><span
-            class="interest-name">Data Analysis</span></div>
-        <div class="interest-card reveal" style="transition-delay:0.2s"><span class="interest-icon">🏀</span><span
-            class="interest-name">Basketball</span></div>
-        <div class="interest-card reveal" style="transition-delay:0.26s"><span class="interest-icon">🎮</span><span
-            class="interest-name">Gaming</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="section-header reveal"><span class="section-num">03</span>
-      <h2 class="section-title">Experience</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-meta"><span class="timeline-date">2026 — Present</span><span class="timeline-company">@
-            Google Developers Team</span></div>
-        <div class="timeline-role">Developer</div>
-        <div class="timeline-desc">
-          <ul>
-            <li>Active member since 2026, working on real products.</li>
-            <li>UI/UX Designer on the LIMU Archive System project.</li>
-            <li>Focused on clear layout, usability, and organized workflow design.</li>
-          </ul>
         </div>
-      </div>
-      <div class="timeline-item reveal" style="transition-delay:0.1s">
-        <div class="timeline-dot"></div>
-        <div class="timeline-meta"><span class="timeline-date">2025</span><span class="timeline-company">@ NVIDIA</span>
+        <div class="edges edges--bottom" aria-hidden="true">
+          <svg viewBox="0 0 1000 22" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="edgeFadeB" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#d0b48a" />
+                <stop offset="55%" stop-color="#e4cca4" />
+                <stop offset="100%" stop-color="#eed8b0" />
+              </linearGradient>
+              <clipPath id="edgeBotClip"><rect x="0" y="0" width="1000" height="22" /></clipPath>
+              <path id="edgeBot" d="M0 13 C 240 13, 400 6, 500 4 C 600 6, 760 13, 1000 13" />
+            </defs>
+            <path class="edges__fill" fill="url(#edgeFadeB)" d="M0 13 C 240 13, 400 6, 500 4 C 600 6, 760 13, 1000 13 L 1000 0 L 0 0 Z" />
+            <g clip-path="url(#edgeBotClip)">
+            <use href="#edgeBot" y="0.8" class="rim" />
+            <use href="#edgeBot" y="-1.6" class="lit" />
+            <use href="#edgeBot" y="-3.2" class="dark" />
+            <use href="#edgeBot" y="-4.8" class="mid" />
+            <use href="#edgeBot" y="-6.4" class="dark" />
+            <use href="#edgeBot" y="-8.0" class="mid" />
+            <use href="#edgeBot" y="-9.6" class="dark" />
+            <use href="#edgeBot" y="-11.2" class="mid" />
+            <use href="#edgeBot" y="-12.8" class="dark" />
+            <use href="#edgeBot" y="-14.4" class="mid" />
+            <use href="#edgeBot" y="-16.0" class="dark" />
+            <use href="#edgeBot" y="-17.6" class="mid" />
+            <use href="#edgeBot" y="-19.2" class="dark" />
+            <use href="#edgeBot" y="-20.8" class="mid" />
+            </g>
+          </svg>
         </div>
-        <div class="timeline-role">AI Project Contributor</div>
-        <div class="timeline-desc">
-          <ul>
-            <li>Trained a neural network model as part of the Deep Learning course.</li>
-            <li>Debugged and fixed model code for the certification exam.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="timeline-item reveal" style="transition-delay:0.2s">
-        <div class="timeline-dot"></div>
-        <div class="timeline-meta"><span class="timeline-date">2023 — Present</span><span class="timeline-company">@
-            Libyan International Medical University</span></div>
-        <div class="timeline-role">Student Developer</div>
-        <div class="timeline-desc">
-          <ul>
-            <li>Built web development projects and team-based university assignments.</li>
-            <li>Worked on UI design, system requirements & analysis, and database design.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="education">
-    <div class="section-header reveal"><span class="section-num">04</span>
-      <h2 class="section-title">Education</h2>
-      <div class="section-line"></div>
-    </div>
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <img class="edu-img" src="assets/images/limu.webp" alt="Libyan International Medical University" />
-        <div class="edu-body">
-          <div class="edu-degree">B.Sc. Information Technology — Software Engineering</div>
-          <div class="edu-school">Libyan International Medical University</div>
-          <div class="edu-year">2023 — Expected July 2027 · Benghazi, Libya</div>
-          <p class="edu-note">Web development, UI design, databases, software engineering, UML modeling, and AI
-            fundamentals. Currently in third year.</p>
-        </div>
-      </div>
-      <div class="edu-card reveal" style="transition-delay:0.1s">
-        <img class="edu-img" src="assets/images/babel_school.webp" alt="Gardens of Babel School" />
-        <div class="edu-body">
-          <div class="edu-degree">High School Diploma</div>
-          <div class="edu-school">Gardens of Babel School</div>
-          <div class="edu-year">Benghazi, Libya</div>
-          <p class="edu-note">Secondary education at one of Benghazi's leading private schools, building a strong
-            foundation in sciences and mathematics.</p>
-        </div>
-      </div>
-    </div>
+        <div class="spreads" id="spreads">
 
-    <div id="certifications" style="margin-top:4rem;">
-      <div class="section-header reveal"><span class="section-num" style="opacity:0.5">04b</span>
-        <h2 class="section-title" style="font-size:1.6rem;">Certifications</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="cert-list">
-
-        <div class="cert-item reveal" id="cert-0">
-          <div class="cert-item-header" onclick="toggleCert('cert-0')">
-            <div class="cert-item-left">
-              <div class="cert-badge">🧠</div>
-              <div class="cert-item-info">
-                <div class="cert-name">Fundamentals of Deep Learning</div>
-                <div class="cert-issuer">NVIDIA &nbsp;·&nbsp; <span class="cert-date">September 1, 2025</span></div>
-                <div class="cert-skills"><span class="cert-skill">NLP</span><span class="cert-skill">Computer
-                    Vision</span><span class="cert-skill">Neural Networks</span><span class="cert-skill">Python</span>
-                </div>
+          <!-- ============ 1. PROFILE ============ -->
+          <article class="spread" data-volume="portfolio" data-spread="0" data-tab="profile">
+            <section class="page page--l">
+              <div class="plate">
+                <img class="plate__img" src="assets/px/avatar.png" alt="Pixel-art portrait of Hussain Alshikhy"
+                  width="72" height="72" />
               </div>
-            </div>
-            <button class="cert-view-btn">View Certificate <i class="cert-arrow">▼</i></button>
-          </div>
-          <div class="cert-img-panel">
-            <div class="cert-img-inner"><img src="assets/images/nvidia.jpg" alt="NVIDIA Certificate" loading="lazy" />
-            </div>
-          </div>
-        </div>
+              <h1 class="name">Hussain<br />Alshikhy</h1>
+              <p class="role">Full-Stack Web Developer<br />UI/UX Designer</p>
+              <ul class="meta">
+                <li>Benghazi, Libya</li>
+                <li><a href="mailto:hussain14saleem1@gmail.com">hussain14saleem1@gmail.com</a></li>
+                <li><a href="tel:+218916765318">(+218) 916 765 318</a></li>
+                <li><a href="https://www.linkedin.com/in/hussain-saleem-801879388/" target="_blank" rel="noopener">linkedin.com/in/hussain-saleem</a></li>
+              </ul>
+              <p class="stamp">OPEN TO WORK</p>
+            </section>
 
-        <div class="cert-item reveal" id="cert-1" style="transition-delay:0.06s">
-          <div class="cert-item-header" onclick="toggleCert('cert-1')">
-            <div class="cert-item-left">
-              <div class="cert-badge">⚡</div>
-              <div class="cert-item-info">
-                <div class="cert-name">Agile Project Management</div>
-                <div class="cert-issuer">HP LIFE &nbsp;·&nbsp; <span class="cert-date">August 18, 2025</span></div>
-                <div class="cert-skills"><span class="cert-skill">Agile</span><span class="cert-skill">Scrum</span><span
-                    class="cert-skill">Kanban</span><span class="cert-skill">Planning</span></div>
+            <section class="page page--r">
+              <h2 class="h2"><span class="h2__num">01</span>About</h2>
+              <p>I'm a <b>fourth-year Software Engineering student</b> at Libyan International Medical
+                University and a working web developer. My day job is building and maintaining web
+                applications at <b>Grids Company</b> — right now, the complete web system for Emaar.</p>
+              <p>Front end is where I spend most of my time: structure, layout, responsiveness, and the
+                small interaction details that make an interface feel finished. I design the interfaces
+                too, so I'm not handing specs across a wall — I go from wireframe in Figma to the
+                deployed page.</p>
+              <p>Before Grids I worked remotely with <b>Texs Studio</b>, contributing front-end work and
+                UI/UX design to products delivered to <b>30+ clients</b>. I also test games and preview
+                builds through the <b>Xbox Insider Program</b>, which is where a lot of my instinct for
+                usability bugs comes from.</p>
+              <div class="stats">
+                <div class="stat"><b>4th</b><span>Year, Software Eng.</span></div>
+                <div class="stat"><b>30+</b><span>Clients served</span></div>
+                <div class="stat"><b>10</b><span>Certifications</span></div>
+                <div class="stat"><b>20+</b><span>Games tested</span></div>
               </div>
-            </div>
-            <button class="cert-view-btn">View Certificate <i class="cert-arrow">▼</i></button>
-          </div>
-          <div class="cert-img-panel">
-            <div class="cert-img-inner"><img src="assets/images/agile.jpg" alt="Agile Certificate" loading="lazy" />
-            </div>
-          </div>
-        </div>
+            </section>
+          </article>
 
-        <div class="cert-item reveal" id="cert-2" style="transition-delay:0.12s">
-          <div class="cert-item-header" onclick="toggleCert('cert-2')">
-            <div class="cert-item-left">
-              <div class="cert-badge">📊</div>
-              <div class="cert-item-info">
-                <div class="cert-name">Data Science & Analytics</div>
-                <div class="cert-issuer">HP LIFE &nbsp;·&nbsp; <span class="cert-date">August 18, 2025</span></div>
-                <div class="cert-skills"><span class="cert-skill">Data Science</span><span class="cert-skill">Data
-                    Ethics</span><span class="cert-skill">ML Basics</span><span class="cert-skill">Visualization</span>
-                </div>
+          <!-- ============ 3. EXPERIENCE I ============ -->
+          <article class="spread" data-volume="portfolio" data-spread="1" data-tab="work" hidden>
+            <section class="page page--l">
+              <h2 class="h2"><span class="h2__num">02</span>Experience</h2>
+              <div class="job">
+                <p class="job__when">Apr 2026 — Present <b class="now">NOW</b></p>
+                <h3 class="job__role">Web Developer</h3>
+                <p class="job__org">Grids Company · Libya</p>
+                <ul class="bullets">
+                  <li>Building the complete web system for <b>Emaar</b> (in progress) — front end, back
+                    end and UI/UX.</li>
+                  <li>Develop and maintain web applications across the full stack: front-end delivery,
+                    back-end development, interface design and DevOps.</li>
+                  <li>Handle deployment, environment configuration and release workflows to keep
+                    delivery consistent and reliable.</li>
+                </ul>
               </div>
-            </div>
-            <button class="cert-view-btn">View Certificate <i class="cert-arrow">▼</i></button>
-          </div>
-          <div class="cert-img-panel">
-            <div class="cert-img-inner"><img src="assets/images/data_science.jpg" alt="Data Science Certificate"
-                loading="lazy" /></div>
-          </div>
-        </div>
-
-        <div class="cert-item reveal" id="cert-3" style="transition-delay:0.18s">
-          <div class="cert-item-header" onclick="toggleCert('cert-3')">
-            <div class="cert-item-left">
-              <div class="cert-badge">🎯</div>
-              <div class="cert-item-info">
-                <div class="cert-name">Effective Leadership</div>
-                <div class="cert-issuer">HP LIFE &nbsp;·&nbsp; <span class="cert-date">August 16, 2025</span></div>
-                <div class="cert-skills"><span class="cert-skill">Goal Setting</span><span class="cert-skill">Decision
-                    Making</span><span class="cert-skill">Ethics</span><span class="cert-skill">Communication</span>
-                </div>
+              <div class="job">
+                <p class="job__when">Jan 2026 — Present <b class="now">NOW</b></p>
+                <h3 class="job__role">Developer + UI/UX Designer</h3>
+                <p class="job__org">GDG on Campus, LIMU · Benghazi</p>
+                <ul class="bullets">
+                  <li>Contribute as developer and designer on community and university software.</li>
+                  <li>UI/UX design for the university <b>Archive System</b> — layout structure,
+                    usability flows and organised workflows.</li>
+                </ul>
               </div>
-            </div>
-            <button class="cert-view-btn">View Certificate <i class="cert-arrow">▼</i></button>
-          </div>
-          <div class="cert-img-panel">
-            <div class="cert-img-inner"><img src="assets/images/leadership.jpg" alt="Leadership Certificate"
-                loading="lazy" /></div>
-          </div>
-        </div>
+            </section>
 
-        <div class="cert-item reveal" id="cert-4" style="transition-delay:0.24s">
-          <div class="cert-item-header" onclick="toggleCert('cert-4')">
-            <div class="cert-item-left">
-              <div class="cert-badge">💡</div>
-              <div class="cert-item-info">
-                <div class="cert-name">Customer Experience for Business</div>
-                <div class="cert-issuer">HP LIFE &nbsp;·&nbsp; <span class="cert-date">July 24, 2025</span></div>
-                <div class="cert-skills"><span class="cert-skill">CX Strategy</span><span class="cert-skill">Customer
-                    Centricity</span><span class="cert-skill">NPS</span></div>
+            <section class="page page--r">
+              <div class="job">
+                <p class="job__when">Oct 2025 — Feb 2026 · Part-time</p>
+                <h3 class="job__role">Web Developer + UI/UX Designer</h3>
+                <p class="job__org">Texs Studio for Software Solutions · Remote, Texas USA</p>
+                <ul class="bullets">
+                  <li>Contributed web development and UI/UX design to products delivered to
+                    <b>30+ clients</b>.</li>
+                  <li>Translated client requirements into responsive, accessible interfaces across
+                    multiple projects.</li>
+                </ul>
               </div>
+              <div class="job">
+                <p class="job__when">Apr 2024 — Present <b class="now">NOW</b></p>
+                <h3 class="job__role">Xbox Insider Playtester</h3>
+                <p class="job__org">Microsoft · Remote</p>
+                <ul class="bullets">
+                  <li>Tested <b>20+ games</b>, preview builds and Xbox platform features.</li>
+                  <li>Report bugs, performance issues, usability problems and gameplay feedback to help
+                    improve the user experience.</li>
+                </ul>
+              </div>
+              <div class="job">
+                <p class="job__when">Apr 2024 — Nov 2024</p>
+                <h3 class="job__role">Software Debugging Assistant</h3>
+                <p class="job__org">Freelance · Remote, Porto Portugal</p>
+                <ul class="bullets">
+                  <li>Found and fixed bugs in client software, then tested to confirm each fix worked.</li>
+                  <li>Wrote clear bug reports showing how to repeat the problem, so issues were fixed
+                    faster.</li>
+                </ul>
+              </div>
+            </section>
+          </article>
+
+          <!-- ============ 4. EDUCATION ============ -->
+          <article class="spread" data-volume="portfolio" data-spread="2" data-tab="work" hidden>
+            <section class="page page--l">
+              <h2 class="h2"><span class="h2__num">03</span>Education</h2>
+              <div class="job">
+                <p class="job__when">Expected July 2027</p>
+                <h3 class="job__role">Bachelor of Information Technology</h3>
+                <p class="job__org">Software Engineering · Libyan International Medical University,
+                  Benghazi</p>
+                <ul class="bullets">
+                  <li>Currently in the fourth year.</li>
+                  <li>Coursework spanning requirements engineering, software design, databases and
+                    cloud deployment — the university projects on the computer downstairs came out of it.</li>
+                </ul>
+              </div>
+              <h3 class="h3">Languages</h3>
+              <ul class="bullets">
+                <li><b>Arabic</b> — native</li>
+                <li><b>English</b> — intermediate</li>
+              </ul>
+            </section>
+
+            <section class="page page--r">
+              <h3 class="h3">University Work</h3>
+              <ul class="bullets bullets--tight">
+                <li><b>Software Requirements Specification</b> — a full SRS with functional and
+                  non-functional requirements, user stories, use cases, and activity, sequence and
+                  class diagrams.</li>
+                <li><b>Software Design (UML)</b> — modelled a role-based company system (Manager,
+                  Accountant, HR, Warehouse and Site Supervisors, Employees) across Use Case,
+                  Activity, Class, Sequence, Collaboration and State diagrams.</li>
+                <li><b>SQL Database</b> — designed tables, relationships and constraints, and wrote
+                  queries for insert, update and retrieval.</li>
+                <li><b>Library Website</b> — a responsive online library with browsing, search and an
+                  admin page, built with clean UI and accessibility as the priority.</li>
+                <li><b>University Events Website</b> — an events and announcements site focused on
+                  layout structure, navigation and mobile responsiveness.</li>
+                <li><b>DevOps Deployment</b> — containerised and published websites on Microsoft
+                  Azure using container images, ACR, ACI and App Service.</li>
+              </ul>
+            </section>
+          </article>
+
+          <!-- ============ 7. CERTIFICATIONS -> THE BLUE VOLUME ======= -->
+          <!-- ============ 2. SKILLS ============ -->
+          <article class="spread" data-volume="portfolio" data-spread="3" data-tab="skills" hidden>
+            <section class="page page--l">
+              <h2 class="h2"><span class="h2__num">04</span>Skills</h2>
+              <h3 class="h3">Front End</h3>
+              <ul class="chips">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li>
+                <li>Responsive layout</li><li>Accessibility</li><li>Performance</li>
+              </ul>
+
+              <h3 class="h3">UI/UX Design</h3>
+              <ul class="chips">
+                <li>Figma</li><li>Google Stitch</li><li>Wireframing</li>
+                <li>User flows</li><li>Design systems</li><li>Prototyping</li>
+              </ul>
+            </section>
+
+            <section class="page page--r">
+              <h3 class="h3">Back End + Data</h3>
+              <ul class="chips">
+                <li>C#</li><li>Python</li><li>SQL</li><li>Supabase</li>
+                <li>Schema design</li><li>Auth</li>
+              </ul>
+
+              <h3 class="h3">Cloud + DevOps</h3>
+              <ul class="chips">
+                <li>Azure App Service</li><li>ACR</li><li>ACI</li>
+                <li>Google Cloud</li><li>Containers</li><li>Git</li>
+              </ul>
+
+              <h3 class="h3">AI + Machine Learning</h3>
+              <ul class="chips">
+                <li>Deep learning</li><li>Model training</li><li>Evaluation</li><li>GPU workflow</li>
+              </ul>
+
+              <h3 class="h3">QA + Testing</h3>
+              <ul class="chips">
+                <li>Bug reporting</li><li>Repro steps</li><li>Usability checks</li><li>Performance</li>
+              </ul>
+
+              <h3 class="h3">Away from the keyboard</h3>
+              <ul class="chips">
+                <li>Basketball</li><li>Gaming</li><li>PC Building</li><li>Drawing</li><li>Chess</li>
+              </ul>
+
+              <h3 class="h3">Ways of Working</h3>
+              <ul class="chips chips--soft">
+                <li>Teamwork</li><li>Leadership</li><li>Clear communication</li>
+                <li>Time management</li><li>Attention to detail</li><li>Fast learner</li>
+              </ul>
+            </section>
+          </article>
+
+          <!-- ============ 8. CONTACT ============ -->
+          <article class="spread" data-volume="portfolio" data-spread="4" data-tab="contact" data-single hidden>
+            <section class="page page--only">
+              <h2 class="h2"><span class="h2__num">05</span>Contact</h2>
+              <ul class="contact">
+                <li><a href="mailto:hussain14saleem1@gmail.com"><span><b>Email</b>hussain14saleem1@gmail.com</span></a></li>
+                <li><a href="tel:+218916765318"><span><b>Phone</b>(+218) 916 765 318</span></a></li>
+                <li><a class="lnk-linkedin" href="https://www.linkedin.com/in/hussain-saleem-801879388/" target="_blank" rel="noopener"><span><b>LinkedIn</b>linkedin.com/in/hussain-saleem</span></a></li>
+                <li><span><span><b>Location</b>Benghazi, Libya · open to remote</span></span></li>
+              </ul>
+              <p><a class="btn lnk-cv" href="assets/docs/Hussain-Alshikhy-CV.docx"
+                download="Hussain-Alshikhy-CV.docx">Download CV</a></p>
+            </section>
+          </article>
+
+
+          <!-- ============ CERT 01 ============ -->
+          <article class="spread" data-volume="certs" data-spread="0" data-tab="certs">
+            <section class="page page--l">
+              <p class="cert-no">01 / 10</p>
+              <h2 class="cert-title">Fundamentals of Deep Learning</h2>
+              <p class="cert-by">NVIDIA Deep Learning Institute &middot; Sep 2025</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>How a neural network actually trains, and what the loss curve is telling you. Building and evaluating a model end to end, convolutional networks for image data, and working in a GPU-accelerated environment.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Deep learning</li>
+                <li>Model training</li>
+                <li>Evaluation</li>
+                <li>CNNs</li>
+                <li>GPU workflow</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate cert-plate--tall">
+                <img src="assets/images/nvidia.jpg" alt="Fundamentals of Deep Learning certificate" loading="lazy" />
+                <figcaption>NVIDIA Deep Learning Institute &middot; September 2025</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 02 ============ -->
+          <article class="spread" data-volume="certs" data-spread="1" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">02 / 10</p>
+              <h2 class="cert-title">Understanding Microsoft Azure</h2>
+              <p class="cert-by">DataCamp</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Azure core services, regions and availability. IaaS, PaaS and SaaS, and which one is the right call for a given job. Subscriptions and resource groups, and how to read Azure pricing before it surprises you.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Azure</li>
+                <li>Cloud models</li>
+                <li>Resource groups</li>
+                <li>Cost basics</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/azure_understanding.jpg" alt="Understanding Microsoft Azure certificate" loading="lazy" />
+                <figcaption>DataCamp &middot; 31 July 2026</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 03 ============ -->
+          <article class="spread" data-volume="certs" data-spread="2" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">03 / 10</p>
+              <h2 class="cert-title">Azure App Services</h2>
+              <p class="cert-by">DataCamp</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Deploying a web app to App Service and keeping it running. App Service plans, scaling up versus scaling out, deployment slots for releases that do not take the site down, custom domains and environment configuration.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>App Service</li>
+                <li>Scaling</li>
+                <li>Deployment slots</li>
+                <li>Env config</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/azure_app_services.jpg" alt="Azure App Services certificate" loading="lazy" />
+                <figcaption>DataCamp &middot; 3 August 2026</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 04 ============ -->
+          <article class="spread" data-volume="certs" data-spread="3" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">04 / 10</p>
+              <h2 class="cert-title">Azure Compute Solutions</h2>
+              <p class="cert-by">DataCamp</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Virtual machines against containers against serverless. Azure Container Registry for storing images, Azure Container Instances for running them, and how to pick a compute tier that fits both the workload and the budget.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Containers</li>
+                <li>ACR</li>
+                <li>ACI</li>
+                <li>Compute tiers</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/azure_compute.jpg" alt="Azure Compute Solutions certificate" loading="lazy" />
+                <figcaption>DataCamp &middot; 3 August 2026</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 05 ============ -->
+          <article class="spread" data-volume="certs" data-spread="4" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">05 / 10</p>
+              <h2 class="cert-title">Build with AI &mdash; Ramadan Edition</h2>
+              <p class="cert-by">Google Developers Group</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Prototyping with Google's AI tooling, wiring a model into a web front end, and getting from an idea to a working demo fast — with a team, against a fixed deadline.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>AI prototyping</li>
+                <li>Frontend integration</li>
+                <li>Rapid delivery</li>
+                <li>Teamwork</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/build_with_ai.jpg" alt="Build with AI - Ramadan Edition certificate" loading="lazy" />
+                <figcaption>Google Developers Group &middot; 16 February – 16 March 2026</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 06 ============ -->
+          <article class="spread" data-volume="certs" data-spread="5" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">06 / 10</p>
+              <h2 class="cert-title">Agile Project Management</h2>
+              <p class="cert-by">HP LIFE &middot; Aug 2025</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Sprint planning and keeping a backlog honest. Scrum roles and what each ceremony is actually for. Shipping in iterations instead of one big reveal, and estimating and tracking work without the theatre.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Sprints</li>
+                <li>Backlog</li>
+                <li>Scrum roles</li>
+                <li>Estimation</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/agile.jpg" alt="Agile Project Management certificate" loading="lazy" />
+                <figcaption>HP LIFE &middot; 18 August 2025</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 07 ============ -->
+          <article class="spread" data-volume="certs" data-spread="6" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">07 / 10</p>
+              <h2 class="cert-title">Data Science &amp; Analytics</h2>
+              <p class="cert-by">HP LIFE &middot; Aug 2025</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Framing a question so that data can actually answer it. Cleaning and exploring a messy dataset, reading charts critically rather than trusting them, and turning an analysis into a decision someone can act on.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Data cleaning</li>
+                <li>Exploration</li>
+                <li>Reading charts</li>
+                <li>Decisions</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/data_science.jpg" alt="Data Science - Analytics certificate" loading="lazy" />
+                <figcaption>HP LIFE &middot; 18 August 2025</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 08 ============ -->
+          <article class="spread" data-volume="certs" data-spread="7" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">08 / 10</p>
+              <h2 class="cert-title">Effective Leadership</h2>
+              <p class="cert-by">HP LIFE &middot; Aug 2025</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Leading a small team without micromanaging it. Delegating properly, giving feedback someone can use, handling disagreement before it hardens into conflict, and keeping people going when the deadline is tight.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Leading</li>
+                <li>Delegation</li>
+                <li>Feedback</li>
+                <li>Conflict</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/leadership.jpg" alt="Effective Leadership certificate" loading="lazy" />
+                <figcaption>HP LIFE &middot; 16 August 2025</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 09 ============ -->
+          <article class="spread" data-volume="certs" data-spread="8" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">09 / 10</p>
+              <h2 class="cert-title">Customer Experience for Business Success</h2>
+              <p class="cert-by">HP LIFE &middot; Jul 2025</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>Mapping the journey a customer actually takes rather than the one you assume. Turning support feedback into concrete interface fixes, measuring satisfaction in a way that means something, and designing for the second visit.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Journey mapping</li>
+                <li>Feedback loops</li>
+                <li>Retention</li>
+                <li>UX fixes</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/customer_experience.jpg" alt="Customer Experience for Business Success certificate" loading="lazy" />
+                <figcaption>HP LIFE &middot; 24 July 2025</figcaption>
+              </figure>
+            </section>
+          </article>
+
+          <!-- ============ CERT 10 ============ -->
+          <article class="spread" data-volume="certs" data-spread="9" data-tab="certs" hidden>
+            <section class="page page--l">
+              <p class="cert-no">10 / 10</p>
+              <h2 class="cert-title">Introduction to Digital Business Skills</h2>
+              <p class="cert-by">HP LIFE &middot; Jul 2025</p>
+
+              <h3 class="h3">What it covered</h3>
+              <p>How digital business models are put together, building an online presence that holds up, choosing digital tools that fit a real workflow, and the fundamentals of digital marketing.</p>
+
+              <h3 class="h3">Skills</h3>
+              <ul class="chips">
+                <li>Digital models</li>
+                <li>Online presence</li>
+                <li>Tooling</li>
+                <li>Marketing basics</li>
+              </ul>
+            </section>
+
+            <section class="page page--r page--plate">
+              <figure class="cert-plate">
+                <img src="assets/images/digital_business.jpg" alt="Introduction to Digital Business Skills certificate" loading="lazy" />
+                <figcaption>HP LIFE &middot; 28 July 2025</figcaption>
+              </figure>
+            </section>
+          </article>
+        </div><!-- /.spreads -->
+
+        <!-- The turning leaf. Built by JS as a chain of nested vertical
+             strips so the page can actually bend; see section 8 of the CSS. -->
+        <div class="curl-cast" id="curlCast" aria-hidden="true" hidden></div>
+        <div class="curl" id="curl" aria-hidden="true" hidden></div>
+
+        <div class="gutter" aria-hidden="true"></div>
+      </div><!-- /.book__board -->
+
+      <!-- bookmark tabs down the right edge -->
+      <nav class="tabs" id="tabs" aria-label="Sections">
+        <button type="button" data-goto="0"><span>PROFILE</span></button>
+        <button type="button" data-goto="1"><span>EXPERIENCE</span></button>
+        <button type="button" data-goto="3"><span>SKILLS</span></button>
+        <button type="button" data-goto="4"><span>CONTACT</span></button>
+      </nav>
+
+      <!-- controls, mirroring the section tabs on the right -->
+      <div class="hud">
+        <button class="hudbtn" id="btnShelf" type="button" title="Back to the shelf">SHELF</button>
+      </div>
+    </div><!-- /.book -->
+
+    <!-- page controls -->
+    <div class="pager">
+      <button class="pgbtn" id="prev" type="button" aria-label="Previous page">&lt;</button>
+      <p class="pager__count"><span id="pgNow">1</span> / <span id="pgAll">8</span></p>
+      <button class="pgbtn" id="next" type="button" aria-label="Next page">&gt;</button>
+      <p class="hint-keys" id="hintKeys" hidden>ARROW KEYS TURN PAGES &middot; ESC BACK TO SHELF</p>
+    </div>
+
+  </main>
+
+  <!-- ======================= THE COMPUTER =======================
+       The projects live in here rather than in the book. Same handover the
+       book does: the camera pushes into the glass, and at peak zoom this
+       takes over — pixel *styling* over real HTML, because a project write-up
+       cannot be painted into an 84x48 sprite and still be read or indexed.
+  -->
+  <main id="os" class="os" hidden aria-label="Projects">
+    <div class="os__crt">
+      <div class="os__inner">
+
+        <p class="os__boot" id="osBoot" aria-hidden="true"></p>
+
+        <div class="os__head">
+          <span class="os__name">HUSSAIN&nbsp;OS</span>
+          <span class="os__path" id="osPath">C:\PROJECTS</span>
+        </div>
+
+        <div class="os__main">
+        <div class="os__desktop" id="osDesktop">
+          <button class="app" type="button" data-app="rabt">
+            <img src="assets/px/app_rabt.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">Rabt</span>
+          </button>
+          <button class="app" type="button" data-app="qaemati">
+            <img src="assets/px/app_qaemati.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">Qaemati</span>
+          </button>
+          <button class="app" type="button" data-app="arcade">
+            <img src="assets/px/app_arcade.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">GDG Arcade</span>
+          </button>
+          <button class="app" type="button" data-app="techzaar">
+            <img src="assets/px/app_techzaar.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">TechZaar</span>
+          </button>
+          <button class="app" type="button" data-app="archive">
+            <img src="assets/px/app_archive.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">Archive</span>
+          </button>
+          <button class="app" type="button" data-app="deeplearning">
+            <img src="assets/px/app_deeplearning.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">DL Model</span>
+          </button>
+          <button class="app" type="button" data-app="azure">
+            <img src="assets/px/app_azure.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">Azure Deploy</span>
+          </button>
+        </div>
+
+        <!-- One window, one project. All eight stay in the document so the
+             content is readable without JavaScript and findable by search. -->
+        <div class="os__wins" id="osWins">
+
+          <article class="win" data-app="rabt" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_rabt.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">RABT</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">Grids Company &middot; NFC platform &middot; Front end</p>
+              <p>An established platform where users build a personal digital portfolio and share it
+                by tapping an NFC card &mdash; the portfolio opens straight on the recipient's device.
+                I contributed enhancements and new features inside a live production codebase.</p>
+              <p class="win__go"><a class="oslink" href="https://rabt.grids.ly" target="_blank" rel="noopener">OPEN SITE</a><span class="win__url">rabt.grids.ly</span></p>
+              <ul class="chips chips--sm"><li>Front end</li><li>Live product</li><li>NFC</li></ul>
             </div>
-            <button class="cert-view-btn">View Certificate <i class="cert-arrow">▼</i></button>
-          </div>
-          <div class="cert-img-panel">
-            <div class="cert-img-inner"><img src="assets/images/customer_experience.jpg" alt="CX Certificate"
-                loading="lazy" /></div>
-          </div>
+          </article>
+
+          <article class="win" data-app="qaemati" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_qaemati.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">QAEMATI</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">Grids Company &middot; Restaurant ordering &middot; Front end</p>
+              <p>A digital menu system: restaurants upload their meals and customers open the menu by
+                scanning a QR code at the table. I worked on the ordering flow, where orders reach the
+                restaurant's screen tagged with the table number for kitchen and floor staff.</p>
+              <p class="win__go"><a class="oslink" href="https://qaemati.ly" target="_blank" rel="noopener">OPEN SITE</a><span class="win__url">qaemati.ly</span></p>
+              <ul class="chips chips--sm"><li>Ordering flow</li><li>QR</li><li>Real-time</li></ul>
+            </div>
+          </article>
+
+          <article class="win" data-app="arcade" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_arcade.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">GDG ARCADE</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">TechZaar Event &middot; GDG on Campus, LIMU &middot; Built it</p>
+              <p>An arcade website with four interactive browser games built in HTML, CSS and
+                JavaScript, plus Supabase authentication for sign-up and login. Built around
+                responsive layout and smooth, readable interaction.</p>
+              <p class="win__go"><a class="oslink" href="https://gdg-g.vercel.app" target="_blank" rel="noopener">OPEN SITE</a><span class="win__url">gdg-g.vercel.app</span></p>
+              <ul class="chips chips--sm"><li>JavaScript</li><li>Canvas games</li><li>Supabase</li></ul>
+            </div>
+          </article>
+
+          <article class="win" data-app="techzaar" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_techzaar.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">TECHZAAR ACTIVITIES</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">TechZaar Event &middot; GDG on Campus, LIMU &middot; Built it</p>
+              <p>A companion site helping attendees explore event content and locations &mdash; a home
+                page presenting available activities in a clear layout, and a map page with a 3D map
+                pinpointing each activity location.</p>
+              <p class="win__go"><a class="oslink" href="https://gdg-techzaar.vercel.app" target="_blank" rel="noopener">OPEN SITE</a><span class="win__url">gdg-techzaar.vercel.app</span></p>
+              <ul class="chips chips--sm"><li>3D map</li><li>Wayfinding</li><li>Responsive</li></ul>
+            </div>
+          </article>
+
+          <article class="win" data-app="archive" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_archive.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">ARCHIVE SYSTEM</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">GDG on Campus, LIMU &middot; UI/UX designer &middot; In progress</p>
+              <p>UI/UX design for the university's archive system. The work is about layout
+                structure, usability flows and organised workflows &mdash; making a records system that
+                staff can move through quickly.</p>
+              <p class="win__go win__go--none">NOT DEPLOYED PUBLICLY</p>
+              <ul class="chips chips--sm"><li>Figma</li><li>Information architecture</li><li>User flows</li></ul>
+            </div>
+          </article>
+
+          <article class="win" data-app="deeplearning" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_deeplearning.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">DEEP LEARNING MODEL</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">NVIDIA Deep Learning Institute &middot; Coursework</p>
+              <p>Trained and evaluated a small deep learning model as part of the NVIDIA course, then
+                debugged and corrected model code under exam conditions to pass the assessment.</p>
+              <p class="win__go win__go--none">NOT DEPLOYED PUBLICLY</p>
+              <ul class="chips chips--sm"><li>Deep learning</li><li>Python</li><li>Debugging</li></ul>
+            </div>
+          </article>
+
+          <article class="win" data-app="azure" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_azure.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">AZURE DEPLOYMENT</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">University &middot; DevOps</p>
+              <p>Containerised and published websites on Microsoft Azure, working with container
+                images, Azure Container Registry (ACR), Azure Container Instances (ACI) and App
+                Service.</p>
+              <p class="win__go win__go--none">NOT DEPLOYED PUBLICLY</p>
+              <ul class="chips chips--sm"><li>Azure</li><li>ACR / ACI</li><li>Containers</li></ul>
+            </div>
+          </article>
+
+
+        </div>
+
+          <!-- A note pinned to the desktop. Half of it is filling the empty
+               half of a screen; the other half is saying who is talking. -->
+          <aside class="os__note" id="osNote">
+            <p class="os__note-h">README.TXT</p>
+            <p>Seven projects, from the CV. Four of them are live; those carry a
+              link.</p>
+            <p class="os__note-f">&mdash; HUSSAIN ALSHIKHY, BENGHAZI</p>
+          </aside>
+
+        </div><!-- /.os__main -->
+
+        <div class="os__bar">
+          <button class="osbtn" id="osBack" type="button">QUIT TO ROOM</button>
+          <span class="os__tip" id="osTip">PICK A PROJECT</span>
+          <span class="os__count"><b id="osIdx">8</b> ITEMS</span>
         </div>
 
       </div>
+      <!-- The browser. A project opens inside the portfolio rather than
+           taking you out of it: same pixel chrome, real site in the glass.
+
+           Every escape hatch stays visible, because a page can refuse to
+           be framed (X-Frame-Options / frame-ancestors) and there is no
+           way to detect that from script — a blocked frame fires `load`
+           and reads as cross-origin exactly like a good one. So: a
+           watchdog for the silent case, and NEW TAB always on the bar. -->
+      <div class="web" id="web" hidden>
+        <header class="web__bar">
+          <span class="web__lights" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="web__url" id="webUrl">&nbsp;</span>
+          <button class="web__btn" id="webReload" type="button">RELOAD</button>
+          <a class="web__btn" id="webTab" href="#" target="_blank" rel="noopener">NEW TAB</a>
+          <button class="win__x" id="webX" type="button" aria-label="Close the site">X</button>
+        </header>
+        <div class="web__view">
+          <iframe id="webFrame" title="Project site" src="about:blank"
+            referrerpolicy="no-referrer"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"></iframe>
+          <p class="web__load" id="webLoad">CONNECTING&hellip;</p>
+
+          <!-- Shown for a few seconds after the frame reports it has
+               loaded. A page blocked by X-Frame-Options fires the same
+               load event, reports the same cross-origin document and the
+               same zero transfer size as one that worked, so the parent
+               cannot tell the two apart. Rather than guess, say so and
+               keep the way out one click away. -->
+          <p class="web__hint" id="webHint" hidden>
+            NOTHING THERE? SOME SITES REFUSE TO BE EMBEDDED.
+            <a id="webHintOut" href="#" target="_blank" rel="noopener">OPEN IN A NEW TAB</a>
+          </p>
+
+          <!-- The frame never reported back at all. -->
+          <div class="web__fail" id="webFail" hidden>
+            <p class="web__fail-h">NO ANSWER FROM THE SITE</p>
+            <p>The page has not responded. It may be down, or the connection
+              may have dropped.</p>
+            <p><a class="oslink" id="webOut" href="#" target="_blank" rel="noopener">OPEN IN A NEW TAB</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="os__scan" aria-hidden="true"></div>
+      <div class="os__curve" aria-hidden="true"></div>
     </div>
-  </section>
+  </main>
 
-  <section id="projects">
-    <div class="section-header reveal"><span class="section-num">05</span>
-      <h2 class="section-title">Projects</h2>
-      <div class="section-line"></div>
+  <noscript>
+    <div class="noscript">
+      <h1>Hussain Alshikhy — Full-Stack Web Developer &amp; UI/UX Designer</h1>
+      <p>This portfolio is an interactive pixel-art book and needs JavaScript for the animation.
+        All of the content is still on this page — enable JavaScript for the full thing, or read on.</p>
     </div>
-    <div class="project-filters reveal">
-      <button class="filter-btn active" onclick="filterProjects('all',this)">All</button>
-      <button class="filter-btn" onclick="filterProjects('live',this)">Live</button>
-      <button class="filter-btn" onclick="filterProjects('uiux',this)">UI/UX</button>
-      <button class="filter-btn" onclick="filterProjects('ai',this)">AI</button>
-      <button class="filter-btn" onclick="filterProjects('uni',this)">University</button>
-    </div>
-    <div class="projects-grid" id="projects-grid">
+  </noscript>
 
-      <div class="project-card reveal" data-cat="uiux">
-        <div class="project-top">
-          <div class="project-icon">🗂️</div><span class="project-badge badge-progress">In Progress</span>
-        </div>
-        <div class="project-title">Archive System — LIMU</div>
-        <div class="project-desc">
-          <ul>
-            <li>UI/UX Designer on the Google Developers Team project.</li>
-            <li>Focused on clear layout structure and usability.</li>
-            <li>Designed organized workflow for document archiving.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">Figma</span><span class="stack-tag">UI/UX</span><span
-            class="stack-tag">Google Dev Team</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.06s" data-cat="live">
-        <div class="project-top">
-          <div class="project-icon">🎮</div><span class="project-badge badge-live">Live</span>
-        </div>
-        <div class="project-title">GDG Arcade — TechZaar</div>
-        <div class="project-desc">
-          <ul>
-            <li>4 interactive games: Hangman, Memory Cards, Python Quiz, Roulette.</li>
-            <li>Supabase auth for user sign-up and login.</li>
-            <li>Responsive design with smooth, engaging UX.</li>
-          </ul>
-        </div>
-        <div class="project-preview">
-          <div class="project-preview-bar">
-            <span class="preview-dot" style="background:#ff5f57"></span>
-            <span class="preview-dot" style="background:#febc2e"></span>
-            <span class="preview-dot" style="background:#28c840"></span>
-            <span class="preview-url">gdg-g.vercel.app</span>
-            <a href="https://gdg-g.vercel.app/home.html" target="_blank" class="preview-open-btn"
-              onclick="event.stopPropagation()">Open ↗</a>
-          </div>
-          <div class="preview-click-area" onclick="togglePreview(this)">
-            <iframe data-src="https://gdg-g.vercel.app/home.html" class="project-iframe" title="GDG Arcade"></iframe>
-            <div class="preview-overlay"><span>▶ Click to preview</span></div>
-          </div>
-        </div>
-        <div class="project-stack"><span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span
-            class="stack-tag">JavaScript</span><span class="stack-tag">Supabase</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.12s" data-cat="live">
-        <div class="project-top">
-          <div class="project-icon">🗺️</div><span class="project-badge badge-live">Live</span>
-        </div>
-        <div class="project-title">TechZaar Activities Website</div>
-        <div class="project-desc">
-          <ul>
-            <li>Homepage displaying all activities in a clear, organized way.</li>
-            <li>3D map page showing the location of each activity.</li>
-            <li>Helps users explore event content and locations.</li>
-          </ul>
-        </div>
-        <div class="project-preview">
-          <div class="project-preview-bar">
-            <span class="preview-dot" style="background:#ff5f57"></span>
-            <span class="preview-dot" style="background:#febc2e"></span>
-            <span class="preview-dot" style="background:#28c840"></span>
-            <span class="preview-url">gdg-techzaar.vercel.app</span>
-            <a href="https://gdg-techzaar.vercel.app/index.html" target="_blank" class="preview-open-btn"
-              onclick="event.stopPropagation()">Open ↗</a>
-          </div>
-          <div class="preview-click-area" onclick="togglePreview(this)">
-            <iframe data-src="https://gdg-techzaar.vercel.app/index.html" class="project-iframe"
-              title="TechZaar"></iframe>
-            <div class="preview-overlay"><span>▶ Click to preview</span></div>
-          </div>
-        </div>
-        <div class="project-stack"><span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span
-            class="stack-tag">JavaScript</span><span class="stack-tag">3D Map</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.18s" data-cat="ai">
-        <div class="project-top">
-          <div class="project-icon">🤖</div><span class="project-badge badge-nvidia">NVIDIA</span>
-        </div>
-        <div class="project-title">AI Model Training</div>
-        <div class="project-desc">
-          <ul>
-            <li>Trained a neural network model from scratch.</li>
-            <li>Debugged and fixed model code for the certification exam.</li>
-            <li>Applied deep learning techniques from the NVIDIA course.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">Python</span><span class="stack-tag">Deep
-            Learning</span><span class="stack-tag">Neural Networks</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.24s" data-cat="live">
-        <div class="project-top">
-          <div class="project-icon">🕹️</div><span class="project-badge badge-live">QA</span>
-        </div>
-        <div class="project-title">Game Testing</div>
-        <div class="project-desc">
-          <ul>
-            <li>Tested several games and software products.</li>
-            <li>Identified bugs, usability issues, and performance bottlenecks.</li>
-            <li>Documented findings and reported reproducible issues.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">QA Testing</span><span class="stack-tag">Bug
-            Reporting</span><span class="stack-tag">Usability</span><span class="stack-tag">Performance</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.06s" data-cat="uni">
-        <div class="project-top">
-          <div class="project-icon">📋</div><span class="project-badge badge-uni">University</span>
-        </div>
-        <div class="project-title">SRS — Company System</div>
-        <div class="project-desc">
-          <ul>
-            <li>Collaborated to create a complete Software Requirements Specification.</li>
-            <li>Wrote functional & non-functional requirements, user stories, and use cases.</li>
-            <li>Designed activity, sequence, and class diagrams for system workflows.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">SRS</span><span class="stack-tag">UML</span><span
-            class="stack-tag">Use Cases</span><span class="stack-tag">Team</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.12s" data-cat="uni">
-        <div class="project-top">
-          <div class="project-icon">🏗️</div><span class="project-badge badge-uni">University</span>
-        </div>
-        <div class="project-title">UML Modeling — Company System</div>
-        <div class="project-desc">
-          <ul>
-            <li>Designed a role-based system: Manager, Accountant, HR, Warehouse, Site Supervisor, Employees.</li>
-            <li>Created Use Case, Activity, Class, Sequence, Collaboration, and State diagrams.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">UML</span><span class="stack-tag">System Design</span><span
-            class="stack-tag">Role-Based</span><span class="stack-tag">Team</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.18s" data-cat="uni">
-        <div class="project-top">
-          <div class="project-icon">🗄️</div><span class="project-badge badge-uni">University</span>
-        </div>
-        <div class="project-title">SQL Database Design</div>
-        <div class="project-desc">
-          <ul>
-            <li>Built a relational SQL database as a team project.</li>
-            <li>Designed tables, relationships, and constraints for proper data structure.</li>
-            <li>Wrote SQL queries for inserting, updating, and retrieving data.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">SQL</span><span class="stack-tag">Database Design</span><span
-            class="stack-tag">Relational DB</span><span class="stack-tag">Team</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.24s" data-cat="uni">
-        <div class="project-top">
-          <div class="project-icon">📚</div><span class="project-badge badge-uni">University</span>
-        </div>
-        <div class="project-title">Library Website</div>
-        <div class="project-desc">
-          <ul>
-            <li>Responsive library website with book browsing and search.</li>
-            <li>Implemented admin panel and user-facing pages.</li>
-            <li>Focused on clean UI and accessibility.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span
-            class="stack-tag">JavaScript</span><span class="stack-tag">Team</span></div>
-      </div>
-
-      <div class="project-card reveal" style="transition-delay:0.30s" data-cat="uni">
-        <div class="project-top">
-          <div class="project-icon">🗓️</div><span class="project-badge badge-uni">University</span>
-        </div>
-        <div class="project-title">University Events Website</div>
-        <div class="project-desc">
-          <ul>
-            <li>Displays upcoming activities and announcements.</li>
-            <li>Worked on interface design, layout structure, and navigation.</li>
-            <li>Mobile responsive with consistent UI across devices.</li>
-          </ul>
-        </div>
-        <div class="project-stack"><span class="stack-tag">HTML</span><span class="stack-tag">CSS</span><span
-            class="stack-tag">JavaScript</span><span class="stack-tag">Team</span></div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="contact-inner reveal">
-      <div class="contact-left">
-        <h2>Let's Build<br />Something.</h2>
-        <p>Open to internships, collaborations, or just a good conversation about AI and web development.</p>
-        <div class="contact-links">
-          <a href="mailto:hussain14saleem1@gmail.com"
-            class="contact-link"><span>✉</span><span>hussain14saleem1@gmail.com</span></a>
-          <a href="tel:+218916765318" class="contact-link"><span>📞</span><span>(+218) 916 765 318</span></a>
-          <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-URL" target="_blank" class="contact-link">
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                fill="currentColor">
-                <path
-                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg></span>
-            <span>LinkedIn Profile</span>
-          </a>
-          <a href="#" class="contact-link"><span>📍</span><span>Benghazi, Libya</span></a>
-        </div>
-      </div>
-      <form class="contact-form" action="https://formspree.io/f/mnjgbndl" method="POST">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" name="name" placeholder="Your name" required />
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" placeholder="you@example.com" required />
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea rows="4" name="message" placeholder="Tell me about your project..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <footer>
-    <span style="color:var(--accent)">HA<span style="color:var(--muted)">.dev</span></span>
-    <span style="color:var(--muted)">Designed & built by <span style="color:var(--accent)">Hussain Alshikhy</span> —
-      2026</span>
-  </footer>
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/spinjitzu.js" defer></script>
+  <script src="assets/js/main.js?v=29"></script>
 </body>
 
 </html>

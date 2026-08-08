@@ -1,1204 +1,2323 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0
+/* ==========================================================================
+   Hussain Alshikhy — pixel-art portfolio
+   Vanilla CSS. No framework, no build step.
+
+   Two rendering worlds live in here:
+     1. THE STAGE  — the room, the shelf, the book. Real pixel art, scaled by
+        integer-ish factors with image-rendering: pixelated. A camera transform
+        moves through it.
+     2. THE READER — the open book. Pixel *styling* (hard edges, palette, pixel
+        fonts) but real HTML text at real sizes, because 8px bitmap type cannot
+        carry a CV and cannot be read by a screen reader.
+   The handover happens at peak zoom, green cover to green cover.
+   ========================================================================== */
+
+/* --- 0. Fonts ----------------------------------------------------------- */
+/* Self-hosted rather than pulled from Google: one less third-party request in
+   the critical path, and the site still renders correctly offline.
+   Silkscreen and Pixelify Sans are both SIL Open Font License — see
+   assets/fonts/LICENSE-*.txt. */
+
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../fonts/silkscreen-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('../fonts/silkscreen-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('../fonts/pixelify-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('../fonts/pixelify-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixelify Sans';
+  src: url('../fonts/pixelify-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- 1. Reset ----------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { height: 100%; }
+
+/* --- 2. Palette --------------------------------------------------------- */
+/* These are the exact 32 colours from tools/pxlib.py. If one changes there it
+   changes here — the art and the interface must never drift apart. */
 
 :root {
-  --bg: #080a0f;
-  --bg2: #0d1017;
-  --bg3: #131720;
-  --line: rgba(255, 255, 255, 0.07);
-  --accent: #4af7c4;
-  --accent2: #7b6ef6;
-  --text: #e8eaf0;
-  --muted: #6b7280;
-  --card: #111520
+  --ink:      #18141e;
+  --ink2:     #26202e;
+  --shadow:   #342a3a;
+
+  --wood-dd:  #3a2620;
+  --wood-d:   #56382a;
+  --wood:     #784f34;
+  --wood-l:   #9e6e47;
+  --wood-ll:  #c49260;
+
+  --teal-dd:  #12282a;
+  --teal-d:   #1a3a3a;
+  --teal:     #26524e;
+  --teal-l:   #3a7065;
+  --teal-ll:  #5e9884;
+
+  --blu-dd:   #182648;
+  --blu-d:    #283c68;
+  --blu:      #3c588e;
+  --blu-l:    #5c80b8;
+  --blu-ll:   #8cb2dc;
+
+  --grn-dd:   #1a4230;
+  --grn-d:    #266042;
+  --grn:      #388456;
+  --grn-l:    #56aa70;
+  --grn-ll:   #86d094;
+
+  --cream-d:  #a88c6a;
+  --cream-m:  #d0b48a;
+  --cream:    #eed8b0;
+  --cream-l:  #faeed2;
+  --white:    #fffaec;
+
+  --amber-d:  #c48034;
+  --amber:    #f0b04e;
+  --amber-l:  #ffd68a;
+
+  --red-d:    #6e2634;
+  --red:      #b03e42;
+  --orange:   #e08442;
+  --gold:     #d6a442;
+  --blue-d:   #2c3e66;
+  --blue:     #4a6c9e;
+  --purple:   #5c3e76;
+  --plum:     #8c4e7a;
+
+  --ui:   'Silkscreen', 'Courier New', monospace;
+  --body: 'Pixelify Sans', 'Trebuchet MS', sans-serif;
+
+  /* which volume's cloth the binding wears; switched on <body> */
+  --bind-dd: var(--grn-dd);
+  --bind-d:  var(--grn-d);
+
+  /* camera, driven from JS */
+  --cam-x: 0px;
+  --cam-y: 0px;
+  --cam-s: 1;
+  --cam-ms: 900ms;
 }
 
-html {
-  scroll-behavior: smooth
+body[data-volume="certs"] {
+  --bind-dd: var(--blu-dd);
+  --bind-d:  var(--blu-d);
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 14px;
-  line-height: 1.7;
-  overflow-x: hidden
+  min-height: 100%;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow: hidden;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
 }
 
-body::before {
-  content: '';
+
+img {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* No native drag. Holding the pointer down on the room used to peel a
+     translucent copy of the whole 480x560 sprite off and float it under the
+     cursor, which made the scene look like a pasted screenshot. */
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+a { color: var(--amber-l); text-decoration: none; border-bottom: 1px solid var(--amber-d); }
+a:hover { color: var(--white); background: var(--grn-dd); }
+
+/* inside the book the ground is cream, so links flip to a dark ink */
+.page a, .curl__face a {
+  color: var(--red-d);
+  border-bottom: 2px solid var(--cream-d);
+}
+
+.page a:hover, .curl__face a:hover { color: var(--grn-dd); background: var(--cream-l); border-bottom-color: var(--grn-dd); }
+
+::selection { background: var(--amber); color: var(--ink); }
+
+:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+code {
+  font-family: var(--ui);
+  font-size: 0.78em;
+  background: var(--cream-m);
+  color: var(--ink);
+  padding: 0 3px;
+}
+
+/* --- 3. (icon sprite sheet removed) ------------------------------------- */
+/* The 16x16 sprite icons that used to sit beside headings and contact rows
+   are gone. Next to pixel type at body size they read as emoji rather than as
+   part of the artwork, and a book page wants to be typographic. The sheet and
+   its generator are still in the repo if they are ever wanted back. */
+
+/* --- 4. Boot screen ----------------------------------------------------- */
+
+.boot {
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  transition: opacity 500ms steps(6), visibility 500ms;
 }
 
-#spinjitzu-canvas {
+body:not(.booting) .boot { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.boot__inner { text-align: center; padding: 1.5rem; }
+
+.boot__logo { display: grid; place-items: center; margin-bottom: 1.4rem; }
+
+.boot__book {
+  display: block;
+  width: 44px;
+  height: 60px;
+  background: url('../px/book_spine.png') no-repeat center / contain;
+  image-rendering: pixelated;
+  animation: boot-tilt 1.4s steps(2) infinite alternate;
+}
+
+@keyframes boot-tilt { to { transform: translateY(-6px) rotate(-6deg); } }
+
+.boot__title {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: clamp(14px, 3.6vw, 22px);
+  letter-spacing: 0.08em;
+  color: var(--amber);
+}
+
+.boot__sub {
+  font-family: var(--ui);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--teal-ll);
+  margin-top: 0.5rem;
+}
+
+.boot__bar {
+  width: min(260px, 70vw);
+  height: 14px;
+  margin: 1.6rem auto 0.7rem;
+  border: 2px solid var(--cream-d);
+  background: var(--ink2);
+  padding: 2px;
+}
+
+.boot__bar i { display: block; height: 100%; width: 0%; background: var(--grn-l); transition: width 180ms steps(4); }
+
+.boot__hint {
+  font-family: var(--ui);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--cream-d);
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.25; } }
+
+/* --- 5. Stage ----------------------------------------------------------- */
+
+.stage {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.55
+  overflow: hidden;
+  /* nothing in the room is text you would want to select, and a stray
+     drag-select across it highlights the prompt in blue */
+  user-select: none;
+  background: var(--teal-dd);
+  z-index: 10;
+  transition: opacity 480ms ease, filter 480ms ease;
 }
 
-nav {
+body[data-scene="read"] .stage {
+  opacity: 0;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+
+.world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 560px;
+  transform-origin: 0 0;
+  transform: translate(var(--cam-x), var(--cam-y)) scale(var(--cam-s));
+  transition: transform var(--cam-ms) cubic-bezier(0.55, 0.03, 0.2, 1);
+  /* Deliberately NO will-change here. It pins the layer's raster scale, so the
+     compositor stretches one small bitmap instead of re-rasterising at the
+     camera's zoom — which turned an 11-colour sprite into 1244 colours of
+     mush. Letting Chrome re-raster costs a frame at the end of a camera move
+     and keeps every pixel hard. */
+}
+
+.world__room { position: absolute; inset: 0; width: 480px; height: 560px; }
+
+/* -- the book on the shelf -- */
+
+.spine {
+  position: absolute;
+  left: 220px;
+  top: 114px;
+  width: 22px;
+  height: 106px;
+  padding: 0;
+  z-index: 4;
+  transition: transform 620ms cubic-bezier(0.34, 1.3, 0.5, 1), opacity 200ms;
+}
+
+.spine img { width: 22px; height: 106px; }
+
+/* The certificates, further along the same shelf. Kept clear of the brown
+   spines, which read as shelf woodwork when a book sits against them.
+   No width override: the sprite is 22px and forcing it to 20 was a 0.909
+   scale, which threw the pixel grid off and stretched the lettering. */
+.spine--blue { left: 344px; }
+
+/* nudged forward on hover, the way you'd tip a book out with a fingertip */
+body[data-scene="shelf"] .spine:hover,
+body[data-scene="shelf"] .spine:focus-visible { transform: translate(3px, -3px); }
+
+/* Only the book you actually clicked reacts. `is-taken` is set on that one
+   element by the click handler; the other book is left alone entirely.
+   This used to be driven off body[data-taking] with `.spine` on one side and
+   `.spine--blue` on the other — but the blue spine carries both classes, so
+   the portfolio rule selected it too and both books tipped out together. */
+.spine.is-taken { z-index: 5; }
+
+body[data-scene="pull"] .spine.is-taken {
+  transform: translate(26px, -10px) rotate(6deg);
+}
+
+/* and it is the only one that leaves the shelf: the other book never moved,
+   so it has no reason to vanish */
+body[data-scene="drop"] .spine.is-taken,
+body[data-scene="desk"] .spine.is-taken,
+body[data-scene="open"] .spine.is-taken,
+body[data-scene="read"] .spine.is-taken { opacity: 0; }
+
+/* nothing on the shelf is clickable once you have left it */
+body:not([data-scene="shelf"]) .spine { pointer-events: none; }
+
+/* halo so the books that matter are obvious in a shelf of eighty. One per
+   book, each centred on its own slot, so the pulse scales about the book
+   rather than dragging the pair apart. */
+.glow {
+  position: absolute;
+  left: 200px;      /* slot 220..242, centre 231 */
+  top: 96px;
+  width: 62px;
+  height: 142px;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+      rgba(240, 176, 78, 0.5) 0%,
+      rgba(240, 176, 78, 0.22) 42%,
+      rgba(240, 176, 78, 0) 70%);
+  animation: halo 2.2s ease-in-out infinite;
+}
+
+.glow--blue { left: 324px; }   /* slot 344..366, centre 355 */
+
+@keyframes halo {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.08); }
+}
+
+body:not([data-scene="shelf"]) .glow { opacity: 0; transition: opacity 300ms; }
+
+/* -- the pointing hand -----------------------------------------------------
+
+   Two jobs, two elements:
+     .hand    a static hint bobbing beside the book — touch devices only, where
+              there is no pointer to turn into one.
+     .cursor  the real pointer, on anything with a fine, hover-capable one.
+   Only ever one of them is visible.
+   -------------------------------------------------------------------------- */
+
+.hand,
+.cursor {
+  width: 24px;
+  height: 27px;
+  background: url('../px/hand.png') no-repeat 0 0;
+  background-size: 48px 27px;   /* two 24px frames: idle, pressed */
+  image-rendering: pixelated;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.hand.is-press,
+.cursor.is-press { background-position: calc(-24px * var(--cs, 3)) 0; }
+
+/* -- static hint, touch devices only -- */
+
+.hand {
+  position: absolute;
+  left: 246px;
+  top: 150px;
+  z-index: 6;
+  animation: hand-bob 1.05s steps(1) infinite alternate;
+}
+
+@keyframes hand-bob {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-3px, 4px); }
+}
+
+body[data-scene="desk"] .hand { left: 308px; top: 330px; }
+
+body:not([data-scene="shelf"]):not([data-scene="desk"]) .hand { opacity: 0; }
+
+/* once we know there is a real pointer, the hint is redundant */
+body.has-cursor .hand { display: none; }
+
+/* -- the desk lamp: light, dust, and the cord that switches it -- */
+
+.lamp {
+  position: absolute;
+  left: 75px;                    /* mouth 104 + 15, centred on an 88px sprite */
+  top: 362px;
+  width: 88px;
+  height: 48px;
+  z-index: 2;                    /* over the room, under anything you can hold */
+  pointer-events: none;
+  transition: opacity 200ms steps(4);
+}
+
+.lamp__cone { width: 88px; height: 48px; }
+.lamp__dust { position: absolute; inset: 0; }
+
+body.lamp-off .lamp { opacity: 0; }
+
+/* Motes falling through the beam. The fade is stepped rather than smooth —
+   `steps()` on the whole animation moves them in whole pixels too, which is
+   what keeps them looking drawn rather than tweened. */
+.lamp__dust i {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: var(--amber-l);
+  animation: lampmote linear infinite;
+  animation-timing-function: steps(9);
+}
+
+@keyframes lampmote {
+  from { transform: translateY(0);          opacity: 1; }
+  to   { transform: translateY(var(--fall, 30px)); opacity: 0; }
+}
+
+/* The rope's playground. The anchor — the gold pin under the shade — is at
+   local (36, 0), so the cord has room to swing either side of it. */
+.cord {
+  position: absolute;
+  left: 85px;
+  top: 363px;
+  width: 72px;
+  height: 56px;
+  z-index: 6;
+  pointer-events: none;          /* only the bead is grabbable */
+}
+
+.cord__svg { display: block; width: 72px; height: 56px; overflow: visible; }
+
+/* Drawn twice: a dark strand and a pale one a pixel to its right. A single
+   pale cord vanished against the light cone and a single dark one vanished
+   against the dark wall, and the cord has to be legible in both states of the
+   thing it switches. crispEdges keeps it on the pixel grid. */
+.cord__rope {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.cord__rope--lit { stroke: var(--cream-m); }
+
+.cordgrab {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  touch-action: none;            /* the drag is ours, not the page's */
+  /* placed by JS every frame, at the loose end of the rope */
+  left: 0;
+  top: 0;
+}
+
+.cordgrab__bead {
+  display: block;
+  width: 3px;
+  height: 5px;
+  background: var(--amber);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.cordgrab:hover .cordgrab__bead,
+.cordgrab:focus-visible .cordgrab__bead { background: var(--amber-l); }
+
+/* it is dark in here with the lamp off, so the bead says where to grab */
+body.lamp-off .cordgrab__bead { background: var(--cream-m); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lamp__dust { display: none; }
+}
+
+/* -- the pointer itself -- */
+
+.cursor {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 200;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.25rem 3rem;
-  border-bottom: 1px solid var(--line);
-  background: rgba(8, 10, 15, 0.92);
-  backdrop-filter: blur(14px)
+  z-index: 500;
+  display: none;
+  /* --cs tracks the world's pixel scale, so the cursor sits on the same pixel
+     grid as the art. A 2x cursor over a 3x room reads as a different game.
+     That scale is applied through width/height rather than through the
+     transform: scaling via transform resamples the sprite, scaling the box
+     lets image-rendering: pixelated do a clean nearest-neighbour blow-up. */
+  width: calc(24px * var(--cs, 3));
+  height: calc(27px * var(--cs, 3));
+  background-size: calc(48px * var(--cs, 3)) calc(27px * var(--cs, 3));
+  transform: translate3d(var(--curx, -200px), var(--cury, -200px), 0);
 }
 
-.nav-logo {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  text-decoration: none
+body.has-cursor .cursor { display: block; }
+
+/* gone once we leave the pixel scenes, and while the pointer is off-window.
+   Also gone over a framed site: pointermove does not cross an origin
+   boundary, so the pixel hand would freeze wherever it entered the frame
+   while the site drew a second, real cursor underneath it. */
+/* The drawn hand belongs to the room. Inside the book and inside the computer
+   you are using an interface with real text in it, so the real pointer takes
+   over — and those layers sit outside .stage, which is the only thing given
+   `cursor: none`. Leaving the hand on drew it *underneath* the system arrow:
+   two cursors, one of them fake. */
+body.has-cursor[data-scene="read"] .cursor,
+body.has-cursor[data-scene="pc"] .cursor,
+body.os-web .cursor,
+body.has-cursor .cursor.is-out { display: none; }
+
+/* Over something clickable the finger taps. This animates the sprite frame,
+   never the transform — moving the cursor would drag the fingertip off the
+   real pointer position, so the finger would no longer point at what you click. */
+.cursor.is-over { animation: cursor-tap 0.62s steps(1) infinite; }
+
+@keyframes cursor-tap {
+  0%, 62%   { background-position: 0 0; }
+  63%, 100% { background-position: calc(-24px * var(--cs, 3)) 0; }
 }
 
-.nav-links {
-  display: flex;
-  gap: 1.75rem;
-  list-style: none
+/* an actual press beats the idle tap */
+.cursor.is-press { animation: none; background-position: calc(-24px * var(--cs, 3)) 0; }
+
+/* the native arrow would otherwise sit on top of ours */
+body.has-cursor .stage,
+body.has-cursor .stage *,
+body.has-cursor .prompt { cursor: none; }
+
+/* -- the book once it's on the desk -- */
+
+.deskbook {
+  position: absolute;
+  left: 206px;
+  top: 272px;
+  width: 96px;
+  height: 128px;
+  padding: 0;
+  z-index: 5;
+  /* flat while resting — see the note on .deskbook__cover */
+  perspective: none;
 }
 
-.nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: color 0.2s
+body[data-scene="open"] .deskbook,
+body[data-scene="read"] .deskbook { perspective: 700px; }
+
+.deskbook[hidden] { display: none; }
+
+/* The page block under the cover.
+
+   This is a sprite, not a CSS gradient. A repeating-linear-gradient of 1px
+   stripes is rasterised after the camera's fractional scale, so the stripes
+   landed on fractional device pixels and moired into a shimmering barcode.
+   As a PNG it shares the pixel grid with the rest of the art. */
+.deskbook__pages {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 99px;
+  height: 128px;
+  background: url('../px/book_pages.png') no-repeat 0 0 / 99px 128px;
+  /* offset by 3px so only a narrow, even cream edge shows past the board */
+  image-rendering: pixelated;
+  box-shadow: 3px 4px 0 rgba(24, 20, 30, 0.55);
 }
 
-.nav-links a:hover {
-  color: var(--accent)
+.deskbook__cover {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  /* Flat at rest. transform-style: preserve-3d promotes this to a 3D layer
+     that Chrome resamples bilinearly even with no rotation applied, which is
+     what made the cover blurry just sitting there. 3D is switched on only
+     while the cover actually swings; blur during a fast rotation is both
+     unavoidable and invisible. */
+  transform-style: flat;
+  transition: transform 900ms cubic-bezier(0.5, 0, 0.2, 1);
+  backface-visibility: hidden;
 }
 
-section {
-  padding: 7rem 3rem;
-  max-width: 1100px;
+body[data-scene="open"] .deskbook__cover,
+body[data-scene="read"] .deskbook__cover { transform-style: preserve-3d; }
+
+.deskbook__cover img { width: 96px; height: 128px; }
+
+/* the marbled endpaper on the reverse of the board */
+.deskbook__inner {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  background: url('../px/book_endpaper.png') no-repeat center / 100% 100%;
+  image-rendering: pixelated;
+}
+
+body[data-scene="open"] .deskbook__cover,
+body[data-scene="read"] .deskbook__cover { transform: rotateY(-158deg); }
+
+/* Hover must not use a 3D transform: rotateY promotes the element to a
+   composited layer that is resampled bilinearly, and the cover goes blurry.
+   A brightness shift reads just as clearly and keeps every pixel hard. */
+/* The affordance is a light behind the book, not a filter over it. A filter
+   would recolour the artwork itself and push it off the 32-colour palette;
+   a glow underneath leaves every cover pixel exactly as drawn. */
+.deskbook::before {
+  content: '';
+  position: absolute;
+  inset: -14px -12px -10px -12px;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+      rgba(240, 176, 78, 0.55) 0%,
+      rgba(240, 176, 78, 0.2) 48%,
+      rgba(240, 176, 78, 0) 72%);
+  transition: opacity 220ms steps(3);
+}
+
+body[data-scene="desk"] .deskbook:hover::before,
+body[data-scene="desk"] .deskbook:focus-visible::before { opacity: 1; }
+
+body[data-scene="desk"] .deskbook:hover .deskbook__pages {
+  box-shadow: 5px 6px 0 rgba(24, 20, 30, 0.55);
+}
+
+/* the fall from shelf to desk, with a small settle at the end */
+@keyframes book-drop {
+  0%   { transform: translate(46px, -172px) rotate(16deg); }
+  62%  { transform: translate(0, 0) rotate(0deg); }
+  74%  { transform: translate(0, -11px) rotate(-2deg); }
+  86%  { transform: translate(0, 0) rotate(0deg); }
+  93%  { transform: translate(0, -3px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.deskbook.is-dropping { animation: book-drop 1000ms cubic-bezier(0.45, 0, 0.6, 1); }
+
+/* -- dust, prompt, screen treatment -- */
+
+.dust { position: absolute; inset: 0; pointer-events: none; z-index: 7; }
+
+.dust i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--amber-l);
+  opacity: 0.5;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(0) translateX(0); opacity: 0; }
+  15%  { opacity: 0.6; }
+  85%  { opacity: 0.5; }
+  to   { transform: translateY(-90px) translateX(22px); opacity: 0; }
+}
+
+.prompt {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(18px, 6vh, 54px);
+  transform: translateX(-50%);
+  z-index: 20;
+  font-family: var(--ui);
+  font-size: clamp(9px, 1.7vw, 13px);
+  letter-spacing: 0.16em;
+  color: var(--amber-l);
+  background: rgba(24, 20, 30, 0.82);
+  border: 2px solid var(--amber-d);
+  padding: 0.55em 1.1em;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0 rgba(24, 20, 30, 0.6);
+  transition: opacity 260ms;
+}
+
+.prompt span { animation: blink 1.15s steps(2) infinite; }
+
+body[data-scene="pull"] .prompt,
+body[data-scene="drop"] .prompt,
+body[data-scene="open"] .prompt,
+body[data-scene="read"] .prompt { opacity: 0; }
+
+.stage__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+      rgba(24, 20, 30, 0) 45%, rgba(24, 20, 30, 0.72) 100%);
+}
+
+.stage__scan {
+  position: absolute;
+  inset: 0;
+  z-index: 16;
+  pointer-events: none;
+  opacity: 0.16;
+  background: repeating-linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.9) 2px 4px);
+}
+
+body.no-crt .stage__scan { display: none; }
+
+/* --- 6. Reader shell ---------------------------------------------------- */
+
+.reader {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  padding: clamp(8px, 2vh, 26px) clamp(8px, 2vw, 26px) 0;
+  opacity: 0;
+  transition: opacity 520ms ease;
+}
+
+.reader[hidden] { display: none; }
+body[data-scene="read"] .reader { opacity: 1; }
+
+.reader__desk {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 38%,
+      rgba(240, 176, 78, 0.16) 0%, rgba(24, 20, 30, 0) 62%),
+    url('../px/tex_wood.png') repeat;
+  background-size: auto, 96px 96px;
+  image-rendering: pixelated;
+}
+
+.reader__desk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center,
+      rgba(24, 20, 30, 0.1) 40%, rgba(24, 20, 30, 0.9) 100%);
+}
+
+/* --- 7. The book -------------------------------------------------------- */
+
+.book {
+  position: relative;
+  width: min(1180px, 100%);
+  height: 100%;
+  max-height: min(86vh, 860px);
+  perspective: 2600px;
+}
+
+.book__board {
+  position: relative;
+  height: 100%;
+  /* Deep top and bottom margins so the page-edge bands sit entirely in the
+     board, clear of the pages. They are opaque, and the pages scroll — with
+     the bands overlapping the text slid under them and was sliced mid-line. */
+  padding: 30px 13px;
+  background: url('../px/tex_leather.png') repeat;
+  background-size: 64px 64px;
+  image-rendering: pixelated;
+  border: 3px solid var(--ink);
+  box-shadow:
+    inset 0 0 0 2px var(--bind-dd),
+    inset 0 0 0 4px var(--gold),
+    10px 12px 0 rgba(24, 20, 30, 0.55);
+  transform-style: preserve-3d;
+}
+
+/* The head and tail of the page block.
+
+   These used to be flat horizontal bars, which is what a closed ream of paper
+   looks like — not an open book. On an open book the edges curve down into the
+   gutter, because the leaves bend into the binding. Each band is a stack of
+   nested curves: level along the fore-edges, diving at the centre. */
+.edges {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  height: 22px;
+  z-index: 3;      /* under the gutter, so its shadow falls across the edges */
+  pointer-events: none;
+}
+
+.edges svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  shape-rendering: crispEdges;   /* hard pixel steps, like the rest of the art */
+}
+
+/* the solid stack behind the individual leaves — without this you can see
+   the green board straight through the gaps in the curve */
+/* Outlined, so the band reads as a solid object whether it happens to sit
+   against the green board or against the paper. */
+/* Filled with a fade so the stack melts into the paper. Only the outer curve
+   gets an ink rim — outlining the whole band drew a hard line straight across
+   the page where the underside was. */
+.edges__fill { stroke: none; }
+
+.edges use { fill: none; stroke-width: 1.4; }
+.edges .rim  { stroke: var(--ink); stroke-width: 1.2; }
+.edges .lit  { stroke: var(--cream-l); }
+.edges .mid  { stroke: var(--cream); }
+.edges .dark { stroke: var(--cream-d); }
+
+/* 30px board margin minus the 22px band: the leaves meet the paper exactly */
+.edges--top    { top: 8px; }
+.edges--bottom { bottom: 8px; }
+
+.gutter {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  bottom: 30px;
+  width: 54px;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  /* A soft valley with a hard crease line down the centre. The old version
+     was a wide near-opaque bar, which just read as a black stripe. */
+  background:
+    linear-gradient(to right,
+      rgba(24, 20, 30, 0) 0%,
+      rgba(24, 20, 30, 0.10) 30%,
+      rgba(24, 20, 30, 0.30) 46%,
+      rgba(24, 20, 30, 0.42) 50%,
+      rgba(24, 20, 30, 0.30) 54%,
+      rgba(24, 20, 30, 0.10) 70%,
+      rgba(24, 20, 30, 0) 100%);
+}
+
+/* the stitched crease itself */
+.gutter::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  bottom: 2%;
+  width: 2px;
+  margin-left: -1px;
+  background: repeating-linear-gradient(to bottom,
+      rgba(24, 20, 30, 0.55) 0 7px,
+      rgba(168, 140, 106, 0.35) 7px 11px);
+}
+
+.spreads { position: relative; height: 100%; }
+
+.spread {
+  position: relative;   /* the scroll trails are positioned against this */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  height: 100%;
+}
+
+.spread[hidden] { display: none; }
+
+/* A closing page runs across the whole opening rather than leaving an empty
+   recto. Losing the colophon left the contact spread with a blank right half,
+   which reads as a page that failed to load rather than as the end of a book;
+   the content is centred on the paper instead. */
+.spread[data-single] { grid-template-columns: 1fr; }
+
+/* The page still fills the board — constraining its width let the binding
+   cloth show through either side, which reads as a broken layout rather than
+   as a page. It is the measure that is centred, using padding.
+
+   Two classes deep on purpose: `.page` sets a padding shorthand further down
+   the file, and at equal specificity the later rule wins. */
+.page.page--only {
+  padding-inline: max(clamp(16px, 2.6vw, 38px), calc((100% - 52ch) / 2));
+}
+
+/* and there is no gutter down the middle of a page that has no fold */
+body:has(.spread[data-single]:not([hidden])) .gutter { opacity: 0; }
+
+.page {
+  position: relative;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(16px, 2.4vw, 34px) clamp(16px, 2.6vw, 38px);
+  background: url('../px/tex_parchment.png') repeat;
+  background-size: 128px 128px;
+  image-rendering: pixelated;
+  color: var(--ink2);
+  /* No scrollbar in the book — it broke the illusion at the gutter. The page
+     still scrolls by wheel, keyboard, trackpad and touch. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Paper bows as it runs into the binding: it lifts a little at the outer edge,
+   catches the light across the middle, and falls into shadow at the gutter.
+
+   These live on .spread, NOT on .page. .page is a scroll container, and an
+   absolutely positioned child of a scroll container is laid out against its
+   scrolled content — so this overlay slid up out of view as you read, leaving
+   everything past the first screenful unshaded. That was the pale band with a
+   hard top edge that appeared partway down a long page. */
+.spread::before,
+.spread::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.spread::before {
+  left: 0;
+  background: linear-gradient(to right,
+      rgba(24, 20, 30, 0.13) 0%,
+      rgba(24, 20, 30, 0.03) 7%,
+      rgba(255, 250, 236, 0.16) 30%,
+      rgba(255, 250, 236, 0.05) 55%,
+      rgba(24, 20, 30, 0.05) 78%,
+      rgba(24, 20, 30, 0.20) 95%,
+      rgba(24, 20, 30, 0.34) 100%);
+}
+
+.spread::after {
+  left: 50%;
+  background: linear-gradient(to left,
+      rgba(24, 20, 30, 0.13) 0%,
+      rgba(24, 20, 30, 0.03) 7%,
+      rgba(255, 250, 236, 0.16) 30%,
+      rgba(255, 250, 236, 0.05) 55%,
+      rgba(24, 20, 30, 0.05) 78%,
+      rgba(24, 20, 30, 0.20) 95%,
+      rgba(24, 20, 30, 0.34) 100%);
+}
+
+
+.page::-webkit-scrollbar { width: 0; height: 0; }
+
+/* --- 8. Page turn ------------------------------------------------------- */
+/*
+   A turning page is not a rigid board on a hinge, and animating it as one is
+   what made the old turn look static. Real paper bends: it is flat when it
+   starts, bows through the middle of the arc, and flattens again as it lands.
+
+   The standard way to get that in CSS is to slice the leaf into vertical
+   strips and nest them, each rotated a little relative to its parent, so the
+   chain approximates a curved surface (the technique Fabrizio Bianchi's
+   well-known pen popularised). Angles are driven per frame from JavaScript
+   because the bend has to vary over the course of the turn, which keyframes
+   cannot express.
+*/
+
+.curl {
+  /* top / left / width / height are measured and set from JS so the leaf
+     matches the page exactly — see Curl.build() */
+  position: absolute;
+  z-index: 8;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.curl[hidden] { display: none; }
+
+.curl__seg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.curl--fwd .curl__seg  { left: 0; transform-origin: left center; }
+.curl--back .curl__seg { right: 0; transform-origin: right center; }
+
+/* the slice of page this strip shows */
+.curl__face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  background: url('../px/tex_parchment.png') repeat;
+  background-size: 128px 128px;
+  image-rendering: pixelated;
+  color: var(--ink2);
+}
+
+.curl__inner {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Both sides exist from the start; we just swap which is visible when the
+   leaf passes edge-on. The far side is painted mirrored, because by then we
+   are looking at the back of the strip. */
+/* Per strip, not per leaf: direct-child combinators so a parent strip's state
+   never leaks into the strips nested inside it. */
+.curl__inner--back { visibility: hidden; transform: scaleX(-1); }
+.curl__seg.is-back > .curl__face > .curl__inner--front { visibility: hidden; }
+.curl__seg.is-back > .curl__face > .curl__inner--back  { visibility: visible; }
+
+.curl__inner > * {
+  padding: clamp(16px, 2.4vw, 34px) clamp(16px, 2.6vw, 38px);
+  height: 100%;
+  overflow: hidden;
+}
+
+/* per-strip shading — the further a strip turns away from the light, the
+   darker it gets. This is what reads as a curve rather than a fold. */
+.curl__shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  /* width and gradient are written per frame from JS; it sits inside the face
+     so it can only ever tint its own strip */
+}
+
+/* the shadow the lifting page casts down onto the spread underneath */
+.curl-cast {
+  position: absolute;
+  z-index: 7;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(to right,
+      rgba(24, 20, 30, 0.55) 0%,
+      rgba(24, 20, 30, 0.22) 38%,
+      rgba(24, 20, 30, 0) 78%);
+}
+
+.curl-cast[hidden] { display: none; }
+
+/* --- 8b. The beetle ----------------------------------------------------- */
+/*
+   Ambient life, not a control. An earlier version made this the scrollbar,
+   walking a dashed route as you scrolled — but the pages barely overflow, so
+   it had almost nothing to indicate and mostly sat still. It now just wanders
+   the spread the way a beetle would wander a real open book.
+
+   It appears on some spreads, not all, and never on touch.
+
+   It lives in .spread rather than .page: an absolutely positioned child of a
+   scroll container is laid out against the scrolled content, so anything
+   inside a page slides out of view as you read.
+*/
+
+.critter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 3;
+  pointer-events: none;          /* never block selecting the text under it */
+  background: url('../px/bug.png') no-repeat 0 0;
+  background-size: 192px 48px;   /* 8 headings x 2 walk phases */
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity 600ms ease;
+  will-change: transform;
+}
+
+.critter.is-awake { opacity: 1; }
+
+
+@media (max-width: 900px) {
+  .critter { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* a bug crawling across the page is exactly the kind of movement someone
+     asking for reduced motion is asking not to have */
+  .critter { display: none; }
+}
+
+/* --- 8c. The certificates volume ---------------------------------------- */
+/* Same book, different cloth. Only the binding colour and the plate styling
+   change; the paper, the curl and the page edges are shared. */
+
+/* A different cloth, not a colour filter. filter: hue-rotate() on the board
+   forces the whole subtree through a rasterisation pass, which would soften
+   the pixel art and the page curl inside it. */
+body[data-volume="certs"] .book__board {
+  background-image: url('../px/tex_leather_blue.png');
+}
+
+body[data-volume="certs"] .tabs { display: none; }
+
+/* the certificate itself, mounted on the right-hand page */
+.page--plate {
+  display: grid;
+  place-items: center;
+}
+
+.cert-plate {
+  width: 100%;
+  max-width: 430px;
+  text-align: center;
+}
+
+/* The certificate is printed on the page, not mounted on it. No frame, no
+   plate, no drop shadow — a picture in a book does not sit above the paper.
+
+   The box it fits into is still fixed, because the issuers use three aspect
+   ratios (DataCamp wide, HP squarer, NVIDIA portrait) and left to themselves
+   the scans came out at wildly different sizes. `contain` fits each inside the
+   same height without cropping or stretching it; the box has no appearance of
+   its own, so nothing about it shows. */
+.cert-plate img {
+  display: block;
+  width: 100%;
+  height: clamp(190px, 30vh, 260px);
+  object-fit: contain;
+  object-position: center;
   margin: 0 auto;
-  position: relative;
-  z-index: 10
+  /* These are photographs of paper, not sprites. The global pixelated rule is
+     for the pixel art; forced onto a real scan it turns the certificate's own
+     type into rubble, which is exactly what a certificate is there to let
+     someone read. */
+  image-rendering: auto;
 }
 
-#hero {
-  min-height: 100vh;
+/* NVIDIA's is the only portrait one, so at a shared height it came out half
+   the width of the rest. It gets its own, taller. */
+.cert-plate--tall img { height: clamp(280px, 46vh, 400px); }
+
+.cert-plate figcaption {
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.09em;
+  color: var(--wood-d);
+  margin-top: 1rem;
+}
+
+.cert-no {
+  font-family: var(--ui);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--red-d);
+}
+
+.cert-title {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: clamp(14px, 1.9vw, 20px);
+  line-height: 1.3;
+  color: var(--bind-dd);
+  margin: 0.5rem 0 0.3rem;
+}
+
+.cert-by {
+  font-family: var(--ui);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  color: var(--wood-d);
+  border-bottom: 3px solid var(--bind-dd);
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.4rem !important;
+}
+
+.cert-used {
+  border-left: 4px solid var(--red);
+  padding-left: 0.9rem;
+  color: var(--wood-d);
+  font-style: italic;
+}
+
+/* the pointer from the portfolio across to the blue volume */
+.crossref { text-align: center; max-width: 34ch; margin: 0 auto; }
+
+.crossref__book {
+  width: 96px;
+  height: 128px;
+  margin: 0 auto 1.2rem;
+  image-rendering: pixelated;
+  box-shadow: 6px 7px 0 rgba(24, 20, 30, 0.3);
+}
+
+.crossref__title {
+  font-family: var(--ui);
+  font-size: clamp(14px, 2vw, 19px);
+  color: var(--blu-dd);
+  margin-bottom: 0.8rem;
+}
+
+/* --- 9. Page content ---------------------------------------------------- */
+
+.h2 {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: clamp(15px, 2.1vw, 21px);
+  letter-spacing: 0.04em;
+  color: var(--grn-dd);
+  border-bottom: 3px solid var(--grn-dd);
+  padding-bottom: 0.45rem;
+  margin-bottom: 1.1rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: 8rem;
-  position: relative;
-  max-width: 100%;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  z-index: 10
+  align-items: baseline;
+  gap: 0.7rem;
 }
 
-.hero-eyebrow {
+.h2__num { font-size: 0.62em; color: var(--red-d); }
+
+.h3 {
+  font-family: var(--ui);
+  font-size: clamp(11px, 1.35vw, 13px);
+  letter-spacing: 0.05em;
+  color: var(--red-d);
+  margin: 1.5rem 0 0.6rem;
+  display: flex;
+  align-items: center;
+}
+
+.h3:first-child { margin-top: 0; }
+
+.page p { margin-bottom: 0.85rem; font-size: clamp(15px, 1.15vw, 17px); }
+.page p:last-child { margin-bottom: 0; }
+.page b { color: var(--grn-dd); font-weight: 700; }
+
+.lede { color: var(--wood-d); }
+.small { font-size: clamp(13px, 1vw, 15px); color: var(--wood-d); }
+
+/* -- title page -- */
+
+.plate {
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--ink);
+  background: var(--teal-d);
+  box-shadow: 5px 5px 0 rgba(24, 20, 30, 0.4);
+  margin-bottom: 1.1rem;
+}
+
+.plate__img { width: 72px; height: 72px; }
+
+.name {
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: clamp(22px, 3.4vw, 38px);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  color: var(--grn-dd);
+  text-shadow: 3px 3px 0 var(--cream-d);
+  margin-bottom: 0.6rem;
+}
+
+.role {
+  font-family: var(--ui);
+  font-size: clamp(10px, 1.25vw, 12px);
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+  color: var(--red-d);
+  margin-bottom: 1.2rem;
+}
+
+.meta { list-style: none; display: grid; gap: 0.4rem; margin-bottom: 1.3rem; }
+.meta li { display: flex; align-items: center; font-size: clamp(13px, 1.05vw, 15px); }
+
+.stamp {
+  display: inline-block;
+  font-family: var(--ui);
   font-size: 11px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
+  color: var(--red);
+  border: 3px solid var(--red);
+  padding: 0.4em 0.7em;
+  transform: rotate(-5deg);
+  opacity: 0.85;
+}
+
+/* -- stats -- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin: 1.1rem 0;
+}
+
+.stat {
+  border: 2px solid var(--grn-dd);
+  background: var(--cream-l);
+  padding: 0.55rem 0.6rem;
+  box-shadow: 3px 3px 0 var(--cream-d);
+}
+
+.stat b {
+  display: block;
+  font-family: var(--ui);
+  font-size: clamp(16px, 2vw, 22px);
+  color: var(--grn-dd);
+  line-height: 1;
+}
+
+.stat span {
+  display: block;
+  font-family: var(--ui);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--wood-d);
+  margin-top: 0.35rem;
+}
+
+.quote {
+  border-left: 5px solid var(--red);
+  padding-left: 0.85rem;
+  font-style: italic;
+  color: var(--wood-d);
+}
+
+/* -- chips, bars -- */
+
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 0.6rem; }
+
+.chips li {
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.2s forwards
+  border: 2px solid var(--bind-dd);
+  background: var(--cream-l);
+  color: var(--bind-dd);
+  padding: 0.35em 0.5em;
+  box-shadow: 2px 2px 0 var(--cream-d);
 }
 
-.hero-name {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  font-weight: 800;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  color: #fff;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.4s forwards
+.chips--soft li { border-color: var(--purple); color: var(--purple); }
+.chips--sm li { font-size: 8px; }
+
+.bars { list-style: none; display: grid; gap: 0.7rem; margin-bottom: 0.4rem; }
+
+.bars li { display: grid; gap: 0.25rem; }
+
+.bars span {
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: var(--wood-d);
 }
 
-.hero-name span {
-  color: var(--accent)
+.bar {
+  display: block;
+  height: 12px;
+  border: 2px solid var(--grn-dd);
+  background: var(--cream-l);
+  padding: 1px;
 }
 
-.hero-tagline {
-  font-size: 1rem;
-  color: var(--muted);
-  max-width: 520px;
-  margin-bottom: 0.75rem;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.55s forwards
+.bar b {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: repeating-linear-gradient(to right,
+      var(--grn) 0 3px, var(--grn-d) 3px 4px);
+  transition: width 900ms steps(20);
 }
 
-.hero-location {
-  font-size: 12px;
-  color: var(--muted);
-  opacity: 0;
-  animation: fadeUp 0.7s 0.65s forwards;
-  margin-bottom: 2.5rem;
+.spread:not([hidden]) .bar b { width: var(--w); }
+
+/* -- jobs, projects, certs -- */
+
+.job, .proj, .cert {
+  border-left: 3px solid var(--cream-d);
+  padding-left: 0.9rem;
+  margin-bottom: 1.3rem;
+}
+
+.job:last-child, .proj:last-child, .cert:last-child { margin-bottom: 0; }
+
+.job__when {
+  font-family: var(--ui);
+  font-size: 9px;
   letter-spacing: 0.08em;
+  color: var(--wood-d);
+  margin-bottom: 0.3rem !important;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem
+  gap: 0.5rem;
 }
 
-.hero-location span {
-  color: var(--accent)
+.now {
+  font-size: 8px;
+  color: var(--cream-l);
+  background: var(--grn-d);
+  padding: 0.2em 0.4em;
+  letter-spacing: 0.1em;
 }
 
-.linkedin-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  padding: 0.3rem 0.75rem;
-  border: 1px solid rgba(74, 247, 196, 0.3);
-  border-radius: 4px;
-  background: rgba(74, 247, 196, 0.06);
-  transition: all 0.2s
-}
-
-.linkedin-btn:hover {
-  background: rgba(74, 247, 196, 0.15);
-  border-color: var(--accent);
-  transform: translateY(-1px)
-}
-
-.linkedin-btn svg {
-  flex-shrink: 0
-}
-
-.hero-cta {
+.job__role, .proj__name, .cert__name {
+  font-family: var(--ui);
+  font-size: clamp(12px, 1.5vw, 15px);
+  color: var(--grn-dd);
+  margin-bottom: 0.2rem;
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp 0.7s 0.8s forwards
+  align-items: center;
 }
+
+.job__org, .proj__where, .cert__by {
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: var(--red-d);
+  margin-bottom: 0.5rem !important;
+}
+
+.cert__got { font-size: clamp(13px, 1vw, 15px) !important; color: var(--wood-d); }
+
+.bullets { list-style: none; display: grid; gap: 0.4rem; }
+
+.bullets li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: clamp(14px, 1.05vw, 16px);
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+}
+
+.bullets--tight li { font-size: clamp(13px, 1vw, 15px); }
+
+/* -- contact -- */
+
+.contact { list-style: none; display: grid; gap: 6px; margin-bottom: 1.2rem; }
+
+.contact a, .contact > li > span {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--grn-dd);
+  background: var(--cream-l);
+  padding: 0.6rem 0.7rem;
+  box-shadow: 3px 3px 0 var(--cream-d);
+  color: var(--ink2);
+  transition: transform 120ms steps(2), box-shadow 120ms steps(2);
+}
+
+.contact a:hover {
+  background: var(--cream-l);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--cream-d);
+}
+
+.contact span span { display: block; }
+
+.contact b {
+  display: block;
+  font-family: var(--ui);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--red-d);
+  margin-bottom: 0.15rem;
+}
+
+.page .btn, .curl__face .btn {
+  color: var(--cream-l);
+  border-bottom: 0;
+}
+
+.page .btn:hover, .curl__face .btn:hover { color: var(--amber-l); background: var(--grn-d); }
 
 .btn {
   display: inline-block;
-  padding: 0.75rem 1.75rem;
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
+  font-family: var(--ui);
+  font-size: 11px;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.2s;
-  cursor: pointer;
-  border: none
+  color: var(--cream-l);
+  background: var(--grn-dd);
+  border: 3px solid var(--ink);
+  padding: 0.65em 1.1em;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 110ms steps(2), box-shadow 110ms steps(2);
 }
 
-.btn-primary {
-  background: var(--accent);
-  color: #080a0f;
-  font-weight: 700
+.btn:hover { color: var(--amber-l); background: var(--grn-d); }
+.btn:active { transform: translate(4px, 4px); box-shadow: none; }
+
+.colophon-end {
+  font-family: var(--ui);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--cream-d);
+  text-align: center;
+  margin-top: 1.6rem !important;
 }
 
-.btn-primary:hover {
-  background: #2de0ac;
-  transform: translateY(-2px)
-}
+/* --- 10. Tabs, pager, HUD ---------------------------------------------- */
 
-.btn-outline {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--line)
-}
-
-.btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px)
-}
-
-.hero-grid-lines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
-  opacity: 0.4
-}
-
-.hero-scroll {
+.tabs {
   position: absolute;
-  bottom: 2.5rem;
-  left: 3rem;
+  right: -2px;
+  top: 34px;
+  display: grid;
+  gap: 6px;
+  transform: translateX(100%);
+  z-index: 6;
+}
+
+.tabs button {
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--cream-l);
+  background: var(--red-d);
+  border: 3px solid var(--ink);
+  border-left: 0;
+  padding: 0.55em 0.6em 0.55em 0.45em;
+  box-shadow: 3px 3px 0 rgba(24, 20, 30, 0.5);
+  transition: transform 130ms steps(2), background 130ms;
+}
+
+.tabs button:hover { background: var(--red); transform: translateX(3px); }
+.tabs button[aria-current="true"] { background: var(--grn-d); transform: translateX(6px); }
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: clamp(8px, 1.5vh, 14px) 0 clamp(10px, 1.8vh, 18px);
+}
+
+.pgbtn {
+  font-family: var(--ui);
+  font-size: 14px;
+  color: var(--cream-l);
+  background: var(--grn-dd);
+  border: 3px solid var(--ink);
+  width: 44px;
+  height: 38px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 110ms steps(2), box-shadow 110ms steps(2);
+}
+
+.pgbtn:hover { background: var(--grn-d); color: var(--amber-l); }
+.pgbtn:active { transform: translate(3px, 3px); box-shadow: none; }
+.pgbtn[disabled] { opacity: 0.35; cursor: not-allowed; }
+
+.pager__count {
+  font-family: var(--ui);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--cream-m);
+  min-width: 5.5em;
+  text-align: center;
+}
+
+.hud {
+  position: absolute;
+  left: -2px;
+  top: 34px;
+  display: grid;
+  gap: 6px;
+  transform: translateX(-100%);
+  z-index: 6;
+}
+
+.hudbtn {
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-align: right;
+  color: var(--cream-m);
+  background: var(--ink2);
+  border: 3px solid var(--ink);
+  border-right: 0;
+  padding: 0.55em 0.45em 0.55em 0.6em;
+  box-shadow: -3px 3px 0 rgba(24, 20, 30, 0.5);
+  transition: transform 130ms steps(2), background 130ms, color 130ms;
+}
+
+.hudbtn:hover { background: var(--shadow); color: var(--amber-l); transform: translateX(-3px); }
+.hudbtn[aria-pressed="true"] { background: var(--grn-d); color: var(--cream-l); transform: translateX(-6px); }
+
+.hint-keys {
+  flex-basis: 100%;
+  text-align: center;
+  order: 9;
+  margin-top: 2px;
+  font-family: var(--ui);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: var(--cream-d);
+  opacity: 0.6;
+}
+
+.hint-keys[hidden] { display: none; }
+
+/* --- 11. (plain-text mode removed) ------------------------------------- */
+/* There used to be a TEXT control that flattened the book into one scrolling
+   column, and a SOUND control. Both are gone: sound is simply on, and the
+   fallback for anyone without JavaScript is the <noscript> block, which has
+   always carried the full content. */
+
+/* --- 11b. The computer -------------------------------------------------- */
+/* The box matches the drawn case exactly. PC in tools/build_room.py is the
+   single source of those four numbers; if the art moves, move them here. */
+
+.pc {
+  position: absolute;
+  left: 310px;
+  top: 316px;
+  width: 96px;
+  /* down to the desk line at 396: the foot and the keyboard are part of the
+     computer, so clicking them should switch it on too */
+  height: 80px;
+  padding: 0;
+  background: none;
+  border: 0;
+  z-index: 4;
+  transition: transform 200ms steps(2);
+}
+
+.pc__halo {
+  position: absolute;
+  inset: -14px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms;
+  background: radial-gradient(ellipse at center,
+      rgba(94, 152, 132, 0.5) 0%,
+      rgba(94, 152, 132, 0.2) 45%,
+      rgba(94, 152, 132, 0) 72%);
+  animation: halo 2.4s ease-in-out infinite;
+}
+
+body[data-scene="desk-idle"] .pc__halo { opacity: 1; }
+body[data-scene="desk-idle"] .pc:hover,
+body[data-scene="desk-idle"] .pc:focus-visible { transform: translateY(-2px); }
+body:not([data-scene="desk-idle"]) .pc { pointer-events: none; }
+
+/* --- 11c. Moving between the two floors of the room --------------------- */
+/* Arrows, on the left, because the section tabs are on the right. Drawn with
+   CSS borders rather than characters: the arrow glyphs are not in Silkscreen
+   or Pixelify Sans, and the browser substitutes a system font for them. */
+
+.floors {
+  position: absolute;
+  left: clamp(8px, 2.4vw, 34px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: grid;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms;
+}
+
+/* 'desk' is included: once a book has landed on the table, the way back to
+   the shelf has to be on screen. Without it the only exits were opening the
+   book or pressing a key nobody had been told about. */
+body[data-scene="shelf"] .floors,
+body[data-scene="desk"] .floors,
+body[data-scene="desk-idle"] .floors { opacity: 1; pointer-events: auto; }
+body.has-cursor .floors, body.has-cursor .floorbtn { cursor: none; }
+
+.floorbtn {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  justify-content: flex-start;
+  min-width: 126px;
+  gap: 9px;
+  font-family: var(--ui);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--cream-m);
+  background: rgba(24, 20, 30, 0.86);
+  border: 3px solid var(--ink);
+  padding: 0.6em 0.8em;
+  box-shadow: 3px 3px 0 rgba(24, 20, 30, 0.55);
+  transition: transform 130ms steps(2), background 130ms, color 130ms;
+}
+
+.floorbtn:hover:not(:disabled) {
+  background: var(--shadow);
+  color: var(--amber-l);
+  transform: translateX(3px);
+}
+
+.floorbtn:disabled { opacity: 0.42; }
+
+.floorbtn__tri {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+.floorbtn--up .floorbtn__tri { border-bottom: 8px solid currentColor; }
+.floorbtn--down .floorbtn__tri { border-top: 8px solid currentColor; }
+
+/* --- 11d. The desktop on the monitor ------------------------------------ */
+/* Same handover as the book: the camera pushes into the glass, then real HTML
+   takes over. Painted text at 84x48 could not be read, selected or indexed. */
+
+.os {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--ink);
   opacity: 0;
-  animation: fadeUp 0.7s 1.2s forwards
+  transition: opacity 320ms;
+  display: grid;
+  place-items: center;
+  padding: clamp(6px, 2vh, 22px);
 }
 
-.scroll-line {
-  width: 40px;
-  height: 1px;
-  background: var(--muted);
+.os[hidden] { display: none; }
+body[data-scene="pc"] .os { opacity: 1; }
+
+.os__crt {
   position: relative;
-  overflow: hidden
+  width: min(100%, 1180px);
+  height: min(100%, 664px);
+  background: var(--teal-dd);
+  border: 4px solid var(--ink);
+  box-shadow: inset 0 0 0 2px rgba(94, 152, 132, 0.18),
+              0 0 70px rgba(94, 152, 132, 0.16);
+  overflow: hidden;
 }
 
-.scroll-line::after {
+.os__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(10px, 2vw, 22px);
+  gap: clamp(8px, 1.6vh, 16px);
+  min-height: 0;
+}
+
+/* the boot lines, typed in before the desktop appears */
+.os__boot {
+  position: absolute;
+  inset: clamp(10px, 2vw, 22px);
+  z-index: 5;
+  font-family: var(--ui);
+  font-size: clamp(9px, 1.15vw, 13px);
+  line-height: 1.9;
+  color: var(--grn-ll);
+  white-space: pre-line;
+  background: var(--teal-dd);
+}
+
+.os__boot[hidden] { display: none; }
+
+.os__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  font-family: var(--ui);
+  font-size: clamp(9px, 1.1vw, 12px);
+  letter-spacing: 0.14em;
+  color: var(--teal-ll);
+  border-bottom: 2px solid var(--teal);
+  padding-bottom: 0.6em;
+}
+
+.os__name { color: var(--amber); }
+
+.os__note {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(44%, 400px);
+  background: var(--teal-d);
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0 rgba(24, 20, 30, 0.55);
+  padding: clamp(10px, 1.6vw, 18px);
+  display: grid;
+  gap: 0.7em;
+  font-family: var(--body);
+  font-size: clamp(12px, 1.15vw, 15px);
+  line-height: 1.55;
+  color: var(--cream);
+}
+
+.os__note-h, .os__note-f {
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.9vw, 10px);
+  letter-spacing: 0.14em;
+}
+
+.os__note-h { color: var(--amber); }
+.os__note-f { color: var(--teal-ll); }
+
+/* out of the way while a project is open */
+body.os-busy .os__note { opacity: 0; transition: opacity 160ms; }
+
+/* the working area: icons laid on it, windows floating over them */
+.os__main {
+  position: relative;
+  min-height: 0;
+  /* faint dot grid, so an empty desktop reads as a surface and not as a void */
+  background-image: radial-gradient(rgba(94, 152, 132, 0.16) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.os__desktop {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(6px, 1.2vw, 16px);
+  width: min(100%, 560px);
+  padding: clamp(8px, 1.8vh, 18px) 0 0;
+}
+
+.app {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 10px 6px;
+  background: none;
+  border: 2px solid transparent;
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.95vw, 11px);
+  letter-spacing: 0.06em;
+  color: var(--cream-m);
+  transition: background 120ms, color 120ms, transform 120ms steps(2);
+}
+
+.app img {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+}
+
+.app:hover, .app:focus-visible {
+  background: rgba(94, 152, 132, 0.18);
+  border-color: var(--teal-l);
+  color: var(--amber-l);
+  transform: translateY(-2px);
+}
+
+.app[aria-expanded="true"] {
+  background: var(--teal-d);
+  border-color: var(--teal-ll);
+  color: var(--cream-l);
+}
+
+/* The icons never move. An earlier version collapsed them into a dock along
+   the top while a project was open, so all of them stayed clickable — but
+   shuffling the desktop under the visitor every time they opened something is
+   the worse trade. They keep their grid; the window sits over the second row,
+   and closing it puts them back within reach. */
+
+/* the window a project opens in */
+.os__wins {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.win {
+  pointer-events: auto;
+  position: absolute;
+  left: clamp(6px, 4%, 60px);
+  right: clamp(6px, 4%, 60px);
+  /* Clears the first row of icons and covers the second. --win-top is
+     measured from the icons themselves in JS rather than derived from the
+     padding, icon size, gap and label height: a hard-coded sum was five
+     pixels out, and it would drift again with a different font or zoom. */
+  top: var(--win-top, 124px);
+  bottom: clamp(6px, 3%, 30px);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--ink2);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 rgba(24, 20, 30, 0.6),
+              inset 0 0 0 1px var(--teal-d);
+  animation: winIn 180ms steps(3);
+}
+
+.win[hidden] { display: none; }
+
+@keyframes winIn {
+  from { transform: scale(0.86); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.win__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-d);
+  border-bottom: 3px solid var(--ink);
+  padding: 6px 6px 6px 8px;
+}
+
+.win__bar img { image-rendering: pixelated; }
+
+.win__title {
+  flex: 1;
+  font-family: var(--ui);
+  font-size: clamp(9px, 1.1vw, 12px);
+  letter-spacing: 0.14em;
+  color: var(--cream-l);
+  font-weight: 400;
+}
+
+.win__x {
+  font-family: var(--ui);
+  font-size: 11px;
+  line-height: 1;
+  color: var(--cream-l);
+  background: var(--red-d);
+  border: 2px solid var(--ink);
+  padding: 3px 6px;
+  transition: background 120ms;
+}
+
+.win__x:hover { background: var(--red); }
+
+.win__body {
+  overflow: auto;
+  padding: clamp(12px, 2vw, 22px);
+  font-family: var(--body);
+  font-size: clamp(13px, 1.35vw, 17px);
+  line-height: 1.62;
+  color: var(--cream);
+  display: grid;
+  gap: 0.85em;
+  align-content: start;
+}
+
+.win__meta {
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.95vw, 11px);
+  letter-spacing: 0.1em;
+  color: var(--amber);
+}
+
+.win__note {
+  border-left: 3px solid var(--teal-l);
+  padding-left: 0.9em;
+  color: var(--cream-m);
+  font-style: italic;
+}
+
+/* Four of the seven are live. The rest say so plainly rather than showing a
+   dead button — a link that goes nowhere is worse than no link. */
+.win__go {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  flex-wrap: wrap;
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.95vw, 11px);
+  letter-spacing: 0.12em;
+}
+
+.oslink {
+  color: var(--ink);
+  background: var(--amber);
+  border: 2px solid var(--ink);
+  border-bottom-width: 2px;
+  box-shadow: 3px 3px 0 rgba(24, 20, 30, 0.6);
+  padding: 0.6em 1em;
+  transition: background 120ms, transform 120ms steps(2);
+}
+
+.oslink:hover, .oslink:focus-visible {
+  color: var(--ink);
+  background: var(--amber-l);
+  transform: translate(-1px, -1px);
+}
+
+.win__url { color: var(--teal-ll); }
+
+.win__go--none { color: var(--cream-d); opacity: 0.75; }
+
+/* --- 11e. The browser inside the computer -------------------------------- */
+/* Pixel chrome, real site in the glass. The frame itself is left alone: it is
+   a cross-origin document, so it cannot be styled, and a filter laid over it
+   would only make somebody else's work harder to read. */
+
+/* A window on the monitor, not a takeover of the browser. It fills the whole
+   screen of the CRT — head bar, desktop and status bar included — so the site
+   gets every pixel the monitor has, and the room is still visible around the
+   bezel. The first version was a small window sitting inside the desktop,
+   which left the site 430px of height: a hero at `height: 100vh` had nowhere
+   to go and you saw a sliver of it and a scrollbar. */
+.web {
+  position: absolute;
+  inset: 0;
+  z-index: 2;                   /* over .os__inner, under the glass overlays */
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--ink);
+  animation: webIn 220ms steps(4);
+}
+
+/* and the monitor itself grows to meet it. The desktop keeps the size it was
+   designed at; only a site being open makes the screen stretch. */
+body.os-web .os__crt {
+  width: min(100%, 1320px);
+  height: min(100%, 820px);
+}
+
+@keyframes webIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; } }
+
+.web[hidden] { display: none; }
+
+.web__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal-d);
+  border-bottom: 3px solid var(--ink);
+  box-shadow: inset 0 -1px 0 var(--teal-l);
+  padding: 7px clamp(8px, 1.4vw, 18px);
+}
+
+.web__lights { display: flex; gap: 4px; padding-left: 2px; }
+.web__lights i { width: 8px; height: 8px; background: var(--red); border: 1px solid var(--ink); }
+.web__lights i:nth-child(2) { background: var(--amber); }
+.web__lights i:nth-child(3) { background: var(--grn-l); }
+
+.web__url {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.95vw, 11px);
+  letter-spacing: 0.08em;
+  color: var(--cream-l);
+  background: var(--ink);
+  border: 2px solid var(--teal);
+  padding: 5px 8px;
+}
+
+.web__btn {
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.9vw, 10px);
+  letter-spacing: 0.1em;
+  color: var(--cream-m);
+  background: var(--teal);
+  border: 2px solid var(--ink);
+  padding: 5px 8px;
+  white-space: nowrap;
+  transition: background 120ms, color 120ms;
+}
+
+a.web__btn { text-decoration: none; }
+.web__btn:hover { background: var(--teal-l); color: var(--amber-l); }
+
+.web__view { position: relative; background: var(--white); min-height: 0; }
+
+/* still on a CRT. Kept faint — this is somebody's real work underneath. */
+.web__view::after {
   content: '';
   position: absolute;
-  left: -100%;
-  top: 0;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.055;
+  background: repeating-linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.9) 2px 4px);
+}
+
+.web__view iframe {
+  display: block;
   width: 100%;
   height: 100%;
-  background: var(--accent);
-  animation: scanLine 1.5s 1.5s infinite
+  border: 0;
+  background: var(--white);
 }
 
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1.5rem;
-  margin-bottom: 4rem
-}
-
-.section-num {
-  font-size: 11px;
-  color: var(--accent);
-  letter-spacing: 0.2em;
-  opacity: 0.7
-}
-
-.section-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.02em
-}
-
-.section-line {
-  flex: 1;
-  height: 1px;
-  background: var(--line)
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start
-}
-
-.about-bio p {
-  color: var(--muted);
-  margin-bottom: 1.25rem;
-  line-height: 1.9
-}
-
-.about-bio p strong {
-  color: var(--text)
-}
-
-.about-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem
-}
-
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 1.5rem;
-  transition: border-color 0.2s, transform 0.2s
-}
-
-.stat-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-3px)
-}
-
-.stat-num {
-  font-family: 'Syne', sans-serif;
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--accent);
-  display: block
-}
-
-.stat-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted)
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.25rem
-}
-
-.skill-group {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 1.5rem;
-  transition: border-color 0.2s
-}
-
-.skill-group:hover {
-  border-color: var(--accent2)
-}
-
-.skill-group-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent2);
-  margin-bottom: 1rem
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem
-}
-
-.skill-tag {
-  background: rgba(123, 110, 246, 0.08);
-  border: 1px solid rgba(123, 110, 246, 0.2);
-  color: var(--text);
-  font-size: 12px;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px
-}
-
-.soft-tag {
-  background: rgba(74, 247, 196, 0.06);
-  border: 1px solid rgba(74, 247, 196, 0.18);
-  color: var(--text);
-  font-size: 12px;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px
-}
-
-.interests-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem
-}
-
-.interest-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.2s
-}
-
-.interest-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px)
-}
-
-.interest-icon {
-  font-size: 1.4rem;
-  width: 32px;
-  text-align: center
-}
-
-.interest-name {
-  font-size: 13px;
-  color: var(--text)
-}
-
-.timeline {
-  position: relative;
-  padding-left: 2rem
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  bottom: 0;
-  width: 1px;
-  background: var(--line)
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 3.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s, transform 0.5s
-}
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: none
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -2.4rem;
-  top: 0.35rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg);
-  box-shadow: 0 0 0 3px rgba(74, 247, 196, 0.15)
-}
-
-.timeline-meta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap
-}
-
-.timeline-date {
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent)
-}
-
-.timeline-company {
-  font-size: 11px;
-  color: var(--muted)
-}
-
-.timeline-role {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.75rem
-}
-
-.timeline-desc {
-  color: var(--muted);
-  line-height: 1.8;
-  font-size: 13px
-}
-
-.timeline-desc ul {
-  padding-left: 1.2rem
-}
-
-.timeline-desc li {
-  margin-bottom: 0.3rem
-}
-
-.edu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem
-}
-
-.edu-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.2s;
-  position: relative
-}
-
-.edu-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s
-}
-
-.edu-card:hover::before {
-  transform: scaleX(1)
-}
-
-.edu-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(74, 247, 196, 0.2)
-}
-
-.edu-img {
-  width: 100%;
-  height: 130px;
-  object-fit: contain;
-  background: #fff;
-  padding: 0.75rem;
-  display: block
-}
-
-.edu-body {
-  padding: 1.5rem
-}
-
-.edu-degree {
-  font-family: 'Syne', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.3rem
-}
-
-.edu-school {
-  font-size: 13px;
-  color: var(--accent);
-  margin-bottom: 0.25rem
-}
-
-.edu-year {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.12em;
-  text-transform: uppercase
-}
-
-.edu-note {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 0.6rem;
-  line-height: 1.7
-}
-
-.cert-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem
-}
-
-.cert-item {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: border-color 0.25s
-}
-
-.cert-item:hover {
-  border-color: rgba(123, 110, 246, 0.4)
-}
-
-.cert-item.open {
-  border-color: var(--accent)
-}
-
-.cert-item-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  cursor: pointer;
-  gap: 1rem;
-  flex-wrap: wrap
-}
-
-.cert-item-left {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  flex: 1;
-  min-width: 0
-}
-
-.cert-badge {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background: rgba(123, 110, 246, 0.12);
-  border: 1px solid rgba(123, 110, 246, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  flex-shrink: 0
-}
-
-.cert-item-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  min-width: 0
-}
-
-.cert-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff
-}
-
-.cert-issuer {
-  font-size: 12px;
-  color: var(--muted)
-}
-
-.cert-date {
-  color: var(--accent)
-}
-
-.cert-skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-top: 0.2rem
-}
-
-.cert-skill {
-  font-size: 10px;
-  padding: 0.2rem 0.5rem;
-  background: rgba(74, 247, 196, 0.06);
-  border: 1px solid rgba(74, 247, 196, 0.15);
-  color: var(--accent);
-  border-radius: 3px;
-  letter-spacing: 0.06em
-}
-
-.cert-view-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.9rem;
-  background: rgba(74, 247, 196, 0.06);
-  border: 1px solid rgba(74, 247, 196, 0.18);
-  border-radius: 5px;
-  color: var(--accent);
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: background 0.2s, border-color 0.2s
-}
-
-.cert-view-btn:hover {
-  background: rgba(74, 247, 196, 0.14);
-  border-color: var(--accent)
-}
-
-.cert-arrow {
-  display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  font-style: normal;
-  font-size: 11px
-}
-
-.cert-item.open .cert-arrow {
-  transform: rotate(180deg)
-}
-
-.cert-img-panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1)
-}
-
-.cert-img-inner {
-  padding: 0 1.5rem 1.5rem
-}
-
-.cert-img-inner img {
-  width: 100%;
-  display: block;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.08)
-}
-
-.project-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 2.5rem
-}
-
-.filter-btn {
-  padding: 0.4rem 1rem;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--muted)
-}
-
-.filter-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent)
-}
-
-.filter-btn.active {
-  background: rgba(74, 247, 196, 0.1);
-  border-color: var(--accent);
-  color: var(--accent)
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem
-}
-
-.project-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 2rem;
-  transition: all 0.25s;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem
-}
-
-.project-card:hover {
-  border-color: rgba(74, 247, 196, 0.3);
-  transform: translateY(-5px);
-  background: #131a24
-}
-
-.project-card.hidden {
-  display: none
-}
-
-.project-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start
-}
-
-.project-icon {
-  width: 44px;
-  height: 44px;
-  background: rgba(74, 247, 196, 0.08);
-  border: 1px solid rgba(74, 247, 196, 0.2);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  flex-shrink: 0
-}
-
-.project-badge {
-  font-size: 10px;
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap
-}
-
-.badge-live {
-  background: rgba(74, 247, 196, 0.1);
-  border: 1px solid rgba(74, 247, 196, 0.25);
-  color: var(--accent)
-}
-
-.badge-progress {
-  background: rgba(123, 110, 246, 0.1);
-  border: 1px solid rgba(123, 110, 246, 0.25);
-  color: var(--accent2)
-}
-
-.badge-uni {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--muted)
-}
-
-.badge-nvidia {
-  background: rgba(118, 185, 0, 0.1);
-  border: 1px solid rgba(118, 185, 0, 0.3);
-  color: #76b900
-}
-
-.project-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #fff
-}
-
-.project-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.8;
-  flex: 1
-}
-
-.project-desc ul {
-  padding-left: 1.1rem
-}
-
-.project-desc li {
-  margin-bottom: 0.25rem
-}
-
-.project-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem
-}
-
-.stack-tag {
-  font-size: 11px;
-  padding: 0.25rem 0.6rem;
-  background: rgba(74, 247, 196, 0.06);
-  border: 1px solid rgba(74, 247, 196, 0.15);
-  color: var(--accent);
-  border-radius: 4px
-}
-
-.project-preview {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--bg2)
-}
-
-.project-preview-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid var(--line)
-}
-
-.preview-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-  flex-shrink: 0
-}
-
-.preview-url {
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  flex: 1;
-  text-align: center
-}
-
-.preview-open-btn {
-  font-size: 10px;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid rgba(74, 247, 196, 0.2);
-  border-radius: 3px;
-  transition: background 0.2s
-}
-
-.preview-open-btn:hover {
-  background: rgba(74, 247, 196, 0.1)
-}
-
-.preview-click-area {
-  position: relative;
-  cursor: pointer;
-  background: var(--bg3)
-}
-
-.project-iframe {
-  width: 100%;
-  height: 0;
-  border: none;
-  display: block;
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none
-}
-
-.project-iframe.open {
-  height: 220px;
-  pointer-events: all
-}
-
-.preview-overlay {
+.web__load, .web__fail {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(8, 10, 15, 0.7);
-  transition: opacity 0.3s;
-  height: 52px
-}
-
-.preview-overlay span {
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border: 1px solid rgba(74, 247, 196, 0.3);
-  padding: 0.4rem 1rem;
-  border-radius: 4px
-}
-
-.preview-click-area.loaded .preview-overlay {
-  opacity: 0;
-  pointer-events: none
-}
-
-.preview-click-area.loaded .project-iframe {
-  height: 220px
-}
-
-.contact-inner {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 4rem;
+  z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center
+  place-content: center;
+  gap: 1em;
+  text-align: center;
+  padding: clamp(14px, 4vw, 40px);
+  background: var(--teal-dd);
 }
 
-.contact-left h2 {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em
+.web__load {
+  font-family: var(--ui);
+  font-size: clamp(9px, 1.1vw, 12px);
+  letter-spacing: 0.18em;
+  color: var(--grn-ll);
+  animation: blink 1.1s steps(2) infinite;
 }
 
-.contact-left p {
-  color: var(--muted);
-  line-height: 1.9;
-  margin-bottom: 2rem
+.web__load[hidden], .web__fail[hidden] { display: none; }
+
+.web__fail {
+  font-family: var(--body);
+  font-size: clamp(13px, 1.3vw, 16px);
+  line-height: 1.6;
+  color: var(--cream-m);
+  max-width: none;
+  justify-items: center;
 }
 
-.contact-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem
+.web__fail p { max-width: 46ch; }
+
+.web__fail-h {
+  font-family: var(--ui);
+  font-size: clamp(9px, 1.05vw, 12px);
+  letter-spacing: 0.12em;
+  color: var(--amber);
 }
 
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 13px;
-  transition: color 0.2s;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--line)
-}
-
-.contact-link:hover {
-  color: var(--accent)
-}
-
-.contact-link span:first-child {
-  width: 28px;
-  height: 28px;
-  background: rgba(74, 247, 196, 0.08);
-  border: 1px solid rgba(74, 247, 196, 0.15);
-  border-radius: 6px;
+/* the "it might be blocked" strip — sits over the foot of the frame, fades */
+.web__hint {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
-  flex-shrink: 0
+  gap: 1em;
+  flex-wrap: wrap;
+  background: var(--ink);
+  border-top: 2px solid var(--amber-d);
+  padding: 0.7em 1em;
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.9vw, 10px);
+  letter-spacing: 0.1em;
+  color: var(--cream-m);
+  animation: hintIn 260ms steps(3);
 }
 
-.contact-form {
+.web__hint[hidden] { display: none; }
+.web__hint a { color: var(--amber-l); border-bottom-color: var(--amber); }
+
+@keyframes hintIn { from { transform: translateY(100%); } to { transform: none; } }
+
+.os__bar {
   display: flex;
-  flex-direction: column;
-  gap: 1rem
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem
-}
-
-.form-group label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted)
-}
-
-.form-group input,
-.form-group textarea {
-  background: var(--bg2);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.2s;
-  resize: none
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--accent)
-}
-
-footer {
-  border-top: 1px solid var(--line);
-  padding: 2rem 3rem;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  color: var(--muted);
-  font-size: 12px;
-  position: relative;
-  z-index: 10
+  justify-content: space-between;
+  gap: 1em;
+  border-top: 2px solid var(--teal);
+  padding-top: 0.7em;
+  font-family: var(--ui);
+  font-size: clamp(8px, 0.95vw, 11px);
+  letter-spacing: 0.12em;
+  color: var(--teal-ll);
 }
 
-.cursor-glow {
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(74, 247, 196, 0.04) 0%, transparent 70%);
-  pointer-events: none;
+/* The way out of the machine, in amber rather than the interface's own teal.
+   In teal it sat in the status bar looking like a label; it is the one control
+   on this screen a visitor has to be able to find. */
+.osbtn {
+  font-family: var(--ui);
+  font-size: inherit;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  background: var(--amber);
+  border: 2px solid var(--ink);
+  padding: 0.55em 0.9em;
+  box-shadow: 2px 2px 0 rgba(24, 20, 30, 0.6);
+  transition: background 120ms, color 120ms, transform 120ms steps(2);
+}
+
+.osbtn:hover { background: var(--amber-l); color: var(--ink); transform: translate(-1px, -1px); }
+
+.os__tip span, .os__tip { color: var(--cream-d); }
+.os__count b { color: var(--amber); }
+
+/* the glass: scanlines and a corner falloff, over everything */
+.os__scan {
+  position: absolute;
+  inset: 0;
   z-index: 3;
-  transform: translate(-50%, -50%);
-  transition: left 0.08s, top 0.08s
+  pointer-events: none;
+  opacity: 0.11;
+  background: repeating-linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, 0.85) 2px 4px);
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s, transform 0.6s
+.os__curve {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+      rgba(24, 20, 30, 0) 68%, rgba(24, 20, 30, 0.42) 100%);
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: none
-}
+/* --- 12. Responsive ----------------------------------------------------- */
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px)
-  }
+@media (max-width: 900px) {
+  .book { max-height: none; height: 100%; }
 
-  to {
-    opacity: 1;
-    transform: translateY(0)
-  }
-}
-
-@keyframes scanLine {
-  0% {
-    left: -100%
-  }
-
-  50% {
-    left: 100%
-  }
-
-  100% {
-    left: 100%
-  }
-}
-
-@media(max-width:768px) {
-  nav {
-    padding: 1rem 1.5rem
-  }
-
-  .nav-links {
-    display: none
-  }
-
-  section {
-    padding: 5rem 1.5rem
-  }
-
-  #hero {
-    padding: 8rem 1.5rem 4rem
-  }
-
-  .about-grid {
+  /* one page at a time; both halves of the spread stack and scroll together */
+  .spread {
     grid-template-columns: 1fr;
-    gap: 3rem
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
-  .contact-inner {
-    grid-template-columns: 1fr;
-    padding: 2rem;
-    gap: 2.5rem
+  .page { overflow: visible; }
+  .page--l { box-shadow: none; border-bottom: 3px double var(--cream-d); }
+  .page--r { box-shadow: none; }
+
+  .gutter { display: none; }
+  /* .spread is the scroll container at this width, so the same overlay would
+     scroll away — and a single column has no gutter to bow into anyway */
+  .spread::before, .spread::after { display: none; }
+
+  .tabs {
+    position: static;
+    transform: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 8px;
   }
 
-  .cert-item-header {
-    flex-direction: column;
-    align-items: flex-start
+  .tabs button { border-left: 3px solid var(--ink); padding: 0.5em; }
+  .tabs button:hover, .tabs button[aria-current="true"] { transform: none; }
+
+  .hud {
+    position: static;
+    transform: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 6px;
   }
 
-  .hero-location {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem
-  }
+  .hudbtn { border-right: 3px solid var(--ink); text-align: center; padding: 0.5em 0.6em; }
+  .hudbtn:hover, .hudbtn[aria-pressed="true"] { transform: none; }
 
-  footer {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center
-  }
+  .curl, .curl-cast { display: none !important; }
+
+  .stats { grid-template-columns: 1fr 1fr; }
 }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .reader { padding: 6px 6px 0; }
+  .book__board { padding: 8px; }
+  .edges { left: 10px; right: 10px; }
+  .prompt { font-size: 9px; white-space: normal; text-align: center; max-width: 86vw; }
+}
+
+/* --- 13. Reduced motion ------------------------------------------------- */
+/* Someone who has asked their OS for less movement should not be given a
+   camera dolly and a spinning book. Skip the cinematic; hand them the book. */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .stage__scan { display: none; }
+  .curl, .curl-cast { display: none !important; }
+}
+
+/* --- 14. Print ---------------------------------------------------------- */
+
+@media print {
+  body { overflow: visible; background: #fff; }
+  .stage, .boot, .hud, .tabs, .pager, .hint-keys, .gutter, .edges, .curl, .curl-cast { display: none !important; }
+  .reader { position: static; display: block; opacity: 1; padding: 0; }
+  .reader__desk { display: none; }
+  .book, .book__board { width: 100%; height: auto; max-height: none; padding: 0; border: 0; box-shadow: none; }
+  .spread, .spread[hidden] { display: block !important; page-break-after: always; }
+  .page { height: auto; overflow: visible; background: #fff; color: #000; box-shadow: none; }
+}
+
+.noscript { max-width: 700px; margin: 3rem auto; padding: 1.5rem; }

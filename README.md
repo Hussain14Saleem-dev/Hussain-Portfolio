@@ -285,6 +285,47 @@ has further to travel than one starting halfway down. It fades in discrete
 steps rather than smoothly — `steps()` on the whole animation moves the motes
 in whole pixels too, which is what keeps them looking drawn.
 
+### On a phone
+
+Phones get a different interface, not the same one shrunk. Three things forced
+that, and all three were measured rather than guessed.
+
+**The room did not fit.** The camera covered a 480x270 landscape window, so on
+a 390x844 phone it scaled to fill the height and showed about half the room's
+width — the lamp and its pull cord were off screen at every zoom, and the
+camera left 200px of empty background above the bookcase because the clamp
+that keeps the room in frame skipped the axis where the room exactly fitted.
+In portrait the camera now *fits* the room instead of covering the screen, and
+centres it on any axis where it fits.
+
+**19px is not a tap target.** A book spine is 22 world pixels, about 19 CSS
+pixels on a phone. So in portrait the room becomes a pane at the top with its
+own 480x560 shape — no letterboxing — and the space beneath it holds three
+buttons that do exactly what tapping the objects does. The objects stay
+tappable too; each has an invisible pad bringing it to 44px.
+
+**The book had no navigation.** The tab rail and SHELF hang off the sides of
+the book, and the old mobile rule reflowed them to sit *after* the board — at
+y=1050 in an 844px viewport. They are now a fixed two-row bar at the bottom.
+Two things had to be fixed to get there: the desktop rules pin them at
+`top: 34px`, so setting only `bottom` left both edges applied and each bar
+stretched 1400px tall; and `.book` sets `perspective`, which establishes a
+containing block for fixed descendants, so they were being pinned to the book
+rather than to the screen. The page curl is off at that width, so the 3D
+context had nothing left to do.
+
+Smaller things: interface type has a 12px floor, the desktop icons go to three
+columns and then two, the README note is the first thing dropped on a short
+screen rather than the last thing to fit, and `.os__main` clips rather than
+scrolls — an absolutely positioned child of a scroll container is laid out
+against scrolled content, and the note was spilling over QUIT TO ROOM and
+swallowing the tap.
+
+Verified at 320x568, 360x800, 390x844, 768x1024 and 844x390: no horizontal
+overflow, nothing under 12px, every control at least 40x40 of real hit area,
+and the whole journey — book, computer, project, certificates — completed by
+tap.
+
 ### The beetle
 
 Some spreads have a beetle on them. It wanders — picks a spot, walks there,

@@ -22,7 +22,7 @@
        third-party connection, and the type still renders on a bad line. -->
   <link rel="preload" href="assets/fonts/silkscreen-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/pixelify-400.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="assets/css/style.css?v=29" />
+  <link rel="stylesheet" href="assets/css/style.css?v=37" />
 
   <script type="application/ld+json">
   {
@@ -150,6 +150,25 @@
     <div class="stage__vignette" aria-hidden="true"></div>
     <div class="stage__scan" aria-hidden="true"></div>
   </div>
+
+  <!-- Phones only. The room becomes a pane at the top of the screen and this
+       fills the rest: a 22-pixel book spine is about 19 CSS pixels on a phone,
+       which is not something anyone can tap. Everything here does exactly what
+       clicking the object in the room does. -->
+  <nav id="roomnav" class="roomnav" aria-label="Things in the room">
+    <p class="roomnav__say" id="roomnavSay">Pick something up</p>
+    <div class="roomnav__row">
+      <button id="navBook" class="roomnav__btn roomnav__btn--green" type="button">
+        <b>Portfolio</b><span>the green book</span>
+      </button>
+      <button id="navCerts" class="roomnav__btn roomnav__btn--blue" type="button">
+        <b>Certificates</b><span>the blue book</span>
+      </button>
+      <button id="navPc" class="roomnav__btn roomnav__btn--teal" type="button">
+        <b>Projects</b><span>on the computer</span>
+      </button>
+    </div>
+  </nav>
 
   <!-- The pointer itself, on devices that have one. Lives outside #stage so the
        camera transform never moves or scales it. -->
@@ -992,7 +1011,7 @@
     </div>
   </noscript>
 
-  <script src="assets/js/main.js?v=29"></script>
+  <script src="assets/js/main.js?v=33"></script>
 </body>
 
 </html>

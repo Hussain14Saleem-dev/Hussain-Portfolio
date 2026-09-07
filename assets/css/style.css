@@ -1672,10 +1672,17 @@ body[data-scene="desk-idle"] .pc:hover,
 body[data-scene="desk-idle"] .pc:focus-visible { transform: translateY(-2px); }
 body:not([data-scene="desk-idle"]) .pc { pointer-events: none; }
 
+/* On a screen showing the whole room at once there is no separate desk scene
+   to walk to, so the computer has to be usable from where you are standing. */
+body.roomfull[data-scene="shelf"] .pc { pointer-events: auto; }
+body.roomfull[data-scene="shelf"] .pc__halo { opacity: 1; }
+
 /* --- 11c. Moving between the two floors of the room --------------------- */
 /* Arrows, on the left, because the section tabs are on the right. Drawn with
    CSS borders rather than characters: the arrow glyphs are not in Silkscreen
    or Pixelify Sans, and the browser substitutes a system font for them. */
+
+.floors[hidden] { display: none; }
 
 .floors {
   position: absolute;
@@ -2233,10 +2240,40 @@ a.web__btn { text-decoration: none; }
       rgba(24, 20, 30, 0) 68%, rgba(24, 20, 30, 0.42) 100%);
 }
 
+/* --- 11f. The room controls, on phones ---------------------------------- */
+
+.roomnav { display: none; }
+
 /* --- 12. Responsive ----------------------------------------------------- */
+/* Phones get a different interface, not the same one shrunk. Three things
+   drove every rule below:
+
+   1. The tab rail and the SHELF control hung off the sides of the book. At
+      900px they were reflowed to sit *after* the board, which on a phone put
+      them at y=1050 in an 844px viewport — the book had no reachable
+      navigation at all, only an undiscoverable swipe.
+   2. The interface type is 8-11px, which is right beside pixel art on a
+      desktop and unreadable at arm's length on a phone.
+   3. Half the controls were under 40px, and a spine on the shelf was 33px
+      wide. A finger is about 44.
+*/
 
 @media (max-width: 900px) {
-  .book { max-height: none; height: 100%; }
+  /* `perspective` establishes a containing block for fixed-position
+     descendants, so the tab rail and SHELF — which live inside .book — were
+     being pinned to the book rather than to the screen and ended up 300px
+     below the fold. The page curl is off at this width, so the 3D context has
+     nothing left to do. */
+  .book {
+    max-height: none;
+    height: 100%;
+    min-height: 0;
+    perspective: none;
+  }
+
+  /* minmax(0,…) so the row may shrink below its content and let the spread
+     scroll, instead of the book growing to 1200px inside an 844px screen */
+  .reader { grid-template-rows: minmax(0, 1fr); }
 
   /* one page at a time; both halves of the spread stack and scroll together */
   .spread {
@@ -2245,7 +2282,9 @@ a.web__btn { text-decoration: none; }
     overscroll-behavior: contain;
   }
 
+  .spread[data-single] { grid-template-columns: 1fr; }
   .page { overflow: visible; }
+  .page.page--only { padding-inline: clamp(16px, 2.6vw, 38px); }
   .page--l { box-shadow: none; border-bottom: 3px double var(--cream-d); }
   .page--r { box-shadow: none; }
 
@@ -2254,43 +2293,299 @@ a.web__btn { text-decoration: none; }
      scroll away — and a single column has no gutter to bow into anyway */
   .spread::before, .spread::after { display: none; }
 
+  .curl, .curl-cast { display: none !important; }
+  .stats { grid-template-columns: 1fr 1fr; }
+
+  /* -- the book's controls become one fixed bar at the bottom ------------ */
+
+  .reader {
+    grid-template-rows: 1fr;
+    /* 58px for the bottom row, 52 for the tab row, 6 to breathe */
+    padding: 6px 6px 116px;
+  }
+
+  /* `top: auto` matters: the desktop rules pin these at top:34px, and setting
+     only `bottom` left both edges applied, so each bar stretched from 34px to
+     the bottom of the screen and its buttons grew to 1400px tall. */
+  .tabs,
+  .hud,
+  .pager {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: auto;
+    height: auto;
+    z-index: 40;
+    margin: 0;
+    transform: none;
+    background: rgba(24, 20, 30, 0.94);
+  }
+
   .tabs {
-    position: static;
-    transform: none;
+    bottom: 58px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 4px;
-    margin-top: 8px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 6px 8px;
+    border-top: 3px solid var(--ink);
   }
 
-  .tabs button { border-left: 3px solid var(--ink); padding: 0.5em; }
-  .tabs button:hover, .tabs button[aria-current="true"] { transform: none; }
+  .tabs::-webkit-scrollbar { display: none; }
 
+  .tabs button {
+    flex: 0 0 auto;
+    border: 3px solid var(--ink);
+    border-radius: 0;
+    font-size: 10px;
+    padding: 0 0.9em;
+    min-height: 44px;
+    box-shadow: none;
+  }
+
+  .tabs button:hover,
+  .tabs button[aria-current="true"] { transform: none; }
+  .tabs button[aria-current="true"] { background: var(--grn-d); }
+
+  /* SHELF and the pager share the bottom row */
   .hud {
-    position: static;
-    transform: none;
+    bottom: 0;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 8px;
+    height: 58px;
+    pointer-events: none;
+    border-top: 3px solid var(--ink);
   }
 
-  .hudbtn { border-right: 3px solid var(--ink); text-align: center; padding: 0.5em 0.6em; }
+  .hudbtn {
+    pointer-events: auto;
+    border: 3px solid var(--ink);
+    text-align: center;
+    font-size: 10px;
+    min-height: 44px;
+    padding: 0 1em;
+    box-shadow: none;
+  }
+
   .hudbtn:hover, .hudbtn[aria-pressed="true"] { transform: none; }
 
-  .curl, .curl-cast { display: none !important; }
+  /* SHELF and the pager share one strip. The hud paints it; the pager sits
+     transparently on top, or its own background covered SHELF. */
+  .pager {
+    bottom: 0;
+    height: 58px;
+    z-index: 41;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 0 8px;
+    flex-wrap: nowrap;
+    pointer-events: none;
+    background: none;
+  }
 
-  .stats { grid-template-columns: 1fr 1fr; }
+  .pgbtn { pointer-events: auto; width: 52px; height: 44px; box-shadow: none; }
+  .pager__count { pointer-events: auto; font-size: 11px; }
+  .hint-keys { display: none; }
+
+  /* -- readable interface type ------------------------------------------- */
+
+  .chips li, .chips--sm li { font-size: 12px; padding: 0.35em 0.6em; }
+  .cert-plate figcaption { font-size: 10px; }
+  .page .h3 { font-size: 13px; }
+  .cert-plate img { height: clamp(150px, 26vh, 210px); }
+  .cert-plate--tall img { height: clamp(230px, 38vh, 320px); }
+
+  /* -- the desktop on the monitor ---------------------------------------- */
+
+  .os { padding: 0; }
+  .os__crt, body.os-web .os__crt { width: 100%; height: 100%; border-width: 0; }
+
+  .os__desktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 6px;
+  }
+
+  .app { padding: 8px 2px; }
+  .app img { width: 52px; height: 52px; }
+  .app__name { font-size: 10px; }
+
+  /* the note sits under the icons rather than pinned in a corner, where on a
+     tall screen it left a field of nothing between the two */
+  /* `overflow: hidden` on the working area, not scrolling: .os__wins is
+     positioned against it, and an absolutely positioned child of a scroll
+     container is laid out against scrolled content. Without the clip the note
+     spilled over QUIT TO ROOM on a short screen and swallowed the tap. */
+  .os__main { min-height: 0; overflow: hidden; }
+
+  .os__note {
+    position: static;
+    width: 100%;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+
+  .os__note-h, .os__note-f { font-size: 11px; }
+
+  .os__bar { gap: 0.6em; padding-top: 0.5em; }
+  .osbtn { min-height: 44px; padding: 0 1em; font-size: 10px; }
+  .os__tip { display: none; }
+  .os__count { font-size: 10px; }
+
+  .win { left: 4px; right: 4px; bottom: 4px; }
+  .win__title { font-size: 11px; }
+  .win__x { min-width: 44px; min-height: 44px; font-size: 13px; }
+  .win__meta, .win__go { font-size: 11px; }
+  .oslink { display: inline-flex; align-items: center; padding-block: 12px; }
+
+  /* -- the framed site ---------------------------------------------------- */
+
+  .web__bar { flex-wrap: wrap; gap: 6px; }
+  .web__url { order: 3; flex: 1 0 100%; font-size: 10px; }
+  .web__btn { min-height: 40px; display: inline-flex; align-items: center; font-size: 10px; }
+  .web__lights { display: none; }
+  .web__hint { font-size: 9px; padding: 0.6em; }
+
+  /* -- the room ----------------------------------------------------------- */
+  /* The objects keep their drawn size so the art is untouched; an invisible
+     pad around each brings the target up to something a finger can hit. */
+
+  .spine::after,
+  .pc::after,
+  .cordgrab::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+
+  .floorbtn { min-height: 46px; }
+
+  /* a link in a paragraph is a tap target too */
+  .page a, .contact a, .btn {
+    display: inline-block;
+    min-height: 44px;
+    line-height: 44px;
+  }
+
+  .contact li a { display: block; min-height: 56px; line-height: 1.4; padding: 8px 12px; }
+  .contact li a span { display: block; }
+  .page p a { line-height: 1.7; min-height: 0; display: inline; }
+}
+
+/* Portrait phones: the room is a pane, not the whole screen.
+
+   Fitting the whole room into a tall screen at "cover" showed about half its
+   width, so the lamp and the pull cord were off screen at every zoom, and the
+   things you can tap were 19-33px wide. The room now sits complete in the top
+   two thirds and the controls live underneath at a size a thumb can use. */
+@media (max-width: 900px) and (orientation: portrait) {
+  /* The pane takes the room's own 480x560 shape, so the room fills it edge to
+     edge with no dark bands, and the panel gets everything below. */
+  :root { --pane: min(62svh, calc(100vw * 7 / 6)); }
+
+  .stage {
+    inset: 0 0 auto 0;
+    height: var(--pane);
+    border-bottom: 3px solid var(--ink);
+  }
+
+  /* the camera measures the stage, so it re-centres on the pane by itself */
+  .prompt { display: none; }
+  .floors { display: none; }
+
+  .roomnav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: var(--pane);
+    z-index: 12;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 12px calc(14px + env(safe-area-inset-bottom));
+    background:
+      linear-gradient(rgba(24, 20, 30, 0) 0%, rgba(24, 20, 30, 0.55) 100%),
+      url('../px/tex_wood.png') repeat;
+    background-size: auto, 96px 96px;
+    image-rendering: pixelated;
+    overflow: hidden;
+  }
+
+  body[data-scene="read"] .roomnav,
+  body[data-scene="pc"] .roomnav { display: none; }
+
+  .roomnav__say {
+    font-family: var(--ui);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-align: center;
+    color: var(--amber-l);
+  }
+
+  .roomnav__row {
+    flex: 1;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .roomnav__btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    min-height: 52px;
+    padding: 0 14px;
+    text-align: left;
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 rgba(24, 20, 30, 0.5);
+    background: var(--ink2);
+    transition: transform 110ms steps(2), box-shadow 110ms steps(2);
+  }
+
+  .roomnav__btn:active { transform: translate(4px, 4px); box-shadow: none; }
+  .roomnav__btn b {
+    font-family: var(--ui);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--cream-l);
+  }
+  .roomnav__btn span {
+    font-family: var(--body);
+    font-size: 13px;
+    color: var(--cream-d);
+  }
+
+  .roomnav__btn--green { background: var(--grn-dd); }
+  .roomnav__btn--blue  { background: var(--blu-dd); }
+  .roomnav__btn--teal  { background: var(--teal-d); }
+}
+
+/* On a short screen the icons alone fill the desktop; the note is the first
+   thing to go rather than the last thing to fit. */
+@media (max-width: 900px) and (max-height: 700px) {
+  .os__note { display: none; }
 }
 
 @media (max-width: 560px) {
   body { font-size: 16px; }
-  .reader { padding: 6px 6px 0; }
   .book__board { padding: 8px; }
   .edges { left: 10px; right: 10px; }
   .prompt { font-size: 9px; white-space: normal; text-align: center; max-width: 86vw; }
+
+  .os__desktop { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app img { width: 56px; height: 56px; }
 }
 
 /* --- 13. Reduced motion ------------------------------------------------- */

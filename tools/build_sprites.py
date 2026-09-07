@@ -1124,7 +1124,10 @@ def build():
     save(leather_tile(), 'tex_leather.png')
     save(leather_tile(sk='blue'), 'tex_leather_blue.png')
     save(wood_tile(), 'tex_wood.png')
-    save(avatar(), 'avatar.png')
+    # avatar.png is NOT written here. tools/build_avatar.py owns it, and it is
+    # built from the real photograph; when both scripts wrote it, whichever ran
+    # last won and running the sprite build silently reverted the portrait to
+    # the old drawn placeholder.
     save(lamp_cone(), 'lamp_cone.png')
 
     for slug, fn in APPS:

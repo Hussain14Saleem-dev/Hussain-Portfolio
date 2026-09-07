@@ -26,6 +26,7 @@
   };
 
   var VIEW_W = 480, VIEW_H = 270;   // the camera window, in world pixels
+  var WORLD_W = 480, WORLD_H = 560; // and the whole room it is a window onto
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -33,6 +34,7 @@
     boot:     $('#boot'),
     bootFill: $('#bootFill'),
     bootHint: $('#bootHint'),
+    stage:    $('#stage'),
     world:    $('#world'),
     spine:    $('#spine'),
     spineBlue: $('#spineBlue'),
@@ -64,6 +66,11 @@
 
     // the second floor of the room: the desk, the computer, the projects
     floors:   $('#floors'),
+    roomnav:  $('#roomnav'),
+    roomnavSay: $('#roomnavSay'),
+    navBook:  $('#navBook'),
+    navCerts: $('#navCerts'),
+    navPc:    $('#navPc'),
     goUp:     $('#goUp'),
     goDown:   $('#goDown'),
     pc:       $('#pc'),
@@ -127,7 +134,11 @@
 
   function setScene(name) { body.setAttribute('data-scene', name); }
   function scene() { return body.getAttribute('data-scene'); }
-  function say(text) { el.prompt.innerHTML = '<span>' + text + '</span>'; }
+  function say(text) {
+    el.prompt.innerHTML = '<span>' + text + '</span>';
+    // the phone panel carries the same line; the prompt is hidden there
+    if (el.roomnavSay) el.roomnavSay.textContent = text;
+  }
   function wait(ms, fn) { return setTimeout(fn, reduceMotion ? 0 : ms); }
 
   /* ---------------------------------------------------------------- 2 --- */
@@ -242,16 +253,16 @@
      move" is a single composited transform rather than a redraw. */
 
   var shots = {
-    shelf: { x: 240, y: 138, z: 1,    ms: 900 },
+    shelf: { x: 240, y: 138, z: 1,    ms: 900, px: 293 },   // both books
     // pull is per-book: it leans in on whichever spine was clicked, so the
     // book you took stays in the middle of frame while the camera tightens
     pull:  { x: 232, y: 158, z: 1.45, ms: 700 },
     pullCerts: { x: 356, y: 158, z: 1.45, ms: 700 },
-    desk:  { x: 252, y: 340, z: 1.55, ms: 1150 },
+    desk:  { x: 252, y: 340, z: 1.55, ms: 1150, px: 254 },  // the book that landed
     open:  { x: 254, y: 334, z: 3.3,  ms: 1000 },
 
     // the desk with nothing on it but the computer — where the down arrow goes
-    deskIdle: { x: 244, y: 372, z: 1.25, ms: 1000 },
+    deskIdle: { x: 244, y: 372, z: 1.25, ms: 1000, px: 320 }, // the computer
     // and the glass itself, filling the frame. The screen is 84x48, so at this
     // zoom it is the viewport, which is what makes the handover to the HTML
     // desktop invisible. Numbers come from PC in tools/build_room.py.
@@ -260,17 +271,62 @@
 
   var held = shots.shelf;
 
+  /* Landscape covers the 480x270 window, which is what the scenes were framed
+     for. A portrait phone is nothing like 16:9, and covering that window there
+     meant a scale of 3.1 on a 390px screen: 125 world pixels across, so the
+     blue book and the whole computer were off the side of the room with no way
+     to reach them. Portrait covers the *room* instead — 480x560 — which shows
+     260 world pixels across and the full height, so everything is on screen. */
+  function portrait() { return window.innerHeight > window.innerWidth; }
+
+  /* The camera measures the stage, not the window. On a phone the stage is a
+     pane at the top with the room controls beneath it, and using the window
+     there put the room's centre half a panel too low. */
+  function viewBox() {
+    var r = el.stage.getBoundingClientRect();
+    return { w: r.width || window.innerWidth, h: r.height || window.innerHeight };
+  }
+
   function baseScale() {
-    return Math.max(window.innerWidth / VIEW_W, window.innerHeight / VIEW_H);
+    var v = viewBox();
+    if (!portrait()) return Math.max(v.w / VIEW_W, v.h / VIEW_H);
+    // Portrait fits the whole room rather than covering the screen with a
+    // sliver of it. At cover, a phone showed about half the room's width —
+    // the lamp and its cord were never on screen at any zoom.
+    return Math.min(v.w / WORLD_W, v.h / WORLD_H);
+  }
+
+  /* With the whole room on screen the camera has nowhere to travel, so the
+     up/down arrows would be dead controls and the computer would never become
+     reachable — it is only clickable in the desk scene. `roomfull` says so, and
+     the CSS opens the computer up on the shelf scene too. */
+  function roomFull() {
+    return viewBox().h / baseScale() >= WORLD_H - 8;
   }
 
   function camera(shot, instant) {
     held = shot;
     var s = baseScale() * shot.z;
+    var x = (portrait() && shot.px !== undefined) ? shot.px : shot.x;
+    var y = shot.y;
+
+    // Never pan past the edges of the room and show the void beside it. When
+    // the room fits on an axis there is nothing to clamp against — it has to
+    // be centred instead. Skipping that left the shot's own y in place, which
+    // on a tall phone hung 200px of empty background above the bookcase.
+    var v = viewBox();
+    var halfW = v.w / 2 / s;
+    var halfH = v.h / 2 / s;
+    x = (halfW * 2 >= WORLD_W) ? WORLD_W / 2
+                               : Math.max(halfW, Math.min(WORLD_W - halfW, x));
+    y = (halfH * 2 >= WORLD_H) ? WORLD_H / 2
+                               : Math.max(halfH, Math.min(WORLD_H - halfH, y));
+
+    body.classList.toggle('roomfull', roomFull());
     root.style.setProperty('--cam-ms', (instant || reduceMotion ? 0 : shot.ms) + 'ms');
     root.style.setProperty('--cam-s', s);
-    root.style.setProperty('--cam-x', (window.innerWidth / 2 - shot.x * s) + 'px');
-    root.style.setProperty('--cam-y', (window.innerHeight / 2 - shot.y * s) + 'px');
+    root.style.setProperty('--cam-x', (v.w / 2 - x * s) + 'px');
+    root.style.setProperty('--cam-y', (v.h / 2 - y * s) + 'px');
   }
 
   window.addEventListener('resize', function () { camera(held, true); }, { passive: true });
@@ -640,6 +696,8 @@
   /* An arrow is only offered when there is somewhere to go. */
   function floors() {
     var s = scene();
+    // nothing to travel to when you can already see all of it
+    el.floors.hidden = roomFull();
     // 'desk' is the book-just-landed scene: going up is the way to put it
     // back, and it is the only way out of there short of opening the book
     el.goUp.disabled = !(s === 'desk-idle' || s === 'desk');
@@ -742,7 +800,9 @@
     },
 
     enter: function () {
-      if (scene() !== 'desk-idle' || busy) return;
+      var here = scene();
+      if (busy) return;
+      if (here !== 'desk-idle' && !(here === 'shelf' && roomFull())) return;
       busy = true;
       Sfx.boot();
       Sfx.click();
@@ -1577,6 +1637,29 @@
       // right direction and lands directly on the target
       goTo(+b.getAttribute('data-goto'));
     });
+  });
+
+  /* The phone panel drives the same functions the objects in the room do. It
+     has to put the scene where those functions expect to find it first — you
+     cannot take a book off a shelf you are not looking at. */
+  function fromRoom(fn) {
+    if (busy) return;
+    if (scene() === 'shelf') { fn(); return; }
+    toShelf();
+    wait(360, fn);
+  }
+
+  el.navBook.addEventListener('click', function () {
+    fromRoom(function () { takeBook('portfolio'); });
+  });
+  el.navCerts.addEventListener('click', function () {
+    fromRoom(function () { takeBook('certs'); });
+  });
+  el.navPc.addEventListener('click', function () {
+    if (busy) return;
+    if (scene() === 'desk-idle') { Os.enter(); return; }
+    toDesk();
+    wait(1100, function () { Os.enter(); });
   });
 
   el.goUp.addEventListener('click', function () { if (!busy) toShelf(); });

@@ -22,7 +22,7 @@
        third-party connection, and the type still renders on a bad line. -->
   <link rel="preload" href="assets/fonts/silkscreen-400.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/pixelify-400.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="assets/css/style.css?v=37" />
+  <link rel="stylesheet" href="assets/css/style.css?v=38" />
 
   <script type="application/ld+json">
   {
@@ -789,6 +789,10 @@
 
         <div class="os__main">
         <div class="os__desktop" id="osDesktop">
+          <button class="app" type="button" data-app="irshad">
+            <img src="assets/px/app_irshad.png" alt="" width="32" height="32" draggable="false" />
+            <span class="app__name">Irshad</span>
+          </button>
           <button class="app" type="button" data-app="rabt">
             <img src="assets/px/app_rabt.png" alt="" width="32" height="32" draggable="false" />
             <span class="app__name">Rabt</span>
@@ -822,6 +826,27 @@
         <!-- One window, one project. All eight stay in the document so the
              content is readable without JavaScript and findable by search. -->
         <div class="os__wins" id="osWins">
+
+          <article class="win" data-app="irshad" hidden>
+            <header class="win__bar">
+              <img src="assets/px/app_irshad.png" alt="" width="16" height="16" draggable="false" />
+              <h2 class="win__title">IRSHAD</h2>
+              <button class="win__x" type="button" data-close aria-label="Close">X</button>
+            </header>
+            <div class="win__body">
+              <p class="win__meta">Grids Company &middot; the Emaar system &middot; Front end, back end and UI/UX</p>
+              <p>A platform connecting Libyan families with qualified family and marriage
+                counsellors. A consultation request is posted anonymously &mdash; publicly or to the
+                specialist panel only &mdash; and answered by a qualified counsellor. A directory
+                lists each specialist's field, years of experience and rating, and appointments are
+                booked by video, voice or text.</p>
+              <p>Built for people who cannot walk into a counselling centre: the platform exists to
+                remove the stigma, the distance and the need to leave the house. Backed by the
+                Marriage Support Fund.</p>
+              <p class="win__go"><a class="oslink" href="https://irshad.ly" target="_blank" rel="noopener">OPEN SITE</a><span class="win__url">irshad.ly</span></p>
+              <ul class="chips chips--sm"><li>Full stack</li><li>UI/UX</li><li>Arabic RTL</li><li>In progress</li></ul>
+            </div>
+          </article>
 
           <article class="win" data-app="rabt" hidden>
             <header class="win__bar">
@@ -941,7 +966,7 @@
                half of a screen; the other half is saying who is talking. -->
           <aside class="os__note" id="osNote">
             <p class="os__note-h">README.TXT</p>
-            <p>Seven projects, from the CV. Four of them are live; those carry a
+            <p>Eight projects, from the CV. Five of them are live; those carry a
               link.</p>
             <p class="os__note-f">&mdash; HUSSAIN ALSHIKHY, BENGHAZI</p>
           </aside>

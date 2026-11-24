@@ -1,0 +1,141 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e2]:
+    - banner [ref=f10e3]:
+      - generic [ref=f10e4]:
+        - generic [ref=f10e5]:
+          - link "Coolify" [ref=f10e6] [cursor=pointer]:
+            - /url: /
+          - link "v4.3.17" [ref=f10e8] [cursor=pointer]:
+            - /url: https://github.com/coollabsio/coolify/releases/tag/v4.3.17
+        - generic "New version available" [ref=f10e11]:
+          - button "Update available" [ref=f10e13] [cursor=pointer]
+      - generic [ref=f10e15]:
+        - generic [ref=f10e16]:
+          - button "Root Team" [ref=f10e20]
+          - generic [ref=f10e24]: /
+          - button "Servers" [ref=f10e26]
+        - generic [ref=f10e31]:
+          - generic [ref=f10e32]: /
+          - button "Switch server" [ref=f10e34]:
+            - generic [ref=f10e35]: localhost
+          - button "Attention required" [ref=f10e40] [cursor=pointer]
+    - navigation [ref=f10e49]:
+      - button "Search Ctrl+K" [ref=f10e51]:
+        - generic [ref=f10e52]: Search
+        - generic [ref=f10e56]: Ctrl+K
+      - list [ref=f10e57]:
+        - listitem [ref=f10e58]: Workspace
+        - listitem [ref=f10e59]:
+          - link "Dashboard" [ref=f10e60] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f10e65]:
+          - link "Projects" [ref=f10e66] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f10e73]:
+          - link "Terminal" [ref=f10e74] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/terminal
+        - listitem [ref=f10e80]: Infrastructure
+        - listitem [ref=f10e81]:
+          - link "Servers" [ref=f10e82] [cursor=pointer]:
+            - /url: /servers
+        - listitem [ref=f10e86]:
+          - link "Sources" [ref=f10e87] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/sources
+        - listitem [ref=f10e93]:
+          - link "Destinations" [ref=f10e94] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/destinations
+        - listitem [ref=f10e98]:
+          - link "S3 Storage" [ref=f10e99] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/storages
+        - listitem [ref=f10e103]:
+          - link "Shared Variables" [ref=f10e104] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/shared-variables
+        - listitem [ref=f10e113]: Manage
+        - listitem [ref=f10e114]:
+          - link "Team" [ref=f10e115] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/team
+        - listitem [ref=f10e124]:
+          - link "Notifications" [ref=f10e125] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/notifications/email
+        - listitem [ref=f10e129]:
+          - link "Keys & Tokens" [ref=f10e130] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/security/private-key
+        - listitem [ref=f10e135]:
+          - link "Tags" [ref=f10e136] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/tags
+        - listitem [ref=f10e140]:
+          - link "Settings" [ref=f10e141] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/settings
+        - listitem [aria-hidden] [ref=f10e146]
+      - generic [ref=f10e147]:
+        - button "Account menu for irshad platform" [ref=f10e149]:
+          - generic [ref=f10e150]: I
+          - generic [ref=f10e151]: irshad platform
+        - button "Toggle sidebar" [ref=f10e154]
+    - main [ref=f10e157]:
+      - generic [ref=f10e159]:
+        - navigation [ref=f10e160]:
+          - button "Actions" [ref=f10e164] [cursor=pointer]
+        - generic [ref=f10e170]:
+          - complementary [ref=f10e171]:
+            - navigation "Server configuration sections" [ref=f10e172]:
+              - link "General" [ref=f10e173] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg
+              - link "Advanced" [ref=f10e178] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/advanced
+              - link "Private Key" [ref=f10e185] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/private-key
+              - link "CA Certificate" [ref=f10e190] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/ca-certificate
+              - link "Proxy" [ref=f10e194] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy
+              - generic [ref=f10e203]:
+                - link "Configuration" [ref=f10e204] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy
+                - link "Dynamic Configurations" [ref=f10e209] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy/dynamic
+                - link "Logs" [ref=f10e216] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy/logs
+              - link "Sentinel" [ref=f10e222] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/sentinel
+              - link "Resources" [ref=f10e227] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/resources
+              - link "Terminal" [ref=f10e234] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/terminal
+              - link "Docker Cleanup" [ref=f10e240] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/docker-cleanup
+              - link "Log Drains" [ref=f10e245] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/log-drains
+              - link "Metrics" [ref=f10e249] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/metrics
+              - link "Destinations" [ref=f10e254] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/destinations
+              - link "Swarm" [ref=f10e258] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/swarm
+              - link "Security" [ref=f10e262] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/security/patches
+          - generic [ref=f10e269]:
+            - generic [ref=f10e270]:
+              - heading [level=3] [ref=f10e272]:
+                - button "More information about Proxy logs" [ref=f10e274] [cursor=pointer]:
+                  - generic [ref=f10e275]: Proxy logs
+              - generic [ref=f10e276]: Running
+            - generic [ref=f10e285]:
+              - generic [ref=f10e287]:
+                - generic [ref=f10e288]:
+                  - button "Refresh Logs" [ref=f10e289]
+                  - button "Stream Logs" [ref=f10e292]
+                  - button "Copy Logs" [ref=f10e295]
+                  - button "Download Logs" [ref=f10e299]
+                  - button "Toggle Timestamps" [ref=f10e302]
+                  - button "Toggle Log Colors" [ref=f10e305]
+                  - button "Filter Log Levels" [ref=f10e310]
+                  - button "Follow Logs" [ref=f10e313]
+                  - button "Fullscreen" [ref=f10e316]
+                - generic [ref=f10e321]:
+                  - generic [ref=f10e323]:
+                    - generic [ref=f10e324]: Lines
+                    - spinbutton "Number of Lines (max 50,000)" [ref=f10e325]: "100"
+                  - searchbox "Find in logs" [ref=f10e327]
+              - generic [ref=f10e328]: No logs yet.
+  - list

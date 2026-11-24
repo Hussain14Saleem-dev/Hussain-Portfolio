@@ -878,6 +878,40 @@ def app_portfolio():
     return cv
 
 
+def app_irshad():
+    """
+    Two figures under a sheltering arc — counselling, held in confidence.
+    The platform's own mark is a tree; a tree at 32px reads as broccoli, so
+    this takes the idea rather than the drawing.
+    """
+    cv = Canvas(APP_SIZE, APP_SIZE)
+    _plate(cv, 'teal_dd', 'teal_d', 'teal_ll')
+
+    # the arc overhead: shelter, and the privacy the whole product is about
+    for i in range(4, 28):
+        t = (i - 15.5) / 11.5
+        y = 6 + int(abs(t) * abs(t) * 5)
+        cv.px(i, y, c('grn_ll'))
+        cv.px(i, y + 1, c('grn_l'))
+
+    # two figures facing each other across the gap
+    for fx, head, body, col_d in ((10, 'cream_l', 'blu_l', 'blu_d'),
+                                  (22, 'cream_l', 'grn_l', 'grn_dd')):
+        cv.rect(fx - 2, 14, 4, 4, c(head))        # head
+        cv.px(fx - 2, 14, c(col_d))
+        cv.px(fx + 1, 14, c(col_d))
+        cv.rect(fx - 3, 19, 6, 8, c(body))        # shoulders and body
+        cv.hline(fx - 3, 19, 6, c(col_d))
+        cv.vline(fx + 2, 19, 8, c(col_d))
+
+    # the conversation between them, kept between them
+    cv.rect(13, 20, 6, 4, c('cream'))
+    cv.frame(13, 20, 6, 4, c('ink'))
+    cv.px(15, 24, c('cream'))
+    cv.px(16, 25, c('ink'))
+    return cv
+
+
 APPS = [
     ('rabt',        app_rabt),
     ('qaemati',     app_qaemati),
@@ -886,6 +920,7 @@ APPS = [
     ('archive',     app_archive),
     ('deeplearning', app_deeplearning),
     ('azure',       app_azure),
+    ('irshad',      app_irshad),
 ]
 
 

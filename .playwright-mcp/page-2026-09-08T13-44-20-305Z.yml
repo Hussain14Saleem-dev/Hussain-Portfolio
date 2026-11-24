@@ -1,0 +1,135 @@
+- generic [active] [ref=f12e1]:
+  - generic [ref=f12e2]:
+    - banner [ref=f12e3]:
+      - generic [ref=f12e4]:
+        - generic [ref=f12e5]:
+          - link "Coolify" [ref=f12e6] [cursor=pointer]:
+            - /url: /
+          - link "v4.3.17" [ref=f12e8] [cursor=pointer]:
+            - /url: https://github.com/coollabsio/coolify/releases/tag/v4.3.17
+        - generic "New version available" [ref=f12e11]:
+          - button "Update available" [ref=f12e13] [cursor=pointer]
+      - generic [ref=f12e15]:
+        - generic [ref=f12e16]:
+          - button "Root Team" [ref=f12e20]
+          - generic [ref=f12e24]: /
+          - button "Servers" [ref=f12e26]
+        - generic [ref=f12e31]:
+          - generic [ref=f12e32]: /
+          - button "Switch server" [ref=f12e34]:
+            - generic [ref=f12e35]: localhost
+          - button "Attention required" [ref=f12e40] [cursor=pointer]
+    - navigation [ref=f12e49]:
+      - button "Search Ctrl+K" [ref=f12e51]:
+        - generic [ref=f12e52]: Search
+        - generic [ref=f12e56]: Ctrl+K
+      - list [ref=f12e57]:
+        - listitem [ref=f12e58]: Workspace
+        - listitem [ref=f12e59]:
+          - link "Dashboard" [ref=f12e60] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f12e65]:
+          - link "Projects" [ref=f12e66] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f12e73]:
+          - link "Terminal" [ref=f12e74] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/terminal
+        - listitem [ref=f12e80]: Infrastructure
+        - listitem [ref=f12e81]:
+          - link "Servers" [ref=f12e82] [cursor=pointer]:
+            - /url: /servers
+        - listitem [ref=f12e86]:
+          - link "Sources" [ref=f12e87] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/sources
+        - listitem [ref=f12e93]:
+          - link "Destinations" [ref=f12e94] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/destinations
+        - listitem [ref=f12e98]:
+          - link "S3 Storage" [ref=f12e99] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/storages
+        - listitem [ref=f12e103]:
+          - link "Shared Variables" [ref=f12e104] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/shared-variables
+        - listitem [ref=f12e113]: Manage
+        - listitem [ref=f12e114]:
+          - link "Team" [ref=f12e115] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/team
+        - listitem [ref=f12e124]:
+          - link "Notifications" [ref=f12e125] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/notifications/email
+        - listitem [ref=f12e129]:
+          - link "Keys & Tokens" [ref=f12e130] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/security/private-key
+        - listitem [ref=f12e135]:
+          - link "Tags" [ref=f12e136] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/tags
+        - listitem [ref=f12e140]:
+          - link "Settings" [ref=f12e141] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/settings
+        - listitem [aria-hidden] [ref=f12e146]
+      - generic [ref=f12e147]:
+        - button "Account menu for irshad platform" [ref=f12e149]:
+          - generic [ref=f12e150]: I
+          - generic [ref=f12e151]: irshad platform
+        - button "Toggle sidebar" [ref=f12e154]
+    - main [ref=f12e157]:
+      - generic [ref=f12e159]:
+        - navigation [ref=f12e160]:
+          - button "Actions" [ref=f12e164] [cursor=pointer]
+        - generic [ref=f12e170]:
+          - complementary [ref=f12e171]:
+            - navigation "Server configuration sections" [ref=f12e172]:
+              - link "General" [ref=f12e173] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg
+              - link "Advanced" [ref=f12e178] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/advanced
+              - link "Private Key" [ref=f12e185] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/private-key
+              - link "CA Certificate" [ref=f12e190] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/ca-certificate
+              - link "Proxy" [ref=f12e194] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy
+              - link "Sentinel" [ref=f12e203] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/sentinel
+              - link "Resources" [ref=f12e208] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/resources
+              - link "Terminal" [ref=f12e215] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/terminal
+              - link "Docker Cleanup" [ref=f12e221] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/docker-cleanup
+              - link "Log Drains" [ref=f12e226] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/log-drains
+              - link "Metrics" [ref=f12e230] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/metrics
+              - link "Destinations" [ref=f12e235] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/destinations
+              - link "Swarm" [ref=f12e239] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/swarm
+              - link "Security" [ref=f12e243] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/security/patches
+          - generic [ref=f12e250]:
+            - generic [ref=f12e251]:
+              - heading [level=3] [ref=f12e253]:
+                - button "More information about Resources" [ref=f12e255] [cursor=pointer]:
+                  - generic [ref=f12e256]: Resources
+              - generic [ref=f12e257]:
+                - generic [ref=f12e258]:
+                  - button "Managed" [ref=f12e259]
+                  - button "Unmanaged" [ref=f12e260]
+                - button "Refresh" [ref=f12e261] [cursor=pointer]
+            - generic [ref=f12e265]:
+              - generic [ref=f12e266]:
+                - generic [ref=f12e267]: Name
+                - generic [ref=f12e268]: Project
+                - generic [ref=f12e269]: Environment
+                - generic [ref=f12e270]: Type
+                - generic [ref=f12e271]: Status
+              - generic [ref=f12e272]:
+                - link "wild-whale-pssj5nf96e0mfgtwz5kkhs5v" [ref=f12e274] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v
+                - generic [ref=f12e275]: Irshad Platform
+                - generic [ref=f12e276]: production
+                - generic [ref=f12e277]: Application
+                - generic [ref=f12e278]: Running:unknown
+              - generic [ref=f12e282]: 1 managed resource
+  - list

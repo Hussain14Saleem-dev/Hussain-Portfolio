@@ -1,0 +1,28 @@
+- generic [ref=f2e5]:
+  - generic [ref=f2e8]:
+    - generic [ref=f2e14]: للمختصين
+    - heading "بوابة المرشدين" [level=1] [ref=f2e15]
+    - paragraph [ref=f2e16]: مساحة الكادر الطبي والمختصين لمراجعة الحالات والرد على الاستشارات.
+    - generic [ref=f2e17]:
+      - generic [ref=f2e18]: بيئة آمنة وموثّقة
+      - generic [ref=f2e22]: مرونة في المواعيد
+  - paragraph [ref=f2e29]:
+    - text: حسابات المرشدين تُنشأ من قبل إدارة المنصّة بعد مراجعة طلب الانضمام. إن لم تتقدّم بعد،
+    - link "قدّم طلبك من بوابة التسجيل" [ref=f2e30] [cursor=pointer]:
+      - /url: /register
+    - text: .
+  - generic [ref=f2e31]:
+    - generic [ref=f2e32]:
+      - generic [ref=f2e33]: اسم المستخدم أو البريد الإلكتروني
+      - textbox "اسمك أو بريدك" [active] [ref=f2e35]
+    - generic [ref=f2e40]:
+      - generic [ref=f2e41]: كلمة المرور
+      - textbox "6 أحرف على الأقل" [ref=f2e43]
+    - button "دخول البوابة" [ref=f2e48] [cursor=pointer]
+  - generic [ref=f2e54]:
+    - link "شعار إرشاد" [ref=f2e55] [cursor=pointer]:
+      - /url: https://www.facebook.com/share/19AbxpaJRz/
+      - img "شعار إرشاد" [ref=f2e56]
+    - link "صندوق دعم الزواج" [ref=f2e57] [cursor=pointer]:
+      - /url: https://www.facebook.com/share/1BR3yqAJCw/
+      - img "صندوق دعم الزواج" [ref=f2e58]

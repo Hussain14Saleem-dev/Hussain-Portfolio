@@ -1,0 +1,804 @@
+- generic [active]:
+  - generic [aria-hidden]:
+    - generic:
+      - generic:
+        - generic:
+          - link:
+            - /url: "#main"
+            - generic: Skip to content
+        - generic:
+          - banner:
+            - generic:
+              - generic:
+                - link:
+                  - /url: /dashboard/org/zwpyveagjxngcxpvnaly
+                  - generic: Back to organization home
+                - generic:
+                  - generic:
+                    - link:
+                      - /url: /dashboard/org/zwpyveagjxngcxpvnaly
+                      - generic: irshad register
+                      - generic: Pro
+                    - button
+                  - generic:
+                    - generic:
+                      - link:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+                        - generic: irshad-registration
+                      - button
+                    - generic:
+                      - link:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+                        - generic: main
+                        - generic: Production
+                      - button
+                - generic:
+                  - button:
+                    - generic: Connect
+              - generic:
+                - button:
+                  - generic: Feedback
+                - generic:
+                  - button:
+                    - generic:
+                      - paragraph: Search...
+                    - generic [aria-hidden]:
+                      - generic: Ctrl K
+                  - button [ref=f52e1024] [cursor=pointer]:
+                    - generic [ref=f52e383]: Help
+                  - button [ref=f52e1025] [cursor=pointer]:
+                    - generic [ref=f52e390]: Advisor Center
+                  - button [ref=f52e1026] [cursor=pointer]:
+                    - generic [ref=f52e395]: SQL Editor
+                  - button [ref=f52e1027] [cursor=pointer]:
+                    - generic [ref=f52e400]: AI Assistant
+                - button [ref=f52e407] [cursor=pointer]:
+                  - figure [ref=f52e409]
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - navigation:
+                    - generic:
+                      - list:
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/editor
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/sql
+                    - generic:
+                      - list:
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/database/schemas
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/users
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/storage/files
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/functions
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/realtime/inspector
+                    - generic:
+                      - list:
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/advisors/security
+                            - generic: Advisors
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/observability
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/logs
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/integrations
+                    - generic:
+                      - list:
+                        - listitem:
+                          - link:
+                            - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/settings/general
+                - generic:
+                  - generic:
+                    - button
+          - generic:
+            - generic:
+              - generic:
+                - main:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic:
+                                - heading [level=4]: Authentication
+                              - generic:
+                                - generic:
+                                  - menu [disabled]:
+                                    - list:
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic: Manage
+                                            - generic:
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/users
+                                                - menuitem [disabled]:
+                                                  - generic: Users
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/oauth-apps
+                                                - menuitem [disabled]:
+                                                  - generic: OAuth Apps
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic: Notifications
+                                            - generic:
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/templates
+                                                - menuitem [disabled]:
+                                                  - generic: Emails
+                                      - generic:
+                                        - generic:
+                                          - generic:
+                                            - generic: Configuration
+                                            - generic:
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/database/policies
+                                                - menuitem [disabled]:
+                                                  - generic: Policies
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/providers
+                                                - menuitem [disabled]:
+                                                  - generic: Sign In / Providers
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/passkeys
+                                                - menuitem [disabled]:
+                                                  - generic:
+                                                    - generic:
+                                                      - generic:
+                                                        - generic: Passkeys
+                                                        - generic: Beta
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/oauth-server
+                                                - menuitem [disabled]:
+                                                  - generic:
+                                                    - generic:
+                                                      - generic:
+                                                        - generic: OAuth Server
+                                                        - generic: Beta
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/sessions
+                                                - menuitem [disabled]:
+                                                  - generic: Sessions
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/rate-limits
+                                                - menuitem [disabled]:
+                                                  - generic: Rate Limits
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/mfa
+                                                - menuitem [disabled]:
+                                                  - generic: Multi-Factor
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/url-configuration
+                                                - menuitem [disabled]:
+                                                  - generic: URL Configuration
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/protection
+                                                - menuitem [disabled]:
+                                                  - generic: Attack Protection
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/hooks
+                                                - menuitem [disabled]:
+                                                  - generic:
+                                                    - generic:
+                                                      - generic:
+                                                        - generic: Auth Hooks
+                                                        - generic: Beta
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/audit-logs
+                                                - menuitem [disabled]:
+                                                  - generic: Audit Logs
+                                              - link [disabled]:
+                                                - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/performance
+                                                - menuitem [disabled]:
+                                                  - generic: Performance
+                      - separator [disabled]
+                      - generic:
+                        - generic:
+                          - main:
+                            - generic:
+                              - generic:
+                                - generic:
+                                  - heading [level=3]: Users
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - combobox:
+                                      - generic: Email address
+                                    - group:
+                                      - textbox:
+                                        - /placeholder: Search by email
+                                  - button:
+                                    - generic: All columns
+                                  - button [disabled] [ref=f52e1028]:
+                                    - generic [ref=f52e676]: Sorted by user ID
+                                - generic:
+                                  - button [ref=f52e1029] [cursor=pointer]
+                                  - button:
+                                    - generic: Add user
+                              - generic:
+                                - generic:
+                                  - generic:
+                                    - generic:
+                                      - grid:
+                                        - row:
+                                          - columnheader
+                                          - columnheader:
+                                            - generic:
+                                              - generic:
+                                                - paragraph: UID
+                                          - columnheader:
+                                            - generic:
+                                              - generic:
+                                                - paragraph: Display name
+                                          - columnheader:
+                                            - generic:
+                                              - generic:
+                                                - paragraph: Email
+                                          - columnheader:
+                                            - generic:
+                                              - generic:
+                                                - paragraph: Phone
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 11b6c819-b7e4-4edb-80a9-7e19543489b8
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: abdalkrim.ali@omu.edu.ly
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 2fbe3e39-b985-4c6f-878c-5e984f78c2bb
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: admin@irshad.ly
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: d828f6e1-2d20-47e4-a112-2069a746dbcd
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: ahmad1969libya@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 0d1d6adb-b6c6-43ea-8fb9-3df1e763cf2e
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: anwralryby4@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: c2d5f2e7-fe1b-43d0-8e8b-c88958f225f6
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: asmaasmat424@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 090d47e2-97db-4072-8385-ad9ff0891905
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: bmny23544@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 3ce449cb-d2e7-475f-8c73-5c0a935a123b
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: bokhzamsamar@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: b8391dca-eace-45b2-843e-e9453959d1da
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: daiwaa1997@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 3cd10aff-7f76-4647-8d0d-4d30336aeb87
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: eyad.bushanna@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: e303f6a2-4b89-47b8-950d-fe90eef0ced7
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: falshaery77@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: d0e73566-bba0-4304-9e45-f29ac00637b8
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: fatma.alfllah@uob.edu.ly
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 1a929730-1206-498c-8124-3e9cbb24fd66
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: fatmabousnina79@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                        - row:
+                                          - gridcell:
+                                            - generic:
+                                              - checkbox
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: 1f4be45e-f380-4de0-83b9-992a0979cd4f
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: fatmasweed9@gmail.com
+                                          - gridcell:
+                                            - generic:
+                                              - paragraph: "-"
+                              - generic: "Total: 32 users"
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic [aria-hidden]:
+                - generic:
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                - generic:
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                - generic:
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "["
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: "]"
+                  - generic: )
+                - generic:
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                - generic:
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                - generic:
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                - generic:
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "]"
+                - generic:
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "{"
+                  - generic: "{"
+                  - generic: ‹
+                  - generic: (
+                  - generic: "["
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+                  - generic: "}"
+                  - generic: "}"
+                  - generic: "]"
+                  - generic: )
+                  - generic: ›
+              - generic:
+                - generic:
+                  - button
+                - generic:
+                  - generic:
+                    - paragraph: Supabase Select 2026
+                    - paragraph: A curated day of talks by the industry’s best builders. Join us on October 2nd in San Francisco.
+                  - link:
+                    - /url: https://select.supabase.com/
+                    - generic: Apply to attend
+    - status [ref=f52e1035]:
+      - button [ref=f52e1036] [cursor=pointer]
+      - generic [ref=f52e1043]: "Successfully created user: test1@irshad.ly"
+  - generic:
+    - alert: Users | Authentication | irshad-registration | irshad register | Supabase
+  - dialog [ref=f52e1046]:
+    - heading "Create a new user" [level=2] [ref=f52e1048]
+    - generic [ref=f52e1050]:
+      - generic [ref=f52e1051]:
+        - generic [ref=f52e1052]: Email address
+        - textbox "user@example.com" [ref=f52e1057]
+      - generic [ref=f52e1058]:
+        - generic [ref=f52e1059]: User Password
+        - textbox "••••••••" [ref=f52e1064]
+      - generic [ref=f52e1065]:
+        - checkbox "Auto confirm user?" [checked] [ref=f52e1066] [cursor=pointer]
+        - checkbox [checked] [aria-hidden]
+        - generic [ref=f52e1067]: Auto confirm user?
+      - paragraph [ref=f52e1069]: A confirmation email will not be sent when creating a user via this form.
+      - button "Create user" [ref=f52e1070] [cursor=pointer]
+    - button "Close" [ref=f52e1072]

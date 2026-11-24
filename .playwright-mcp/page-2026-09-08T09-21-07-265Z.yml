@@ -1,0 +1,650 @@
+- generic [ref=f52e1]:
+  - generic [ref=f52e3]:
+    - generic [ref=f52e303]:
+      - link "Skip to content" [ref=f52e305] [cursor=pointer]:
+        - /url: "#main"
+      - banner [ref=f52e308]:
+        - generic [ref=f52e309]:
+          - generic [ref=f52e310]:
+            - link "Supabase Back to organization home" [ref=f52e311] [cursor=pointer]:
+              - /url: /dashboard/org/zwpyveagjxngcxpvnaly
+              - img "Supabase" [ref=f52e312]
+              - generic [ref=f52e313]: Back to organization home
+            - generic [ref=f52e314]:
+              - generic [ref=f52e318]:
+                - link "irshad register Pro" [ref=f52e319] [cursor=pointer]:
+                  - /url: /dashboard/org/zwpyveagjxngcxpvnaly
+                  - generic [ref=f52e330]: irshad register
+                  - generic [ref=f52e331]: Pro
+                - button "Show organizations" [ref=f52e332] [cursor=pointer]
+              - generic [ref=f52e337]:
+                - generic [ref=f52e341]:
+                  - link "irshad-registration" [ref=f52e342] [cursor=pointer]:
+                    - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+                  - button "Show organization projects" [ref=f52e347] [cursor=pointer]
+                - generic [ref=f52e355]:
+                  - link "main Production" [ref=f52e356] [cursor=pointer]:
+                    - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+                    - generic "main" [ref=f52e357]
+                    - generic [ref=f52e358]: Production
+                  - button "Show project branches" [ref=f52e359] [cursor=pointer]
+            - button "Connect" [ref=f52e365] [cursor=pointer]
+          - generic [ref=f52e370]:
+            - button "Feedback" [ref=f52e371] [cursor=pointer]
+            - generic [ref=f52e373]:
+              - button [ref=f52e374] [cursor=pointer]:
+                - paragraph [ref=f52e379]: Search...
+                - generic [ref=f52e381]: Ctrl K
+              - button "Help" [ref=f52e382] [cursor=pointer]
+              - button "Advisor Center" [ref=f52e389] [cursor=pointer]
+              - button "SQL Editor" [ref=f52e394] [cursor=pointer]
+              - button "AI Assistant" [ref=f52e399] [cursor=pointer]
+            - button [ref=f52e407] [cursor=pointer]:
+              - figure [ref=f52e409]
+      - generic [ref=f52e412]:
+        - generic [ref=f52e416]:
+          - navigation [ref=f52e418]:
+            - list [ref=f52e420]:
+              - listitem [ref=f52e421]:
+                - link "Project Overview" [ref=f52e422] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+              - listitem [ref=f52e425]:
+                - link "Table Editor" [ref=f52e426] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/editor
+              - listitem [ref=f52e429]:
+                - link "SQL Editor" [ref=f52e430] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/sql
+            - list [ref=f52e434]:
+              - listitem [ref=f52e435]:
+                - link "Database" [ref=f52e436] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/database/schemas
+              - listitem [ref=f52e441]:
+                - link "Authentication" [ref=f52e442] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/users
+              - listitem [ref=f52e445]:
+                - link "Storage" [ref=f52e446] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/storage/files
+              - listitem [ref=f52e449]:
+                - link "Edge Functions" [ref=f52e450] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/functions
+              - listitem [ref=f52e456]:
+                - link "Realtime" [ref=f52e457] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/realtime/inspector
+            - list [ref=f52e461]:
+              - listitem [ref=f52e462]:
+                - link "Advisors" [ref=f52e463] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/advisors/security
+              - listitem [ref=f52e467]:
+                - link "Observability" [ref=f52e468] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/observability
+              - listitem [ref=f52e477]:
+                - link "Logs" [ref=f52e478] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/logs
+              - listitem [ref=f52e480]:
+                - link "Integrations" [ref=f52e481] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/integrations
+            - list [ref=f52e486]:
+              - listitem [ref=f52e487]:
+                - link "Project Settings" [ref=f52e488] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/settings/general
+          - button "Sidebar control" [ref=f52e494] [cursor=pointer]
+        - main [ref=f52e501]:
+          - generic [ref=f52e503]:
+            - generic [ref=f52e507]:
+              - heading "Authentication" [level=4] [ref=f52e509]
+              - menu "Sidebar" [disabled] [ref=f52e512]:
+                - list [ref=f52e513]:
+                  - generic [ref=f52e516]:
+                    - generic [ref=f52e517]: Manage
+                    - generic [ref=f52e521]:
+                      - link [disabled] [ref=f52e522] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/users
+                        - menuitem "Users" [disabled] [ref=f52e523]
+                      - link [disabled] [ref=f52e528] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/oauth-apps
+                        - menuitem "OAuth Apps" [disabled] [ref=f52e529]
+                  - generic [ref=f52e537]:
+                    - generic [ref=f52e538]: Notifications
+                    - link [disabled] [ref=f52e543] [cursor=pointer]:
+                      - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/templates
+                      - menuitem "Emails" [disabled] [ref=f52e544]
+                  - generic [ref=f52e552]:
+                    - generic [ref=f52e553]: Configuration
+                    - generic [ref=f52e557]:
+                      - link [disabled] [ref=f52e558] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/database/policies
+                        - menuitem "Policies" [disabled] [ref=f52e559]:
+                          - generic "Policies" [ref=f52e562]
+                      - link [disabled] [ref=f52e568] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/providers
+                        - menuitem "Sign In / Providers" [disabled] [ref=f52e569]
+                      - link [disabled] [ref=f52e574] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/passkeys
+                        - menuitem "Passkeys Beta" [disabled] [ref=f52e575]:
+                          - generic [ref=f52e578]:
+                            - generic [ref=f52e579]: Passkeys
+                            - generic [ref=f52e580]: Beta
+                      - link [disabled] [ref=f52e581] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/oauth-server
+                        - menuitem "OAuth Server Beta" [disabled] [ref=f52e582]:
+                          - generic [ref=f52e585]:
+                            - generic [ref=f52e586]: OAuth Server
+                            - generic [ref=f52e587]: Beta
+                      - link [disabled] [ref=f52e588] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/sessions
+                        - menuitem "Sessions" [disabled] [ref=f52e589]
+                      - link [disabled] [ref=f52e594] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/rate-limits
+                        - menuitem "Rate Limits" [disabled] [ref=f52e595]
+                      - link [disabled] [ref=f52e600] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/mfa
+                        - menuitem "Multi-Factor" [disabled] [ref=f52e601]
+                      - link [disabled] [ref=f52e606] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/url-configuration
+                        - menuitem "URL Configuration" [disabled] [ref=f52e607]
+                      - link [disabled] [ref=f52e612] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/protection
+                        - menuitem "Attack Protection" [disabled] [ref=f52e613]
+                      - link [disabled] [ref=f52e618] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/hooks
+                        - menuitem "Auth Hooks Beta" [disabled] [ref=f52e619]:
+                          - generic [ref=f52e622]:
+                            - generic [ref=f52e623]: Auth Hooks
+                            - generic [ref=f52e624]: Beta
+                      - link [disabled] [ref=f52e625] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/audit-logs
+                        - menuitem "Audit Logs" [disabled] [ref=f52e626]
+                      - link [disabled] [ref=f52e631] [cursor=pointer]:
+                        - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/performance
+                        - menuitem "Performance" [disabled] [ref=f52e632]
+            - separator [disabled] [ref=f52e637]
+            - main [ref=f52e648]:
+              - generic [ref=f52e649]:
+                - heading "Users" [level=3] [ref=f52e652]
+                - generic [ref=f52e653]:
+                  - generic [ref=f52e654]:
+                    - generic [ref=f52e655]:
+                      - combobox [ref=f52e660]:
+                        - generic: Email address
+                      - group [ref=f52e663]:
+                        - textbox "Search by email" [ref=f52e664]
+                    - button "All columns" [ref=f52e666] [cursor=pointer]
+                    - button "Sorted by user ID" [disabled] [ref=f52e672]
+                  - generic [ref=f52e677]:
+                    - button "Refresh" [ref=f52e678] [cursor=pointer]
+                    - button "Add user" [expanded] [ref=f52e685] [cursor=pointer]
+                - grid [ref=f52e696]:
+                  - row [ref=f52e697]:
+                    - columnheader [ref=f52e698]
+                    - columnheader [ref=f52e699]:
+                      - paragraph [ref=f52e702]: UID
+                    - columnheader [ref=f52e704]:
+                      - paragraph [ref=f52e707]: Display name
+                    - columnheader [ref=f52e709]:
+                      - paragraph [ref=f52e712]: Email
+                    - columnheader [ref=f52e714]:
+                      - paragraph [ref=f52e717]: Phone
+                  - row [ref=f52e719] [cursor=pointer]:
+                    - gridcell [ref=f52e720]:
+                      - checkbox [ref=f52e722]
+                    - gridcell [ref=f52e727]:
+                      - paragraph [ref=f52e729]: 11b6c819-b7e4-4edb-80a9-7e19543489b8
+                    - gridcell [ref=f52e730]:
+                      - paragraph [ref=f52e732]: "-"
+                    - gridcell [ref=f52e733]:
+                      - paragraph [ref=f52e735]: abdalkrim.ali@omu.edu.ly
+                    - gridcell [ref=f52e736]:
+                      - paragraph [ref=f52e738]: "-"
+                  - row [ref=f52e739] [cursor=pointer]:
+                    - gridcell [ref=f52e740]:
+                      - checkbox [ref=f52e742]
+                    - gridcell [ref=f52e747]:
+                      - paragraph [ref=f52e749]: 2fbe3e39-b985-4c6f-878c-5e984f78c2bb
+                    - gridcell [ref=f52e750]:
+                      - paragraph [ref=f52e752]: "-"
+                    - gridcell [ref=f52e753]:
+                      - paragraph [ref=f52e755]: admin@irshad.ly
+                    - gridcell [ref=f52e756]:
+                      - paragraph [ref=f52e758]: "-"
+                  - row [ref=f52e759] [cursor=pointer]:
+                    - gridcell [ref=f52e760]:
+                      - checkbox [ref=f52e762]
+                    - gridcell [ref=f52e767]:
+                      - paragraph [ref=f52e769]: d828f6e1-2d20-47e4-a112-2069a746dbcd
+                    - gridcell [ref=f52e770]:
+                      - paragraph [ref=f52e772]: "-"
+                    - gridcell [ref=f52e773]:
+                      - paragraph [ref=f52e775]: ahmad1969libya@gmail.com
+                    - gridcell [ref=f52e776]:
+                      - paragraph [ref=f52e778]: "-"
+                  - row [ref=f52e779] [cursor=pointer]:
+                    - gridcell [ref=f52e780]:
+                      - checkbox [ref=f52e782]
+                    - gridcell [ref=f52e787]:
+                      - paragraph [ref=f52e789]: 0d1d6adb-b6c6-43ea-8fb9-3df1e763cf2e
+                    - gridcell [ref=f52e790]:
+                      - paragraph [ref=f52e792]: "-"
+                    - gridcell [ref=f52e793]:
+                      - paragraph [ref=f52e795]: anwralryby4@gmail.com
+                    - gridcell [ref=f52e796]:
+                      - paragraph [ref=f52e798]: "-"
+                  - row [ref=f52e799] [cursor=pointer]:
+                    - gridcell [ref=f52e800]:
+                      - checkbox [ref=f52e802]
+                    - gridcell [ref=f52e807]:
+                      - paragraph [ref=f52e809]: c2d5f2e7-fe1b-43d0-8e8b-c88958f225f6
+                    - gridcell [ref=f52e810]:
+                      - paragraph [ref=f52e812]: "-"
+                    - gridcell [ref=f52e813]:
+                      - paragraph [ref=f52e815]: asmaasmat424@gmail.com
+                    - gridcell [ref=f52e816]:
+                      - paragraph [ref=f52e818]: "-"
+                  - row [ref=f52e819] [cursor=pointer]:
+                    - gridcell [ref=f52e820]:
+                      - checkbox [ref=f52e822]
+                    - gridcell [ref=f52e827]:
+                      - paragraph [ref=f52e829]: 090d47e2-97db-4072-8385-ad9ff0891905
+                    - gridcell [ref=f52e830]:
+                      - paragraph [ref=f52e832]: "-"
+                    - gridcell [ref=f52e833]:
+                      - paragraph [ref=f52e835]: bmny23544@gmail.com
+                    - gridcell [ref=f52e836]:
+                      - paragraph [ref=f52e838]: "-"
+                  - row [ref=f52e839] [cursor=pointer]:
+                    - gridcell [ref=f52e840]:
+                      - checkbox [ref=f52e842]
+                    - gridcell [ref=f52e847]:
+                      - paragraph [ref=f52e849]: 3ce449cb-d2e7-475f-8c73-5c0a935a123b
+                    - gridcell [ref=f52e850]:
+                      - paragraph [ref=f52e852]: "-"
+                    - gridcell [ref=f52e853]:
+                      - paragraph [ref=f52e855]: bokhzamsamar@gmail.com
+                    - gridcell [ref=f52e856]:
+                      - paragraph [ref=f52e858]: "-"
+                  - row [ref=f52e859] [cursor=pointer]:
+                    - gridcell [ref=f52e860]:
+                      - checkbox [ref=f52e862]
+                    - gridcell [ref=f52e867]:
+                      - paragraph [ref=f52e869]: b8391dca-eace-45b2-843e-e9453959d1da
+                    - gridcell [ref=f52e870]:
+                      - paragraph [ref=f52e872]: "-"
+                    - gridcell [ref=f52e873]:
+                      - paragraph [ref=f52e875]: daiwaa1997@gmail.com
+                    - gridcell [ref=f52e876]:
+                      - paragraph [ref=f52e878]: "-"
+                  - row [ref=f52e879] [cursor=pointer]:
+                    - gridcell [ref=f52e880]:
+                      - checkbox [ref=f52e882]
+                    - gridcell [ref=f52e887]:
+                      - paragraph [ref=f52e889]: 3cd10aff-7f76-4647-8d0d-4d30336aeb87
+                    - gridcell [ref=f52e890]:
+                      - paragraph [ref=f52e892]: "-"
+                    - gridcell [ref=f52e893]:
+                      - paragraph [ref=f52e895]: eyad.bushanna@gmail.com
+                    - gridcell [ref=f52e896]:
+                      - paragraph [ref=f52e898]: "-"
+                  - row [ref=f52e899] [cursor=pointer]:
+                    - gridcell [ref=f52e900]:
+                      - checkbox [ref=f52e902]
+                    - gridcell [ref=f52e907]:
+                      - paragraph [ref=f52e909]: e303f6a2-4b89-47b8-950d-fe90eef0ced7
+                    - gridcell [ref=f52e910]:
+                      - paragraph [ref=f52e912]: "-"
+                    - gridcell [ref=f52e913]:
+                      - paragraph [ref=f52e915]: falshaery77@gmail.com
+                    - gridcell [ref=f52e916]:
+                      - paragraph [ref=f52e918]: "-"
+                  - row [ref=f52e919] [cursor=pointer]:
+                    - gridcell [ref=f52e920]:
+                      - checkbox [ref=f52e922]
+                    - gridcell [ref=f52e927]:
+                      - paragraph [ref=f52e929]: d0e73566-bba0-4304-9e45-f29ac00637b8
+                    - gridcell [ref=f52e930]:
+                      - paragraph [ref=f52e932]: "-"
+                    - gridcell [ref=f52e933]:
+                      - paragraph [ref=f52e935]: fatma.alfllah@uob.edu.ly
+                    - gridcell [ref=f52e936]:
+                      - paragraph [ref=f52e938]: "-"
+                  - row [ref=f52e939] [cursor=pointer]:
+                    - gridcell [ref=f52e940]:
+                      - checkbox [ref=f52e942]
+                    - gridcell [ref=f52e947]:
+                      - paragraph [ref=f52e949]: 1a929730-1206-498c-8124-3e9cbb24fd66
+                    - gridcell [ref=f52e950]:
+                      - paragraph [ref=f52e952]: "-"
+                    - gridcell [ref=f52e953]:
+                      - paragraph [ref=f52e955]: fatmabousnina79@gmail.com
+                    - gridcell [ref=f52e956]:
+                      - paragraph [ref=f52e958]: "-"
+                  - row [ref=f52e959] [cursor=pointer]:
+                    - gridcell [ref=f52e960]:
+                      - checkbox [ref=f52e962]
+                    - gridcell [ref=f52e967]:
+                      - paragraph [ref=f52e969]: 1f4be45e-f380-4de0-83b9-992a0979cd4f
+                    - gridcell [ref=f52e970]:
+                      - paragraph [ref=f52e972]: "-"
+                    - gridcell [ref=f52e973]:
+                      - paragraph [ref=f52e975]: fatmasweed9@gmail.com
+                    - gridcell [ref=f52e976]:
+                      - paragraph [ref=f52e978]: "-"
+                - generic [ref=f52e979]: "Total: 31 users"
+    - generic [ref=f52e985]:
+      - generic [aria-hidden]:
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+        - generic:
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+        - generic:
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+      - generic [ref=f52e986]:
+        - button "Close banner" [ref=f52e988] [cursor=pointer]
+        - generic [ref=f52e993]:
+          - generic [ref=f52e995]:
+            - paragraph [ref=f52e996]: Supabase Select 2026
+            - paragraph [ref=f52e997]: A curated day of talks by the industry’s best builders. Join us on October 2nd in San Francisco.
+          - link "Apply to attend" [ref=f52e998] [cursor=pointer]:
+            - /url: https://select.supabase.com/
+  - alert [ref=f52e302]: Users | Authentication | Supabase
+  - menu "Add user" [active] [ref=f52e1005]:
+    - menuitem "Send invitation I then I" [ref=f52e1006]:
+      - paragraph [ref=f52e1010]: Send invitation
+      - generic [ref=f52e1011]:
+        - generic [ref=f52e1012]: I
+        - generic [ref=f52e1013]: then
+        - generic [ref=f52e1014]: I
+    - menuitem "Create new user I then U" [ref=f52e1015]:
+      - paragraph [ref=f52e1019]: Create new user
+      - generic [ref=f52e1020]:
+        - generic [ref=f52e1021]: I
+        - generic [ref=f52e1022]: then
+        - generic [ref=f52e1023]: U

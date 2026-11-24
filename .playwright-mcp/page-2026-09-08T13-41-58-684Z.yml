@@ -1,0 +1,184 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e2]:
+    - banner [ref=f8e3]:
+      - generic [ref=f8e4]:
+        - generic [ref=f8e5]:
+          - link "Coolify" [ref=f8e6] [cursor=pointer]:
+            - /url: /
+          - link "v4.3.17" [ref=f8e8] [cursor=pointer]:
+            - /url: https://github.com/coollabsio/coolify/releases/tag/v4.3.17
+        - generic "New version available" [ref=f8e11]:
+          - button "Update available" [ref=f8e13] [cursor=pointer]
+      - generic [ref=f8e15]:
+        - generic [ref=f8e16]:
+          - button "Root Team" [ref=f8e20]
+          - generic [ref=f8e24]: /
+          - button "Servers" [ref=f8e26]
+        - generic [ref=f8e31]:
+          - generic [ref=f8e32]: /
+          - button "Switch server" [ref=f8e34]:
+            - generic [ref=f8e35]: localhost
+          - button "Attention required" [ref=f8e40] [cursor=pointer]
+    - navigation [ref=f8e49]:
+      - button "Search Ctrl+K" [ref=f8e51]:
+        - generic [ref=f8e52]: Search
+        - generic [ref=f8e56]: Ctrl+K
+      - list [ref=f8e57]:
+        - listitem [ref=f8e58]: Workspace
+        - listitem [ref=f8e59]:
+          - link "Dashboard" [ref=f8e60] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f8e65]:
+          - link "Projects" [ref=f8e66] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f8e73]:
+          - link "Terminal" [ref=f8e74] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/terminal
+        - listitem [ref=f8e80]: Infrastructure
+        - listitem [ref=f8e81]:
+          - link "Servers" [ref=f8e82] [cursor=pointer]:
+            - /url: /servers
+        - listitem [ref=f8e86]:
+          - link "Sources" [ref=f8e87] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/sources
+        - listitem [ref=f8e93]:
+          - link "Destinations" [ref=f8e94] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/destinations
+        - listitem [ref=f8e98]:
+          - link "S3 Storage" [ref=f8e99] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/storages
+        - listitem [ref=f8e103]:
+          - link "Shared Variables" [ref=f8e104] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/shared-variables
+        - listitem [ref=f8e113]: Manage
+        - listitem [ref=f8e114]:
+          - link "Team" [ref=f8e115] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/team
+        - listitem [ref=f8e124]:
+          - link "Notifications" [ref=f8e125] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/notifications/email
+        - listitem [ref=f8e129]:
+          - link "Keys & Tokens" [ref=f8e130] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/security/private-key
+        - listitem [ref=f8e135]:
+          - link "Tags" [ref=f8e136] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/tags
+        - listitem [ref=f8e140]:
+          - link "Settings" [ref=f8e141] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/settings
+        - listitem [aria-hidden] [ref=f8e146]
+      - generic [ref=f8e147]:
+        - button "Account menu for irshad platform" [ref=f8e149]:
+          - generic [ref=f8e150]: I
+          - generic [ref=f8e151]: irshad platform
+        - button "Toggle sidebar" [ref=f8e154]
+    - main [ref=f8e157]:
+      - generic [ref=f8e159]:
+        - navigation [ref=f8e160]:
+          - button "Actions" [ref=f8e164] [cursor=pointer]
+        - generic [ref=f8e170]:
+          - complementary [ref=f8e171]:
+            - navigation "Server configuration sections" [ref=f8e172]:
+              - link "General" [ref=f8e173] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg
+              - link "Advanced" [ref=f8e178] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/advanced
+              - link "Private Key" [ref=f8e185] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/private-key
+              - link "CA Certificate" [ref=f8e190] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/ca-certificate
+              - link "Proxy" [ref=f8e194] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy
+              - link "Sentinel" [ref=f8e203] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/sentinel
+              - link "Resources" [ref=f8e208] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/resources
+              - link "Terminal" [ref=f8e215] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/terminal
+              - link "Docker Cleanup" [ref=f8e221] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/docker-cleanup
+              - link "Log Drains" [ref=f8e226] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/log-drains
+              - link "Metrics" [ref=f8e230] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/metrics
+              - link "Destinations" [ref=f8e235] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/destinations
+              - link "Swarm" [ref=f8e239] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/swarm
+              - link "Security" [ref=f8e243] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/security/patches
+          - generic [ref=f8e250]:
+            - generic:
+              - generic: You have changes that haven't been saved yet.
+              - generic:
+                - button "Reset"
+                - button "Save changes Enter":
+                  - generic: Save changes
+                  - generic: Enter
+            - generic [ref=f8e251]:
+              - generic [ref=f8e252]:
+                - heading [level=3] [ref=f8e254]:
+                  - button "More information about Server overview" [ref=f8e256] [cursor=pointer]:
+                    - generic [ref=f8e257]: Server overview
+                - generic [ref=f8e258]: Ready
+              - generic [ref=f8e262]:
+                - generic [ref=f8e267]:
+                  - paragraph [ref=f8e268]: Localhost
+                  - paragraph [ref=f8e269]: The server is reachable, validated, and ready to host resources.
+                - button "Fetch server details" [ref=f8e271] [cursor=pointer]
+            - generic [ref=f8e274]:
+              - generic [ref=f8e275]:
+                - heading [level=3] [ref=f8e277]:
+                  - button "More information about Connection" [ref=f8e279] [cursor=pointer]:
+                    - generic [ref=f8e280]: Connection
+                - button "Validate connection" [ref=f8e282] [cursor=pointer]
+              - generic [ref=f8e285]:
+                - generic [ref=f8e286]:
+                  - generic [ref=f8e287]:
+                    - generic [ref=f8e289]:
+                      - text: Name
+                      - generic [ref=f8e290]: "*"
+                    - textbox [ref=f8e291]: localhost
+                  - generic [ref=f8e292]:
+                    - generic [ref=f8e293]: Description
+                    - textbox [ref=f8e295]: This is the server where Coolify is running on. Don't delete this!
+                - generic [ref=f8e296]:
+                  - generic [ref=f8e297]:
+                    - generic [ref=f8e298]:
+                      - generic [ref=f8e299]:
+                        - text: IP address or domain
+                        - generic [ref=f8e300]: "*"
+                      - button "More information" [ref=f8e302] [cursor=pointer]
+                    - generic [ref=f8e307]:
+                      - textbox [ref=f8e308]: host.docker.internal
+                      - button "Toggle password visibility" [ref=f8e309] [cursor=pointer]
+                  - generic [ref=f8e313]:
+                    - generic [ref=f8e315]:
+                      - text: SSH user
+                      - generic [ref=f8e316]: "*"
+                    - textbox [ref=f8e317]: root
+                  - generic [ref=f8e318]:
+                    - generic [ref=f8e320]:
+                      - text: SSH port
+                      - generic [ref=f8e321]: "*"
+                    - spinbutton [ref=f8e322]: "22"
+                - generic [ref=f8e323]:
+                  - generic [ref=f8e324]:
+                    - generic [ref=f8e325]:
+                      - generic [ref=f8e326]:
+                        - text: Connection timeout
+                        - generic [ref=f8e327]: "*"
+                      - button "More information" [ref=f8e329] [cursor=pointer]
+                    - spinbutton [ref=f8e334]: "10"
+                  - generic [ref=f8e335]:
+                    - generic [ref=f8e336]:
+                      - generic [ref=f8e337]: Server timezone
+                      - button "More information" [ref=f8e339] [cursor=pointer]
+                    - button "Server timezone" [ref=f8e345] [cursor=pointer]:
+                      - generic [ref=f8e346]: UTC
+                  - generic [ref=f8e349]:
+                    - generic [ref=f8e350]:
+                      - generic [ref=f8e351]: Wildcard domain
+                      - button "More information" [ref=f8e353] [cursor=pointer]
+                    - textbox "https://example.com" [ref=f8e358]
+  - list

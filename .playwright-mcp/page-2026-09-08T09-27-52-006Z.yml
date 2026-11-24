@@ -1,0 +1,32 @@
+- generic [ref=e5]:
+  - generic [ref=e8]:
+    - img "إرشاد"
+    - generic [ref=e9]: مساحتك الآمنة
+    - heading "استشارات أسرية بخصوصية تامة" [level=1] [ref=e10]
+    - paragraph [ref=e11]: هويتك محمية دائمًا. اطرح ما يقلقك وتابع ردود المختصين من أي مكان.
+    - generic [ref=e12]:
+      - generic [ref=e13]: خصوصية وهوية محمية
+      - generic [ref=e17]: مختصون معتمدون
+  - generic [ref=e23]:
+    - button "تسجيل الدخول" [ref=e25] [cursor=pointer]
+    - button "حساب جديد" [ref=e26] [cursor=pointer]
+  - generic [ref=e27]:
+    - generic [ref=e28]:
+      - generic [ref=e29]: اسم المستخدم أو البريد الإلكتروني
+      - textbox "اسمك أو بريدك" [ref=e31]
+    - generic [ref=e36]:
+      - generic [ref=e37]: كلمة المرور
+      - textbox "6 أحرف على الأقل" [ref=e39]
+    - button "نسيت كلمة المرور؟" [ref=e45] [cursor=pointer]
+    - button [ref=e46] [cursor=pointer]:
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: الظهور كمجهول
+        - paragraph [ref=e55]: ستظهر مشاركاتك برقم سري بدلاً من اسمك.
+    - button "دخول آمن" [ref=e58] [cursor=pointer]
+  - generic [ref=e64]:
+    - link "شعار إرشاد":
+      - /url: https://www.facebook.com/share/19AbxpaJRz/
+      - img "شعار إرشاد"
+    - link "صندوق دعم الزواج":
+      - /url: https://www.facebook.com/share/1BR3yqAJCw/
+      - img "صندوق دعم الزواج"

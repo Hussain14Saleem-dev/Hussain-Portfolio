@@ -1,0 +1,362 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e3]:
+    - generic [ref=f6e4]:
+      - link "Skip to content" [ref=f6e6] [cursor=pointer]:
+        - /url: "#main"
+      - banner [ref=f6e9]:
+        - generic [ref=f6e10]:
+          - link "Supabase Back to organization home" [ref=f6e12] [cursor=pointer]:
+            - /url: /dashboard/organizations
+            - img "Supabase" [ref=f6e13]
+            - generic [ref=f6e14]: Back to organization home
+          - generic [ref=f6e15]:
+            - button "Feedback" [ref=f6e16] [cursor=pointer]
+            - generic [ref=f6e18]:
+              - button [ref=f6e19] [cursor=pointer]:
+                - paragraph [ref=f6e24]: Search...
+                - generic [ref=f6e26]: Ctrl K
+              - button "Help" [ref=f6e27] [cursor=pointer]
+              - button "Advisor Center" [ref=f6e34] [cursor=pointer]
+            - button [ref=f6e39] [cursor=pointer]
+      - generic [ref=f6e44]:
+        - generic [ref=f6e48]:
+          - generic [ref=f6e49]:
+            - navigation
+          - button "Sidebar control" [ref=f6e52] [cursor=pointer]
+        - main [ref=f6e59]:
+          - generic [ref=f6e61]:
+            - separator [ref=f6e65]
+            - main [ref=f6e76]:
+              - generic [ref=f6e77]:
+                - generic [ref=f6e78]:
+                  - generic [ref=f6e79]:
+                    - button "Collapse sidebar" [ref=f6e80]
+                    - tablist [ref=f6e85]:
+                      - button [ref=f6e87]
+                  - status [ref=f6e90]
+                - generic [ref=f6e92]:
+                  - generic [ref=f6e93]:
+                    - generic [ref=f6e94]:
+                      - generic [ref=f6e95]: Autosave enabled
+                      - button "Disable autosave" [ref=f6e96] [cursor=pointer]
+                    - button "More actions" [ref=f6e102] [cursor=pointer]
+                    - generic [ref=f6e108]:
+                      - generic [ref=f6e109]:
+                        - generic [ref=f6e110] [cursor=pointer]:
+                          - generic [ref=f6e111]: Source
+                          - button "Primary database" [ref=f6e112]
+                        - button "Role postgres" [ref=f6e120] [cursor=pointer]:
+                          - generic [ref=f6e122]:
+                            - generic [ref=f6e123]: Role
+                            - generic [ref=f6e124]: postgres
+                      - button "Limit 100 rows" [ref=f6e127] [cursor=pointer]
+                      - button "Run" [ref=f6e133] [cursor=pointer]:
+                        - generic [ref=f6e136]: Ctrl ↵
+                  - separator [ref=f6e144]
+    - generic [ref=f6e161]:
+      - generic [aria-hidden]:
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+        - generic:
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+        - generic:
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+        - generic:
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+      - generic [ref=f6e162]:
+        - button "Close banner" [ref=f6e164] [cursor=pointer]
+        - generic [ref=f6e169]:
+          - generic [ref=f6e171]:
+            - paragraph [ref=f6e172]: Supabase Select 2026
+            - paragraph [ref=f6e173]: A curated day of talks by the industry’s best builders. Join us on October 2nd in San Francisco.
+          - link "Apply to attend" [ref=f6e174] [cursor=pointer]:
+            - /url: https://select.supabase.com/
+  - alert [ref=f6e180]

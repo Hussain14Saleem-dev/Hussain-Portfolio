@@ -1,0 +1,35 @@
+- generic [ref=e65]:
+  - navigation [ref=e66]:
+    - generic [ref=e67]:
+      - img "Irshad Logo" [ref=e69]
+      - textbox "ابحث في المنشورات..." [ref=e72]
+      - generic [ref=e76]:
+        - button "الإشعارات" [ref=e77] [cursor=pointer]
+        - generic [ref=e81]: مجهول USR-515824
+  - generic [ref=e87]:
+    - generic [ref=e89]:
+      - generic [ref=e90]:
+        - heading "القائمة" [level=2] [ref=e91]
+        - generic [ref=e92]:
+          - button "الرئيسية" [ref=e93] [cursor=pointer]
+          - button "منشوراتي" [ref=e99] [cursor=pointer]
+          - button "دليل المختصين" [ref=e105] [cursor=pointer]
+          - button "مواعيدي" [ref=e112] [cursor=pointer]
+          - button "المحادثات" [ref=e117] [cursor=pointer]
+          - button "الإشعارات" [ref=e123] [cursor=pointer]
+          - button "المركز التعليمي" [ref=e129] [cursor=pointer]
+          - button "خدمات تهمّك" [ref=e135] [cursor=pointer]
+          - button "الملف الشخصي" [ref=e145] [cursor=pointer]
+          - button "الشكاوى والدعم" [ref=e151] [cursor=pointer]
+          - button "من نحن" [ref=e156] [cursor=pointer]
+          - button "الإعدادات" [ref=e161] [cursor=pointer]
+      - button "تسجيل الخروج" [ref=e168] [cursor=pointer]
+    - main [ref=e172]:
+      - generic [ref=e174]:
+        - generic [ref=e181]:
+          - textbox "بم تفكر؟ اطرح مشكلتك بكل أمان وخصوصية..." [ref=e182]
+          - generic [ref=e183]:
+            - button "لجنة المختصين" [ref=e184] [cursor=pointer]
+            - button "مجهول الهوية" [pressed] [ref=e190] [cursor=pointer]
+          - button "نشر طلب استشارة" [disabled] [ref=e197]
+        - generic [ref=e201]: جاري تحميل المنشورات...

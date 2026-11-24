@@ -1,0 +1,95 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e2]:
+    - banner [ref=f7e3]:
+      - generic [ref=f7e4]:
+        - generic [ref=f7e5]:
+          - link "Coolify" [ref=f7e6] [cursor=pointer]:
+            - /url: /
+          - link "v4.3.17" [ref=f7e8] [cursor=pointer]:
+            - /url: https://github.com/coollabsio/coolify/releases/tag/v4.3.17
+        - generic "New version available" [ref=f7e11]:
+          - button "Update available" [ref=f7e13] [cursor=pointer]
+      - generic [ref=f7e16]:
+        - button "Root Team" [ref=f7e20]
+        - generic [ref=f7e24]: /
+        - button "Servers" [ref=f7e26]
+    - navigation [ref=f7e32]:
+      - button "Search Ctrl+K" [ref=f7e34]:
+        - generic [ref=f7e35]: Search
+        - generic [ref=f7e39]: Ctrl+K
+      - list [ref=f7e40]:
+        - listitem [ref=f7e41]: Workspace
+        - listitem [ref=f7e42]:
+          - link "Dashboard" [ref=f7e43] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f7e48]:
+          - link "Projects" [ref=f7e49] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f7e56]:
+          - link "Terminal" [ref=f7e57] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/terminal
+        - listitem [ref=f7e63]: Infrastructure
+        - listitem [ref=f7e64]:
+          - link "Servers" [ref=f7e65] [cursor=pointer]:
+            - /url: /servers
+        - listitem [ref=f7e69]:
+          - link "Sources" [ref=f7e70] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/sources
+        - listitem [ref=f7e76]:
+          - link "Destinations" [ref=f7e77] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/destinations
+        - listitem [ref=f7e81]:
+          - link "S3 Storage" [ref=f7e82] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/storages
+        - listitem [ref=f7e86]:
+          - link "Shared Variables" [ref=f7e87] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/shared-variables
+        - listitem [ref=f7e96]: Manage
+        - listitem [ref=f7e97]:
+          - link "Team" [ref=f7e98] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/team
+        - listitem [ref=f7e107]:
+          - link "Notifications" [ref=f7e108] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/notifications/email
+        - listitem [ref=f7e112]:
+          - link "Keys & Tokens" [ref=f7e113] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/security/private-key
+        - listitem [ref=f7e118]:
+          - link "Tags" [ref=f7e119] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/tags
+        - listitem [ref=f7e123]:
+          - link "Settings" [ref=f7e124] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/settings
+        - listitem [aria-hidden] [ref=f7e129]
+      - generic [ref=f7e130]:
+        - button "Account menu for irshad platform" [ref=f7e132]:
+          - generic [ref=f7e133]: I
+          - generic [ref=f7e134]: irshad platform
+        - button "Toggle sidebar" [ref=f7e137]
+    - main [ref=f7e140]:
+      - generic [ref=f7e142]:
+        - generic [ref=f7e143]:
+          - heading "Servers" [level=1] [ref=f7e144]
+          - link "New server" [ref=f7e146] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/servers/new
+        - generic [ref=f7e148]:
+          - generic [ref=f7e149]:
+            - searchbox "Search servers" [ref=f7e151]
+            - generic [ref=f7e152]:
+              - generic [ref=f7e153]: 1 server
+              - generic [ref=f7e154]:
+                - button "Table view" [ref=f7e155]
+                - button "Grid view" [ref=f7e160]
+          - generic [ref=f7e166]:
+            - generic [ref=f7e167]:
+              - generic [ref=f7e168]: Server
+              - generic [ref=f7e169]: Status
+            - 'link "localhost This is the server where Coolify is running on. Don''t delete this! Server status: Attention required Attention required" [ref=f7e170] [cursor=pointer]':
+              - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg
+              - generic [ref=f7e171]:
+                - generic [ref=f7e175]:
+                  - paragraph [ref=f7e176]: localhost
+                  - paragraph [ref=f7e177]: This is the server where Coolify is running on. Don't delete this!
+                - 'generic "Server status: Attention required" [ref=f7e178]'
+              - generic [ref=f7e183]: Attention required
+  - list

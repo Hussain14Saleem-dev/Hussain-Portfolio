@@ -1,0 +1,132 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - banner [ref=f6e3]:
+      - generic [ref=f6e4]:
+        - generic [ref=f6e5]:
+          - link "Coolify" [ref=f6e6] [cursor=pointer]:
+            - /url: /
+          - link "v4.3.17" [ref=f6e8] [cursor=pointer]:
+            - /url: https://github.com/coollabsio/coolify/releases/tag/v4.3.17
+        - generic "New version available" [ref=f6e11]:
+          - button "Update available" [ref=f6e13] [cursor=pointer]
+      - generic [ref=f6e16]:
+        - button "Root Team" [ref=f6e20]
+        - generic [ref=f6e24]: /
+        - button "Irshad Platform" [ref=f6e26]
+        - generic [ref=f6e30]: /
+        - button "production" [ref=f6e32]
+        - generic [ref=f6e36]: /
+        - generic [ref=f6e38]:
+          - button "wild-whale-pssj5nf96e0mfgtwz5kkhs5v" [ref=f6e39]
+          - button "Running (no healthcheck)" [ref=f6e45] [cursor=pointer]
+    - navigation [ref=f6e54]:
+      - button "Search Ctrl+K" [ref=f6e56]:
+        - generic [ref=f6e57]: Search
+        - generic [ref=f6e61]: Ctrl+K
+      - list [ref=f6e62]:
+        - listitem [ref=f6e63]: Workspace
+        - listitem [ref=f6e64]:
+          - link "Dashboard" [ref=f6e65] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f6e70]:
+          - link "Projects" [ref=f6e71] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f6e78]:
+          - link "Terminal" [ref=f6e79] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/terminal
+        - listitem [ref=f6e85]: Infrastructure
+        - listitem [ref=f6e86]:
+          - link "Servers" [ref=f6e87] [cursor=pointer]:
+            - /url: /servers
+        - listitem [ref=f6e91]:
+          - link "Sources" [ref=f6e92] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/sources
+        - listitem [ref=f6e98]:
+          - link "Destinations" [ref=f6e99] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/destinations
+        - listitem [ref=f6e103]:
+          - link "S3 Storage" [ref=f6e104] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/storages
+        - listitem [ref=f6e108]:
+          - link "Shared Variables" [ref=f6e109] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/shared-variables
+        - listitem [ref=f6e118]: Manage
+        - listitem [ref=f6e119]:
+          - link "Team" [ref=f6e120] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/team
+        - listitem [ref=f6e129]:
+          - link "Notifications" [ref=f6e130] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/notifications/email
+        - listitem [ref=f6e134]:
+          - link "Keys & Tokens" [ref=f6e135] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/security/private-key
+        - listitem [ref=f6e140]:
+          - link "Tags" [ref=f6e141] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/tags
+        - listitem [ref=f6e145]:
+          - link "Settings" [ref=f6e146] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/settings
+        - listitem [aria-hidden] [ref=f6e151]
+      - generic [ref=f6e152]:
+        - button "Account menu for irshad platform" [ref=f6e154]:
+          - generic [ref=f6e155]: I
+          - generic [ref=f6e156]: irshad platform
+        - button "Toggle sidebar" [ref=f6e159]
+    - main [ref=f6e162]:
+      - generic [ref=f6e164]:
+        - navigation [ref=f6e165]:
+          - generic [ref=f6e166]:
+            - generic [ref=f6e168]:
+              - heading "wild-whale-pssj5nf96e0mfgtwz5kkhs5v" [level=1] [ref=f6e169]
+              - generic [ref=f6e170]:
+                - button "Running (no healthcheck)" [ref=f6e172] [cursor=pointer]
+                - button "Links" [ref=f6e180]
+            - button "Actions" [ref=f6e188] [cursor=pointer]
+        - generic [ref=f6e195]:
+          - complementary [ref=f6e196]:
+            - navigation "Configuration sections" [ref=f6e197]:
+              - link "General" [ref=f6e198] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v
+              - link "Domains" [ref=f6e203] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/domains
+              - link "Environment Variables" [ref=f6e207] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/environment-variables
+              - link "Persistent Storage" [ref=f6e216] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/persistent-storage
+              - link "Advanced" [ref=f6e220] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/advanced
+              - link "Healthcheck" [ref=f6e227] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/healthcheck
+              - link "Runtime Logs" [ref=f6e231] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/logs
+              - link "Deployment Logs" [ref=f6e237] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/deployment
+              - link "Terminal" [ref=f6e242] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/terminal
+              - link "Metrics" [ref=f6e248] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/metrics
+              - link "Git Source" [ref=f6e253] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/source
+              - link "Servers" [ref=f6e259] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/servers
+              - link "Preview Deployments" [ref=f6e263] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/preview-deployments
+              - link "Scheduled Tasks" [ref=f6e268] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/scheduled-tasks
+              - link "Webhooks" [ref=f6e278] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/webhooks
+              - link "Backups" [ref=f6e282] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/backups
+              - link "Resource Operations" [ref=f6e286] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/resource-operations
+              - link "Resource Limits" [ref=f6e290] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/resource-limits
+              - link "Rollback" [ref=f6e294] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/rollback
+              - link "Tags" [ref=f6e299] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/tags
+              - link "Danger Zone" [ref=f6e303] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/project/bsyazsdvs5txpp7cm7cvlzds/environment/uy9rfk7ablwl6fgpwnqytven/application/pssj5nf96e0mfgtwz5kkhs5v/danger
+          - status [ref=f6e311]:
+            - generic [ref=f6e315]: Loading containers
+  - list

@@ -1,0 +1,446 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e3]:
+    - generic [ref=f5e4]:
+      - link "Skip to content" [ref=f5e6] [cursor=pointer]:
+        - /url: "#main"
+      - banner [ref=f5e9]:
+        - generic [ref=f5e10]:
+          - generic [ref=f5e11]:
+            - link "Supabase Back to organization home" [ref=f5e12] [cursor=pointer]:
+              - /url: /dashboard/organizations
+              - img "Supabase" [ref=f5e13]
+              - generic [ref=f5e14]: Back to organization home
+            - button "Connect" [disabled] [ref=f5e22]
+          - generic [ref=f5e27]:
+            - button "Feedback" [ref=f5e28] [cursor=pointer]
+            - generic [ref=f5e30]:
+              - button [ref=f5e31] [cursor=pointer]:
+                - paragraph [ref=f5e36]: Search...
+                - generic [ref=f5e38]: Ctrl K
+              - button "Help" [ref=f5e39] [cursor=pointer]
+              - button "Advisor Center" [ref=f5e46] [cursor=pointer]
+              - button "SQL Editor" [ref=f5e51] [cursor=pointer]
+              - button "AI Assistant" [ref=f5e56] [cursor=pointer]
+            - button [ref=f5e64] [cursor=pointer]
+      - generic [ref=f5e69]:
+        - generic [ref=f5e73]:
+          - navigation [ref=f5e75]:
+            - list [ref=f5e77]:
+              - listitem [ref=f5e78]:
+                - link "Project Overview" [ref=f5e79] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi
+              - listitem [ref=f5e82]:
+                - button "Table Editor" [disabled]
+              - listitem [ref=f5e83]:
+                - button "SQL Editor" [disabled]
+            - list [ref=f5e85]:
+              - listitem [ref=f5e86]:
+                - button "Database" [disabled]
+              - listitem [ref=f5e87]:
+                - button "Authentication" [disabled]
+              - listitem [ref=f5e88]:
+                - button "Storage" [disabled]
+              - listitem [ref=f5e89]:
+                - link "Edge Functions" [ref=f5e90] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/functions
+              - listitem [ref=f5e96]:
+                - button "Realtime" [disabled]
+            - list [ref=f5e98]:
+              - listitem [ref=f5e99]:
+                - button "Advisors" [disabled]
+              - listitem [ref=f5e100]:
+                - button "Observability" [disabled]
+              - listitem [ref=f5e101]:
+                - link "Logs" [ref=f5e102] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/logs
+              - listitem [ref=f5e104]:
+                - button "Integrations" [disabled]
+            - list [ref=f5e106]:
+              - listitem [ref=f5e107]:
+                - link "Project Settings" [ref=f5e108] [cursor=pointer]:
+                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/settings/general
+          - button "Sidebar control" [ref=f5e114] [cursor=pointer]
+        - main [ref=f5e121]:
+          - main [ref=f5e126]:
+            - generic [ref=f5e127]:
+              - generic [ref=f5e131]:
+                - generic [ref=f5e141]:
+                  - generic [ref=f5e152]:
+                    - generic [ref=f5e153]: Status
+                    - generic [ref=f5e154]: Checking...
+                  - generic [ref=f5e161]:
+                    - generic [ref=f5e162]: Compute
+                    - paragraph [ref=f5e165]: Unknown
+                  - generic [ref=f5e166]: GitHub
+                  - link "Recent branch" [ref=f5e176] [cursor=pointer]:
+                    - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/branches
+                  - link "Last migration" [ref=f5e187] [cursor=pointer]:
+                    - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/database/migrations
+                  - link "Last backup" [ref=f5e198] [cursor=pointer]:
+                    - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/database/backups/scheduled
+                - status [ref=f5e210]:
+                  - generic [ref=f5e211]: Loading infrastructure...
+              - generic [ref=f5e215]:
+                - generic [ref=f5e217]:
+                  - button "Drag to reorder section" [ref=f5e219]
+                  - generic [ref=f5e229]:
+                    - generic [ref=f5e230]:
+                      - generic [ref=f5e231]:
+                        - generic [ref=f5e232]: "0"
+                        - generic [ref=f5e233]: Total Requests
+                      - button "Last 24 hours" [ref=f5e234] [cursor=pointer]
+                    - generic [ref=f5e239]:
+                      - button "Scroll right" [ref=f5e240] [cursor=pointer]
+                      - region "Horizontally scrollable content" [ref=f5e244]:
+                        - generic [ref=f5e245]:
+                          - generic [ref=f5e247]:
+                            - generic [ref=f5e250]:
+                              - heading [level=3] [ref=f5e251]:
+                                - link "Database requests" [ref=f5e252] [cursor=pointer]:
+                                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/editor
+                              - generic [ref=f5e253]: "0"
+                            - paragraph [ref=f5e261]: No data for selected period
+                          - generic [ref=f5e265]:
+                            - generic [ref=f5e268]:
+                              - heading [level=3] [ref=f5e269]:
+                                - link "Auth requests" [ref=f5e270] [cursor=pointer]:
+                                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/auth/users
+                              - generic [ref=f5e271]: "0"
+                            - paragraph [ref=f5e279]: No data for selected period
+                          - generic [ref=f5e283]:
+                            - generic [ref=f5e286]:
+                              - heading [level=3] [ref=f5e287]:
+                                - link "Storage requests" [ref=f5e288] [cursor=pointer]:
+                                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/storage/buckets
+                              - generic [ref=f5e289]: "0"
+                            - paragraph [ref=f5e297]: No data for selected period
+                          - generic [ref=f5e301]:
+                            - generic [ref=f5e304]:
+                              - heading [level=3] [ref=f5e305]:
+                                - link "Realtime requests" [ref=f5e306] [cursor=pointer]:
+                                  - /url: /dashboard/project/uqtruuxzxsvwxbosqwgi/realtime/inspector
+                              - generic [ref=f5e307]: "0"
+                            - paragraph [ref=f5e315]: No data for selected period
+                - generic [ref=f5e319]:
+                  - button "Drag to reorder section" [ref=f5e321]
+                  - generic [ref=f5e331]:
+                    - generic [ref=f5e332]:
+                      - heading "Advisor found no issues" [level=2] [ref=f5e333]
+                      - button "Ask Assistant" [ref=f5e334] [cursor=pointer]
+                    - paragraph [ref=f5e346]: No security, performance or health issues found
+                - generic [ref=f5e348]:
+                  - button "Drag to reorder section" [ref=f5e350]
+                  - generic [ref=f5e360]:
+                    - heading "Reports" [level=3] [ref=f5e362]
+                    - generic [ref=f5e364]:
+                      - heading "Build a custom report" [level=4] [ref=f5e365]
+                      - paragraph [ref=f5e366]: Keep track of your most important metrics
+                      - paragraph [ref=f5e367]: No charts set up yet in report
+                - status [ref=f5e368]
+    - generic [ref=f5e372]:
+      - generic [aria-hidden]:
+        - generic:
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+        - generic:
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+        - generic:
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+        - generic:
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+      - generic [ref=f5e373]:
+        - button "Close banner" [ref=f5e375] [cursor=pointer]
+        - generic [ref=f5e380]:
+          - generic [ref=f5e382]:
+            - paragraph [ref=f5e383]: Supabase Select 2026
+            - paragraph [ref=f5e384]: A curated day of talks by the industry’s best builders. Join us on October 2nd in San Francisco.
+          - link "Apply to attend" [ref=f5e385] [cursor=pointer]:
+            - /url: https://select.supabase.com/
+  - alert [ref=f5e391]: Supabase

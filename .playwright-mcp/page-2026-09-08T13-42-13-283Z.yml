@@ -1,0 +1,251 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e2]:
+    - banner [ref=f9e3]:
+      - generic [ref=f9e4]:
+        - generic [ref=f9e5]:
+          - link "Coolify" [ref=f9e6] [cursor=pointer]:
+            - /url: /
+          - link "v4.3.17" [ref=f9e8] [cursor=pointer]:
+            - /url: https://github.com/coollabsio/coolify/releases/tag/v4.3.17
+        - generic "New version available" [ref=f9e11]:
+          - button "Update available" [ref=f9e13] [cursor=pointer]
+      - generic [ref=f9e15]:
+        - generic [ref=f9e16]:
+          - button "Root Team" [ref=f9e20]
+          - generic [ref=f9e24]: /
+          - button "Servers" [ref=f9e26]
+        - generic [ref=f9e31]:
+          - generic [ref=f9e32]: /
+          - button "Switch server" [ref=f9e34]:
+            - generic [ref=f9e35]: localhost
+          - button "Attention required" [ref=f9e40] [cursor=pointer]
+    - navigation [ref=f9e49]:
+      - button "Search Ctrl+K" [ref=f9e51]:
+        - generic [ref=f9e52]: Search
+        - generic [ref=f9e56]: Ctrl+K
+      - list [ref=f9e57]:
+        - listitem [ref=f9e58]: Workspace
+        - listitem [ref=f9e59]:
+          - link "Dashboard" [ref=f9e60] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=f9e65]:
+          - link "Projects" [ref=f9e66] [cursor=pointer]:
+            - /url: /projects
+        - listitem [ref=f9e73]:
+          - link "Terminal" [ref=f9e74] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/terminal
+        - listitem [ref=f9e80]: Infrastructure
+        - listitem [ref=f9e81]:
+          - link "Servers" [ref=f9e82] [cursor=pointer]:
+            - /url: /servers
+        - listitem [ref=f9e86]:
+          - link "Sources" [ref=f9e87] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/sources
+        - listitem [ref=f9e93]:
+          - link "Destinations" [ref=f9e94] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/destinations
+        - listitem [ref=f9e98]:
+          - link "S3 Storage" [ref=f9e99] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/storages
+        - listitem [ref=f9e103]:
+          - link "Shared Variables" [ref=f9e104] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/shared-variables
+        - listitem [ref=f9e113]: Manage
+        - listitem [ref=f9e114]:
+          - link "Team" [ref=f9e115] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/team
+        - listitem [ref=f9e124]:
+          - link "Notifications" [ref=f9e125] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/notifications/email
+        - listitem [ref=f9e129]:
+          - link "Keys & Tokens" [ref=f9e130] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/security/private-key
+        - listitem [ref=f9e135]:
+          - link "Tags" [ref=f9e136] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/tags
+        - listitem [ref=f9e140]:
+          - link "Settings" [ref=f9e141] [cursor=pointer]:
+            - /url: http://169.58.200.148:8000/settings
+        - listitem [aria-hidden] [ref=f9e146]
+      - generic [ref=f9e147]:
+        - button "Account menu for irshad platform" [ref=f9e149]:
+          - generic [ref=f9e150]: I
+          - generic [ref=f9e151]: irshad platform
+        - button "Toggle sidebar" [ref=f9e154]
+    - main [ref=f9e157]:
+      - generic [ref=f9e159]:
+        - navigation [ref=f9e160]:
+          - button "Actions" [ref=f9e164] [cursor=pointer]
+        - generic [ref=f9e170]:
+          - complementary [ref=f9e171]:
+            - navigation "Server configuration sections" [ref=f9e172]:
+              - link "General" [ref=f9e173] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg
+              - link "Advanced" [ref=f9e178] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/advanced
+              - link "Private Key" [ref=f9e185] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/private-key
+              - link "CA Certificate" [ref=f9e190] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/ca-certificate
+              - link "Proxy" [ref=f9e194] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy
+              - generic [ref=f9e203]:
+                - link "Configuration" [ref=f9e204] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy
+                - link "Dynamic Configurations" [ref=f9e209] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy/dynamic
+                - link "Logs" [ref=f9e216] [cursor=pointer]:
+                  - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/proxy/logs
+              - link "Sentinel" [ref=f9e222] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/sentinel
+              - link "Resources" [ref=f9e227] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/resources
+              - link "Terminal" [ref=f9e234] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/terminal
+              - link "Docker Cleanup" [ref=f9e240] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/docker-cleanup
+              - link "Log Drains" [ref=f9e245] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/log-drains
+              - link "Metrics" [ref=f9e249] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/metrics
+              - link "Destinations" [ref=f9e254] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/destinations
+              - link "Swarm" [ref=f9e258] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/swarm
+              - link "Security" [ref=f9e262] [cursor=pointer]:
+                - /url: http://169.58.200.148:8000/server/5vbzanaahrctamvuqdhv7elg/security/patches
+          - generic [ref=f9e270]:
+            - generic:
+              - generic: You have changes that haven't been saved yet.
+              - generic:
+                - button "Reset"
+                - button "Save changes Enter":
+                  - generic: Save changes
+                  - generic: Enter
+            - group [ref=f9e271]:
+              - generic [ref=f9e272]:
+                - generic [ref=f9e273]:
+                  - heading [level=3] [ref=f9e275]:
+                    - button "More information about Proxy configuration" [ref=f9e277] [cursor=pointer]:
+                      - generic [ref=f9e278]: Proxy configuration
+                  - generic [ref=f9e280]:
+                    - generic [ref=f9e281]: Running
+                    - button "Switch proxy" [ref=f9e284] [cursor=pointer]
+                - generic [ref=f9e290]:
+                  - paragraph [ref=f9e291]: Traefik
+                  - paragraph [ref=f9e292]: Saved and running configuration are synchronized.
+              - generic [ref=f9e293]:
+                - heading [level=3] [ref=f9e296]:
+                  - button "More information about Routing behavior" [ref=f9e298] [cursor=pointer]:
+                    - generic [ref=f9e299]: Routing behavior
+                - generic [ref=f9e301]:
+                  - generic [ref=f9e302]:
+                    - generic [ref=f9e303]:
+                      - generic [ref=f9e304]: Generated labels
+                      - button "More information" [ref=f9e306] [cursor=pointer]
+                    - button "Generated labels" [ref=f9e312] [cursor=pointer]:
+                      - generic [ref=f9e313]: Labels for all supported proxies
+                  - generic [ref=f9e316]:
+                    - generic [ref=f9e317]:
+                      - generic [ref=f9e318]: Unknown requests
+                      - button "More information" [ref=f9e320] [cursor=pointer]
+                    - button "Unknown requests" [ref=f9e326] [cursor=pointer]:
+                      - generic [ref=f9e327]: Use custom request handling
+                  - generic [ref=f9e330]:
+                    - generic [ref=f9e331]:
+                      - generic [ref=f9e332]: Redirect URL
+                      - button "More information" [ref=f9e334] [cursor=pointer]
+                    - textbox "https://app.coolify.io" [ref=f9e339]
+              - generic [ref=f9e340]:
+                - generic [ref=f9e341]:
+                  - heading [level=3] [ref=f9e343]:
+                    - button "More information about Traefik configuration" [ref=f9e345] [cursor=pointer]:
+                      - generic [ref=f9e346]: Traefik configuration
+                  - button "Reset configuration" [ref=f9e349] [cursor=pointer]
+                - generic [ref=f9e350]:
+                  - generic [ref=f9e357]:
+                    - generic [ref=f9e358]: New Traefik minor version available
+                    - generic [ref=f9e359]: v3.7 is available. Review the Traefik changelog for breaking changes before upgrading.
+                  - generic [ref=f9e361]:
+                    - generic [ref=f9e362]: Configuration file · /data/coolify/proxy/docker-compose.yml
+                    - code [ref=f9e369]:
+                      - generic [ref=f9e370]:
+                        - generic [aria-hidden] [ref=f9e372]:
+                          - generic [ref=f9e373]: "1"
+                          - generic [ref=f9e376]: "2"
+                          - generic [ref=f9e378]: "3"
+                          - generic [ref=f9e380]: "4"
+                          - generic [ref=f9e382]: "5"
+                          - generic [ref=f9e384]: "6"
+                          - generic [ref=f9e386]: "7"
+                          - generic [ref=f9e388]: "8"
+                          - generic [ref=f9e390]: "9"
+                          - generic [ref=f9e392]: "10"
+                          - generic [ref=f9e394]: "11"
+                          - generic [ref=f9e396]: "12"
+                          - generic [ref=f9e398]: "13"
+                          - generic [ref=f9e400]: "14"
+                          - generic [ref=f9e402]: "15"
+                          - generic [ref=f9e404]: "16"
+                          - generic [ref=f9e406]: "17"
+                          - generic [ref=f9e408]: "18"
+                          - generic [ref=f9e410]: "19"
+                          - generic [ref=f9e412]: "20"
+                          - generic [ref=f9e414]: "21"
+                          - generic [ref=f9e416]: "22"
+                          - generic [ref=f9e418]: "23"
+                          - generic [ref=f9e420]: "24"
+                          - generic [ref=f9e422]: "25"
+                          - generic [ref=f9e424]: "26"
+                          - generic [ref=f9e426]: "27"
+                          - generic [ref=f9e428]: "28"
+                          - generic [ref=f9e430]: "29"
+                          - generic [ref=f9e432]: "30"
+                          - generic [ref=f9e434]: "31"
+                          - generic [ref=f9e436]: "32"
+                          - generic [ref=f9e438]: "33"
+                          - generic [ref=f9e440]: "34"
+                          - generic [ref=f9e442]: "35"
+                          - generic [ref=f9e444]: "36"
+                        - generic [aria-hidden] [ref=f9e568]:
+                          - generic [ref=f9e569]: "name: coolify-proxy"
+                          - generic [ref=f9e571]: "networks:"
+                          - generic [ref=f9e573]: "coolify:"
+                          - generic [ref=f9e575]: "external: true"
+                          - generic [ref=f9e577]: "services:"
+                          - generic [ref=f9e579]: "traefik:"
+                          - generic [ref=f9e581]: "container_name: coolify-proxy"
+                          - generic [ref=f9e583]: "image: 'traefik:v3.6'"
+                          - generic [ref=f9e585]: "restart: unless-stopped"
+                          - generic [ref=f9e587]: "extra_hosts:"
+                          - generic [ref=f9e589]: "- 'host.docker.internal:host-gateway'"
+                          - generic [ref=f9e591]: "networks:"
+                          - generic [ref=f9e593]: "- coolify"
+                          - generic [ref=f9e595]: "ports:"
+                          - generic [ref=f9e597]: "- '80:80'"
+                          - generic [ref=f9e599]: "- '443:443'"
+                          - generic [ref=f9e601]: "- '443:443/udp'"
+                          - generic [ref=f9e603]: "- '8080:8080'"
+                          - generic [ref=f9e605]: "healthcheck:"
+                          - generic [ref=f9e607]: "test: 'wget -qO- http://localhost:80/ping || exit 1'"
+                          - generic [ref=f9e609]: "interval: 4s"
+                          - generic [ref=f9e611]: "timeout: 2s"
+                          - generic [ref=f9e613]: "retries: 5"
+                          - generic [ref=f9e615]: "volumes:"
+                          - generic [ref=f9e617]: "- '/var/run/docker.sock:/var/run/docker.sock:ro'"
+                          - generic [ref=f9e619]: "- '/data/coolify/proxy/:/traefik'"
+                          - generic [ref=f9e621]: "command:"
+                          - generic [ref=f9e623]: "- '--ping=true'"
+                          - generic [ref=f9e625]: "- '--ping.entrypoint=http'"
+                          - generic [ref=f9e627]: "- '--api.dashboard=true'"
+                          - generic [ref=f9e629]: "- '--entrypoints.http.address=:80'"
+                          - generic [ref=f9e631]: "- '--entrypoints.https.address=:443'"
+                          - generic [ref=f9e633]: "- '--entrypoints.http.http.encodequerysemicolons=true'"
+                          - generic [ref=f9e635]: "- '--entryPoints.http.http2.maxConcurrentStreams=250'"
+                          - generic [ref=f9e637]: "- '--entrypoints.https.http.encodequerysemicolons=true'"
+                          - generic [ref=f9e639]: "- '--entryPoints.https.http2.maxConcurrentStreams=250'"
+                        - textbox "Editor content" [ref=f9e641]
+  - list
+  - generic [ref=f9e642]:
+    - alert
+    - alert

@@ -1,0 +1,423 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Skip to content" [ref=e6] [cursor=pointer]:
+        - /url: "#main"
+      - banner [ref=e9]:
+        - generic [ref=e10]:
+          - link "Supabase Back to organization home" [ref=e12] [cursor=pointer]:
+            - /url: /dashboard/organizations
+            - img "Supabase" [ref=e13]
+            - generic [ref=e14]: Back to organization home
+          - generic [ref=e15]:
+            - button "Feedback" [ref=e16] [cursor=pointer]
+            - generic [ref=e18]:
+              - button [ref=e19] [cursor=pointer]:
+                - paragraph [ref=e24]: Search...
+                - generic [ref=e26]: Ctrl K
+              - button "Help" [ref=e27] [cursor=pointer]
+              - button "Advisor Center" [ref=e34] [cursor=pointer]
+            - button [ref=e39] [cursor=pointer]
+      - generic [ref=e44]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - navigation
+          - button "Sidebar control" [ref=e52] [cursor=pointer]
+        - main [ref=e59]:
+          - generic [ref=e61]:
+            - generic [ref=e65]:
+              - heading "Authentication" [level=4] [ref=e67]
+              - menu "Sidebar" [disabled] [ref=e70]:
+                - list [ref=e71]:
+                  - generic [ref=e74]:
+                    - generic [ref=e75]: Manage
+                    - generic [ref=e79]:
+                      - link [disabled] [ref=e80] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/users
+                        - menuitem "Users" [disabled] [ref=e81]
+                      - link [disabled] [ref=e86] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/oauth-apps
+                        - menuitem "OAuth Apps" [disabled] [ref=e87]
+                  - generic [ref=e95]:
+                    - generic [ref=e96]: Notifications
+                    - link [disabled] [ref=e101] [cursor=pointer]:
+                      - /url: /dashboard/project/undefined/auth/templates
+                      - menuitem "Emails" [disabled] [ref=e102]
+                  - generic [ref=e110]:
+                    - generic [ref=e111]: Configuration
+                    - generic [ref=e115]:
+                      - link [disabled] [ref=e116] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/database/policies
+                        - menuitem "Policies" [disabled] [ref=e117]:
+                          - generic "Policies" [ref=e120]
+                      - link [disabled] [ref=e126] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/providers
+                        - menuitem "Sign In / Providers" [disabled] [ref=e127]
+                      - link [disabled] [ref=e132] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/oauth-server
+                        - menuitem "OAuth Server Beta" [disabled] [ref=e133]:
+                          - generic [ref=e136]:
+                            - generic [ref=e137]: OAuth Server
+                            - generic [ref=e138]: Beta
+                      - link [disabled] [ref=e139] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/sessions
+                        - menuitem "Sessions" [disabled] [ref=e140]
+                      - link [disabled] [ref=e145] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/rate-limits
+                        - menuitem "Rate Limits" [disabled] [ref=e146]
+                      - link [disabled] [ref=e151] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/mfa
+                        - menuitem "Multi-Factor" [disabled] [ref=e152]
+                      - link [disabled] [ref=e157] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/url-configuration
+                        - menuitem "URL Configuration" [disabled] [ref=e158]
+                      - link [disabled] [ref=e163] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/protection
+                        - menuitem "Attack Protection" [disabled] [ref=e164]
+                      - link [disabled] [ref=e169] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/hooks
+                        - menuitem "Auth Hooks Beta" [disabled] [ref=e170]:
+                          - generic [ref=e173]:
+                            - generic [ref=e174]: Auth Hooks
+                            - generic [ref=e175]: Beta
+                      - link [disabled] [ref=e176] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/audit-logs
+                        - menuitem "Audit Logs" [disabled] [ref=e177]
+                      - link [disabled] [ref=e182] [cursor=pointer]:
+                        - /url: /dashboard/project/undefined/auth/performance
+                        - menuitem "Performance" [disabled] [ref=e183]
+            - separator [disabled] [ref=e188]
+            - main [ref=e199]:
+              - generic [ref=e200]:
+                - heading "Users" [level=3] [ref=e203]
+                - generic [ref=e204]:
+                  - generic [ref=e205]:
+                    - generic [ref=e206]:
+                      - combobox [ref=e211]:
+                        - generic: Email address
+                      - group [ref=e214]:
+                        - textbox "Search by email" [ref=e215]
+                    - button "All columns" [ref=e217] [cursor=pointer]
+                    - button "Sorted by user ID" [disabled] [ref=e223]
+                  - generic [ref=e228]:
+                    - button "Refresh" [ref=e229] [cursor=pointer]
+                    - button "Add user" [ref=e236] [cursor=pointer]
+                - grid [ref=e247]:
+                  - row [ref=e248]:
+                    - columnheader [ref=e249]
+                    - columnheader [ref=e250]:
+                      - paragraph [ref=e253]: UID
+                    - columnheader [ref=e255]:
+                      - paragraph [ref=e258]: Display name
+                    - columnheader [ref=e260]:
+                      - paragraph [ref=e263]: Email
+                    - columnheader [ref=e265]:
+                      - paragraph [ref=e268]: Phone
+                - generic [ref=e275]: Loading...
+    - generic [ref=e283]:
+      - generic [aria-hidden]:
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+        - generic:
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: "{"
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+        - generic:
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: "["
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: "]"
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+        - generic:
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+        - generic:
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: (
+          - generic: "["
+          - generic: "{"
+          - generic: ‹
+          - generic: (
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+          - generic: "]"
+          - generic: )
+          - generic: )
+          - generic: ›
+          - generic: "}"
+      - generic [ref=e284]:
+        - button "Close banner" [ref=e286] [cursor=pointer]
+        - generic [ref=e291]:
+          - generic [ref=e293]:
+            - paragraph [ref=e294]: Supabase Select 2026
+            - paragraph [ref=e295]: A curated day of talks by the industry’s best builders. Join us on October 2nd in San Francisco.
+          - link "Apply to attend" [ref=e296] [cursor=pointer]:
+            - /url: https://select.supabase.com/
+  - alert [ref=e302]
